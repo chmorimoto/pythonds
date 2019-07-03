@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>6.13. Search Tree Implementation &#8212; Runestone Interactive Overview</title>
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/presenter_mode.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/matrixeq.css?v=58BC228F" />
+    <link rel="stylesheet" type="text/css" href="../_static/clickable.css?v=58C4E18A" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabbedstuff.css?v=424F1CC9" />
+    <link rel="stylesheet" type="text/css" href="../_static/fitb.css?v=3BA0E63E" />
+    <link rel="stylesheet" type="text/css" href="../_static/video.css?v=E5385B3B" />
+    <link rel="stylesheet" type="text/css" href="../_static/webgldemo.css?v=B36B48D" />
+    <link rel="stylesheet" type="text/css" href="../_static/webglinteractive.css?v=910DF1E1" />
+    <link rel="stylesheet" type="text/css" href="../_static/codemirror.css?v=1CE53237" />
+    <link rel="stylesheet" type="text/css" href="../_static/reveal.css?v=4A81D381" />
+    <link rel="stylesheet" type="text/css" href="../_static/parsons.css?v=2F3E13EE" />
+    <link rel="stylesheet" type="text/css" href="../_static/js_lib/prettify.css?v=2A364B6B" />
+    <link rel="stylesheet" type="text/css" href="../_static/pytutor.css?v=239FC54E" />
+    <link rel="stylesheet" type="text/css" href="../_static/modal-basic.css?v=8A1A42E4" />
+    <link rel="stylesheet" type="text/css" href="../_static/activecode.css?v=F471F95B" />
+    <link rel="stylesheet" type="text/css" href="../_static/datafile.css?v=C184EB8A" />
+    <link rel="stylesheet" type="text/css" href="../_static/showEval.css?v=C6382F3" />
+    <link rel="stylesheet" type="text/css" href="../_static/accessibility.css?v=808B982A" />
+    <link rel="stylesheet" type="text/css" href="../_static/dragndrop.css?v=B9BAA0D1" />
+    <link rel="stylesheet" type="text/css" href="../_static/poll.css?v=E220AC33" />
+    <link rel="stylesheet" href="../_static/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/user-highlights.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/runestone-custom-sphinx-bootstrap.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/runestonebase.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/matrixeq.js?v=D64CFA5A"></script>
+    <script type="text/javascript" src="../_static/clickable.js?v=9560E65E"></script>
+    <script type="text/javascript" src="../_static/timedclickable.js?v=93989C23"></script>
+    <script type="text/javascript" src="../_static/tabbedstuff.js?v=5BE6106"></script>
+    <script type="text/javascript" src="../_static/fitb.js?v=8E40E713"></script>
+    <script type="text/javascript" src="../_static/timedfitb.js?v=2AA17071"></script>
+    <script type="text/javascript" src="../_static/runestonevideo.js?v=53E888DE"></script>
+    <script type="text/javascript" src="../_static/codemirror.js?v=94F552C9"></script>
+    <script type="text/javascript" src="../_static/xml.js?v=236EDFF7"></script>
+    <script type="text/javascript" src="../_static/css.js?v=623153CE"></script>
+    <script type="text/javascript" src="../_static/htmlmixed.js?v=33B91944"></script>
+    <script type="text/javascript" src="../_static/javascript.js?v=6F38CA04"></script>
+    <script type="text/javascript" src="../_static/webglinteractive.js?v=2B768384"></script>
+    <script type="text/javascript" src="../_static/FileSaver.min.js?v=8408C997"></script>
+    <script type="text/javascript" src="../_static/Blob.js?v=AEC2447"></script>
+    <script type="text/javascript" src="../_static/reveal.js?v=112CBFA2"></script>
+    <script type="text/javascript" src="../_static/js_lib/prettify.js?v=CA7E8928"></script>
+    <script type="text/javascript" src="../_static/js_lib/hammer.min.js?v=73056367"></script>
+    <script type="text/javascript" src="../_static/parsons.js?v=93EFFF39"></script>
+    <script type="text/javascript" src="../_static/timedparsons.js?v=2EEA9E5A"></script>
+    <script type="text/javascript" src="../_static/animationbase.js?v=A043C3A7"></script>
+    <script type="text/javascript" src="../_static/mchoice.js?v=8329CA55"></script>
+    <script type="text/javascript" src="../_static/timedmc.js?v=B010A457"></script>
+    <script type="text/javascript" src="../_static/timed.js?v=6789FE30"></script>
+    <script type="text/javascript" src="../_static/shortanswer.js?v=5EB6170D"></script>
+    <script type="text/javascript" src="../_static/timed_shortanswer.js?v=B3A117D7"></script>
+    <script type="text/javascript" src="../_static/d3.v2.min.js?v=836E01C"></script>
+    <script type="text/javascript" src="../_static/jquery.ba-bbq.min.js?v=B64CF0A8"></script>
+    <script type="text/javascript" src="../_static/jquery.jsPlumb-1.3.10-all-min.js?v=42F9EBEA"></script>
+    <script type="text/javascript" src="../_static/pytutor.js?v=82B022B9"></script>
+    <script type="text/javascript" src="../_static/codelens.js?v=CABECD49"></script>
+    <script type="text/javascript" src="../_static/jquery.highlight.js?v=F1C496C8"></script>
+    <script type="text/javascript" src="../_static/bookfuncs.js?v=21EFC8E1"></script>
+    <script type="text/javascript" src="../_static/python.js?v=14A28F1F"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/CLDRPluralRuleParser.js?v=599B42B0"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.js?v=88A1430F"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.messagestore.js?v=AE15A4A1"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.fallbacks.js?v=8ABDFE7F"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.language.js?v=747279FF"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.parser.js?v=7B020E13"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.emitter.js?v=660E85C3"></script>
+    <script type="text/javascript" src="../_static/jquery_i18n/jquery.i18n.emitter.bidi.js?v=54B21948"></script>
+    <script type="text/javascript" src="../_static/activecode-i18n.en.js?v=3FBAE230"></script>
+    <script type="text/javascript" src="../_static/skulpt.min.js?v=DC7AC815"></script>
+    <script type="text/javascript" src="../_static/skulpt-stdlib.js?v=48A5D93E"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@4.0.0-rc.2/build/vega.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@2.5.0/build/vega-lite.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0/build/vega-embed.js"></script>
+    <script type="text/javascript" src="../_static/activecode.js?v=9FA573E1"></script>
+    <script type="text/javascript" src="../_static/clike.js?v=2DCE0756"></script>
+    <script type="text/javascript" src="../_static/timed_activecode.js?v=5150FA78"></script>
+    <script type="text/javascript" src="../_static/datafile.js?v=3ED1A80C"></script>
+    <script type="text/javascript" src="../_static/showEval.js?v=C5CE0C81"></script>
+    <script type="text/javascript" src="../_static/dragndrop.js?v=2B6403E8"></script>
+    <script type="text/javascript" src="../_static/timeddnd.js?v=378F237E"></script>
+    <script type="text/javascript" src="../_static/poll.js?v=6C59AE9F"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/waypoints.min.js"></script>
+    <script type="text/javascript" src="../_static/user-highlights.js"></script>
+    <script type="text/javascript" src="../_static/jquery.idle-timer.js"></script>
+    <script type="text/javascript" src="../_static/processing-1.4.1.min.js"></script>
+    <script type="text/javascript" src="../_static/jquery.hotkey.js"></script>
+    <script type="text/javascript" src="../_static/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="../_static/presenter_mode.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+<link rel="shortcut icon" href="/runestone/static/favicon.ico" type="image/ico" />
+
+<script type="text/javascript">
+  eBookConfig = {};
+  eBookConfig.host = 'http://127.0.0.1:8000' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+  eBookConfig.app = eBookConfig.host+'/runestone';
+  eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+  eBookConfig.course = 'LivroAlgoritmos';
+  eBookConfig.logLevel = 0;
+  eBookConfig.loginRequired = false;
+  eBookConfig.build_info = "3.5.0";
+  eBookConfig.isLoggedIn = false;
+  eBookConfig.useRunestoneServices = false;
+  eBookConfig.python3 = true;
+  eBookConfig.basecourse = 'LivroAlgoritmos';
+  eBookConfig.acDefaultLanguage = 'python' ? 'python' : 'python'
+  eBookConfig.runestone_version = '3.4.5';
+  eBookConfig.jobehost = 'http://jobe2.cosc.canterbury.ac.nz';
+  eBookConfig.proxyuri_runs = '/jobe/index.php/restapi/runs/';
+  eBookConfig.proxyuri_files = '/jobe/index.php/restapi/files/';
+  eBookConfig.downloadsEnabled = false;
+  eBookConfig.enable_chatcodes = false ? false : false;
+  eBookConfig.allow_pairs = false ? false : false;
+</script>
+
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+  </head><body>
+
+
+<!-- Begin navbar -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type='button' class='navbar-toggle' data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div>
+        <a class="brand-logo" style='background: transparent url("../_static/img/logo_small.png") no-repeat 0px 0px;' href="/runestone/default/user/login">&nbsp; </a>
+        <a class="navbar-brand" href="../index.html" aria-label="index-page">Livro Algoritmos Project</a>
+      </div>
+    </div>
+
+
+
+    <div class="navbar-collapse collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right" >
+
+        <li class="divider-vertical"></li>
+
+        <!-- social media dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-globe" style="opacity: 0.9"></i>
+          </a>
+          <ul class="dropdown-menu social-menu">
+              <li>
+                <div>
+                  <b>Runestone in social media:</b>
+                </div>
+                <a href="https://twitter.com/iRunestone" class="twitter-follow-button" data-show-count="true">Follow @iRunestone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="fb-like" data-href="https://www.facebook.com/RunestoneInteractive" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <div>
+                  <b>Help support us:</b>
+                </div>
+                <div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHNwYJKoZIhvcNAQcEoIIHKDCCByQCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAcrkqh1hn3lYqIpfXxNqe1T82EhXzCJGy1yMAmklpyZshyMkfDGe1Bhx+iwyGeoYRTTyphFmP+9M3NyO0+Q5XdHxgZPx/zYjjBxlZHgEV6jhE8bN2fHkkPf0VHfz0a0QQylQOPlKiOTZV7B37Jpk6yM47oVZ1tG/KNm0NkfmB76DELMAkGBSsOAwIaBQAwgbQGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIi0GmFfOlcjuAgZBbYOo9UO+CpMQa+PYqwsUmUnJvXIImeMeNI3KVTUx5Cfk9gNMo3WzPeiB5IqZo9nRAQ0mf1qL2ecLeB5tidM+lgBUhOxfj3/FecpnVFa0263gp4g+PLw8jzhvVRdUon1K3SeO1Rzh23fIRKwnrD6btt73uwtj0sl3tGd8qz+6GIcwPDdRk9VcUffiBJT/ZagKgggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xMzExMDMxMzQxMzFaMCMGCSqGSIb3DQEJBDEWBBRDJF8w+zsMr7FSk+pwinB5f5D4rzANBgkqhkiG9w0BAQEFAASBgHw1LMHpkpaqHIvDGdFE0eG+2mZlmMnUeDCBhQlbc7QMzFQYKTV94NfaebBO4PmNdADe1rq4WidSRZZbE7CzkX9IGENYnBTWY0hb2l0lGdGrJdGeWyV3ekg9WVaFMMumrekds96h3Cx7dGz2kWDzIai2iEXE/qoE+xpkyXAYZNV3-----END PKCS7-----
+                  ">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                  </form>
+
+                </div>
+              </li>
+          </ul>
+        </li>
+        <!-- end social media dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- search dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-search" style='opacity:0.9;'></i>
+          </a>
+          <ul class='dropdown-menu'>
+            
+                <li><a href='../index.html' aria-label="index-page">Table of Contents</a></li>
+            
+            <li><a href='/runestone/static/LivroAlgoritmos/genindex.html'>Book Index</a></li>
+            <li class="divider"></li>
+            <li style="width: 240px;">
+              <form class="navbar-search" style="margin:10px;" action="../search.html" method="get">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="q" placeholder="Search this book" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" style="margin:0;" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </li>
+          </ul>
+        </li>
+        <!-- end search dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        
+        <li class="divider-vertical"></li>
+        <!-- <li id="scratch_ac_link"><a href="javascript:ACFactory.toggleScratchActivecode()">Scratch ActiveCode</a></li> -->
+
+        <!-- <li class="dropdown">             -->
+          <li id="scratch_ac_link" class="dropdown"><a href="javascript:ACFactory.toggleScratchActivecode()">
+              <i class="glyphicon glyphicon-pencil" style="opacity:0.9;"></i></a></li>
+        <!-- </li> -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- help menu dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-question-sign" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><a href='/runestone/static/LivroAlgoritmos/navhelp.html'>Navigation Help</a></li>
+            <li><a href='/runestone/static/overview/instructor.html'>Help for Instructors</a></li>
+            <li class="divider"></li>
+            <li><a href='http://runestoneinteractive.org'>About Runestone</a></li>
+            <li><a href='/runestone/default/reportabug?course=LivroAlgoritmos&page=SearchTreeImplementation'>Report A Problem</a></li>
+          </ul>
+        </li>
+        <!-- end help menu dropdown -->
+
+        <li class="divider-vertical"></li>
+
+      </ul>
+      </div>
+
+
+
+
+
+
+      <ul class="nav navbar-nav">
+        <li class="divider-vertical"></li>
+        <!--
+          <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">6.13. Search Tree Implementation</a></li>
+</ul>
+</ul>
+</li>
+          <li class="divider-vertical"></li>
+        
+        
+          
+
+<script type="text/javascript">
+  opts = {'placement':'bottom',
+          'selector': '',
+          'delay': { show: 100, hide: 50}
+         };
+
+  $('#relations-prev').tooltip(opts);
+  $('#relations-next').tooltip(opts);
+</script>
+        -->
+        
+          <li></li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container" id="continue-reading"></div>
+
+<div class="container" id="main-content">
+  
+  <div class="section" id="search-tree-implementation">
+<h1>6.13. Search Tree Implementation<a class="headerlink" href="#search-tree-implementation" title="Permalink to this headline">¶</a></h1>
+<p>A binary search tree relies on the property that
+keys that are less than the parent are found in the left subtree, and
+keys that are greater than the parent are found in the right subtree. We
+will call this the <strong>bst property</strong>. As we implement the Map interface
+as described above, the bst property will guide our implementation.
+<a class="reference internal" href="#fig-simplebst"><span class="std std-ref">Figure 1</span></a> illustrates this property of a binary search
+tree, showing the keys without any associated values. Notice that the
+property holds for each parent and child. All of the keys in the left
+subtree are less than the key in the root. All of the keys in the right
+subtree are greater than the root.</p>
+<div class="figure align-center" id="id1">
+<span id="fig-simplebst"></span><img alt="../_images/simpleBST1.png" src="../_images/simpleBST1.png" />
+<p class="caption"><span class="caption-text">Figure 1: A Simple Binary Search Tree</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Now that you know what a binary search tree is, we will look at how a
+binary search tree is constructed. The search tree in
+<a class="reference internal" href="#fig-simplebst"><span class="std std-ref">Figure 1</span></a> represents the nodes that exist after we have
+inserted the following keys in the order shown:
+<span class="math notranslate nohighlight">\(70,31,93,94,14,23,73\)</span>. Since 70 was the first key inserted into
+the tree, it is the root. Next, 31 is less than 70, so it becomes the
+left child of 70. Next, 93 is greater than 70, so it becomes the right
+child of 70. Now we have two levels of the tree filled, so the next key
+is going to be the left or right child of either 31 or 93. Since 94 is
+greater than 70 and 93, it becomes the right child of 93. Similarly 14
+is less than 70 and 31, so it becomes the left child of 31. 23 is also
+less than 31, so it must be in the left subtree of 31. However, it is
+greater than 14, so it becomes the right child of 14.</p>
+<p>To implement the binary search tree, we will use the nodes and
+references approach similar to the one we used to implement the linked
+list, and the expression tree. However, because we must be able create
+and work with a binary search tree that is empty, our implementation
+will use two classes. The first class we will call <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code>,
+and the second class we will call <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code>. The <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code>
+class has a reference to the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> that is the root of the binary
+search tree. In most cases the external methods defined in the outer
+class simply check to see if the tree is empty. If there are nodes in
+the tree, the request is just passed on to a private method defined in
+the <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> class that takes the root as a parameter. In
+the case where the tree is empty or we want to delete the key at the
+root of the tree, we must take special action. The code for the
+<code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> class constructor along with a few other
+miscellaneous functions is shown in <a class="reference internal" href="#lst-bst1"><span class="std std-ref">Listing 1</span></a>.</p>
+<p id="lst-bst1"><strong>Listing 1</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class provides many helper functions that make the work
+done in the <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> class methods much easier. The
+constructor for a <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code>, along with these helper functions, is
+shown in <a class="reference internal" href="#lst-bst2"><span class="std std-ref">Listing 2</span></a>. As you can see in the listing many of
+these helper functions help to classify a node according to its own
+position as a child, (left or right) and the kind of children the node
+has.
+The <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class will also explicitly keep track
+of the parent as an attribute of each node. You will see why this is
+important when we discuss the implementation for the <code class="docutils literal notranslate"><span class="pre">del</span></code> operator.</p>
+<p>Another interesting aspect of the implementation of <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> in
+<a class="reference internal" href="#lst-bst2"><span class="std std-ref">Listing 2</span></a> is that we use Python’s optional parameters.
+Optional parameters make it easy for us to create a <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> under
+several different circumstances. Sometimes we will want to construct a
+new <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> that already has both a <code class="docutils literal notranslate"><span class="pre">parent</span></code> and a <code class="docutils literal notranslate"><span class="pre">child</span></code>.
+With an existing parent and child, we can pass parent and child as
+parameters. At other times we will just create a <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> with the
+key value pair, and we will not pass any parameters for <code class="docutils literal notranslate"><span class="pre">parent</span></code> or
+<code class="docutils literal notranslate"><span class="pre">child</span></code>. In this case, the default values of the optional parameters
+are used.</p>
+<p id="lst-bst2"><strong>Listing 2</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                       <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+
+    <span class="k">def</span> <span class="nf">hasLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+    <span class="k">def</span> <span class="nf">hasRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+
+    <span class="k">def</span> <span class="nf">isLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">==</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">isRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">==</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">isRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="k">def</span> <span class="nf">isLeaf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hasAnyChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+    <span class="k">def</span> <span class="nf">hasBothChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+    <span class="k">def</span> <span class="nf">replaceNodeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">lc</span><span class="p">,</span><span class="n">rc</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">lc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">rc</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>Now that we have the <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> shell and the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> it
+is time to write the <code class="docutils literal notranslate"><span class="pre">put</span></code> method that will allow us to build our
+binary search tree. The <code class="docutils literal notranslate"><span class="pre">put</span></code> method is a method of the
+<code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> class. This method will check to see if the tree
+already has a root. If there is not a root then <code class="docutils literal notranslate"><span class="pre">put</span></code> will create a
+new <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> and install it as the root of the tree. If a root node
+is already in place then <code class="docutils literal notranslate"><span class="pre">put</span></code> calls the private, recursive, helper
+function <code class="docutils literal notranslate"><span class="pre">_put</span></code> to search the tree according to the following
+algorithm:</p>
+<ul class="simple">
+<li><p>Starting at the root of the tree, search the binary tree comparing
+the new key to the key in the current node. If the new key is less
+than the current node, search the left subtree. If the new key is
+greater than the current node, search the right subtree.</p></li>
+<li><p>When there is no left (or right) child to search, we have found the
+position in the tree where the new node should be installed.</p></li>
+<li><p>To add a node to the tree, create a new <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> object and
+insert the object at the point discovered in the previous step.</p></li>
+</ul>
+<p><a class="reference internal" href="#lst-bst3"><span class="std std-ref">Listing 3</span></a> shows the Python code for inserting a new node in
+the tree. The <code class="docutils literal notranslate"><span class="pre">_put</span></code> function is written recursively following the
+steps outlined above. Notice that when a new child is inserted into the
+tree, the <code class="docutils literal notranslate"><span class="pre">currentNode</span></code> is passed to the new tree as the parent.</p>
+<p>One important problem with our implementation of insert is that
+duplicate keys are not handled properly. As our tree is implemented a
+duplicate key will create a new node with the same key value in the
+right subtree of the node having the original key. The result of this is
+that the node with the new key will never be found during a search. A
+better way to handle the insertion of a duplicate key is for the value
+associated with the new key to replace the old value. We leave fixing
+this bug as an exercise for you.</p>
+<p id="lst-bst3"><strong>Listing 3</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+               <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+               <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">put</span></code> method defined, we can easily overload the <code class="docutils literal notranslate"><span class="pre">[]</span></code>
+operator for assignment by having the <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code> method call (see <a class="reference internal" href="#lst-bst4"><span class="std std-ref">Listing 4</span></a>) the
+put method. This allows us to write Python statements like
+<code class="docutils literal notranslate"><span class="pre">myZipTree['Plymouth']</span> <span class="pre">=</span> <span class="pre">55446</span></code>, just like a Python dictionary.</p>
+<p id="lst-bst4"><strong>Listing 4</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-bstput"><span class="std std-ref">Figure 2</span></a> illustrates the process for inserting a new node
+into a binary search tree. The lightly shaded nodes indicate the nodes
+that were visited during the insertion process.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-bstput"></span><img alt="../_images/bstput1.png" src="../_images/bstput1.png" />
+<p class="caption"><span class="caption-text">Figure 2: Inserting a Node with Key = 19</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition-self-check admonition">
+<p class="admonition-title">Self Check</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<span class="docutils literal">/Users/hitoshi/git/github/pythonds/2019/livro/_sources/Trees/SearchTreeImplementation.rst</span>, line 242)</p>
+<p>Duplicate ID – see Arvores/SearchTreeImplementation, line 246</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">mchoice</span><span class="p">::</span> <span class="n">bst_1</span>
+   <span class="p">:</span><span class="n">correct</span><span class="p">:</span> <span class="n">b</span>
+   <span class="p">:</span><span class="n">answer_a</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;../_static/bintree_a.png&quot;</span><span class="o">&gt;</span>
+   <span class="p">:</span><span class="n">feedback_a</span><span class="p">:</span> <span class="n">Remember</span><span class="p">,</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">the</span> <span class="n">root</span> <span class="n">keys</span> <span class="n">less</span> <span class="n">than</span> <span class="n">the</span> <span class="n">root</span> <span class="n">must</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">left</span> <span class="n">subtree</span><span class="p">,</span> <span class="k">while</span> <span class="n">keys</span> <span class="n">greater</span> <span class="n">than</span> <span class="n">the</span> <span class="n">root</span> <span class="n">go</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">right</span> <span class="n">subtree</span><span class="o">.</span>
+   <span class="p">:</span><span class="n">answer_b</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;../_static/bintree_b.png&quot;</span><span class="o">&gt;</span>
+   <span class="p">:</span><span class="n">feedback_b</span><span class="p">:</span> <span class="n">good</span> <span class="n">job</span><span class="o">.</span>
+   <span class="p">:</span><span class="n">answer_c</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;../_static/bintree_c.png&quot;</span><span class="o">&gt;</span>
+   <span class="p">:</span><span class="n">feedback_c</span><span class="p">:</span> <span class="n">This</span> <span class="n">looks</span> <span class="n">like</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">tree</span> <span class="n">that</span> <span class="n">satisfies</span> <span class="n">the</span> <span class="n">full</span> <span class="n">tree</span> <span class="nb">property</span> <span class="n">needed</span> <span class="k">for</span> <span class="n">a</span> <span class="n">heap</span><span class="o">.</span>
+
+   <span class="n">Which</span> <span class="n">of</span> <span class="n">the</span> <span class="n">trees</span> <span class="n">shows</span> <span class="n">a</span> <span class="n">correct</span> <span class="n">binary</span> <span class="n">search</span> <span class="n">tree</span> <span class="n">given</span> <span class="n">that</span> <span class="n">the</span> <span class="n">keys</span> <span class="n">were</span>
+   <span class="n">inserted</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">following</span> <span class="n">order</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mf">4.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the tree is constructed, the next task is to implement the
+retrieval of a value for a given key. The <code class="docutils literal notranslate"><span class="pre">get</span></code> method is even easier
+than the <code class="docutils literal notranslate"><span class="pre">put</span></code> method because it simply searches the tree recursively
+until it gets to a non-matching leaf node or finds a matching key. When
+a matching key is found, the value stored in the payload of the node is
+returned.</p>
+<p><a class="reference internal" href="#lst-bst5"><span class="std std-ref">Listing 5</span></a> shows the code for <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">_get</span></code> and
+<code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>. The search code in the <code class="docutils literal notranslate"><span class="pre">_get</span></code> method uses the same
+logic for choosing the left or right child as the <code class="docutils literal notranslate"><span class="pre">_put</span></code> method. Notice
+that the <code class="docutils literal notranslate"><span class="pre">_get</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> to <code class="docutils literal notranslate"><span class="pre">get</span></code>, this allows
+<code class="docutils literal notranslate"><span class="pre">_get</span></code> to be used as a flexible helper method for other
+<code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> methods that may need to make use of other data
+from the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> besides the payload.</p>
+<p>By implementing the <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> method we can write a Python
+statement that looks just like we are accessing a dictionary, when in
+fact we are using a binary search tree, for example
+<code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">myZipTree['Fargo']</span></code>.  As you can see, all the <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> method does is call
+<code class="docutils literal notranslate"><span class="pre">get</span></code>.</p>
+<p id="lst-bst5"><strong>Listing 5</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+               <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">payload</span>
+        <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">currentNode</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">currentNode</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">get</span></code>, we can implement the <code class="docutils literal notranslate"><span class="pre">in</span></code> operation by writing a
+<code class="docutils literal notranslate"><span class="pre">__contains__</span></code> method for the <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">__contains__</span></code> method will simply call <code class="docutils literal notranslate"><span class="pre">get</span></code> and return <code class="docutils literal notranslate"><span class="pre">True</span></code>
+if <code class="docutils literal notranslate"><span class="pre">get</span></code> returns a value, or <code class="docutils literal notranslate"><span class="pre">False</span></code> if it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. The
+code for <code class="docutils literal notranslate"><span class="pre">__contains__</span></code> is shown in <a class="reference internal" href="#lst-bst6"><span class="std std-ref">Listing 6</span></a>.</p>
+<p id="lst-bst6"><strong>Listing 6</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">__contains__</span></code> overloads the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator and allows us
+to write statements such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;Northfield&#39;</span> <span class="ow">in</span> <span class="n">myZipTree</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;oom ya ya&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we turn our attention to the most challenging method in the
+binary search tree, the deletion of a key (see <a class="reference internal" href="#lst-bst7"><span class="std std-ref">Listing 7</span></a>). The first task is to find the
+node to delete by searching the tree. If the tree has more than one node
+we search using the <code class="docutils literal notranslate"><span class="pre">_get</span></code> method to find the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> that needs
+to be removed. If the tree only has a single node, that means we are
+removing the root of the tree, but we still must check to make sure the
+key of the root matches the key that is to be deleted. In either case if
+the key is not found the <code class="docutils literal notranslate"><span class="pre">del</span></code> operator raises an error.</p>
+<p id="lst-bst7"><strong>Listing 7</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+   <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="n">nodeToRemove</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">nodeToRemove</span><span class="p">:</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">nodeToRemove</span><span class="p">)</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once we’ve found the node containing the key we want to delete, there
+are three cases that we must consider:</p>
+<ol class="arabic simple">
+<li><p>The node to be deleted has no children (see <a class="reference internal" href="#fig-bstdel1"><span class="std std-ref">Figure 3</span></a>).</p></li>
+<li><p>The node to be deleted has only one child (see <a class="reference internal" href="#fig-bstdel2"><span class="std std-ref">Figure 4</span></a>).</p></li>
+<li><p>The node to be deleted has two children (see <a class="reference internal" href="#fig-bstdel3"><span class="std std-ref">Figure 5</span></a>).</p></li>
+</ol>
+<p>The first case is straightforward (see <a class="reference internal" href="#lst-bst8"><span class="std std-ref">Listing 8</span></a>). If the current node has no children
+all we need to do is delete the node and remove the reference to this
+node in the parent. The code for this case is shown in here.</p>
+<p id="lst-bst8"><strong>Listing 8</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">currentNode</span> <span class="o">==</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+        <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id3">
+<span id="fig-bstdel1"></span><img alt="../_images/bstdel11.png" src="../_images/bstdel11.png" />
+<p class="caption"><span class="caption-text">Figure 3: Deleting Node 16, a Node without Children</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>The second case is only slightly more complicated (see <a class="reference internal" href="#lst-bst9"><span class="std std-ref">Listing 9</span></a>). If a node has only a
+single child, then we can simply promote the child to take the place of
+its parent. The code for this case is shown in the next listing. As
+you look at this code you will see that there are six cases to consider.
+Since the cases are symmetric with respect to either having a left or
+right child we will just discuss the case where the current node has a
+left child. The decision proceeds as follows:</p>
+<ol class="arabic simple">
+<li><p>If the current node is a left child then we only need to update the
+parent reference of the left child to point to the parent of the
+current node, and then update the left child reference of the parent
+to point to the current node’s left child.</p></li>
+<li><p>If the current node is a right child then we only need to update the
+parent reference of the left child to point to the parent of the
+current node, and then update the right child reference of the parent
+to point to the current node’s left child.</p></li>
+<li><p>If the current node has no parent, it must be the root. In this case
+we will just replace the <code class="docutils literal notranslate"><span class="pre">key</span></code>, <code class="docutils literal notranslate"><span class="pre">payload</span></code>, <code class="docutils literal notranslate"><span class="pre">leftChild</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">rightChild</span></code> data by calling the <code class="docutils literal notranslate"><span class="pre">replaceNodeData</span></code> method on the
+root.</p></li>
+</ol>
+<p id="lst-bst9"><strong>Listing 9</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span> <span class="c1"># this node has one child</span>
+   <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+      <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+      <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+                             <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id4">
+<span id="fig-bstdel2"></span><img alt="../_images/bstdel21.png" src="../_images/bstdel21.png" />
+<p class="caption"><span class="caption-text">Figure 4: Deleting Node 25, a Node That Has a Single Child</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>The third case is the most difficult case to handle (see <a class="reference internal" href="#lst-bst10"><span class="std std-ref">Listing 10</span></a>). If a node has two
+children, then it is unlikely that we can simply promote one of them to
+take the node’s place. We can, however, search the tree for a node that
+can be used to replace the one scheduled for deletion. What we need is a
+node that will preserve the binary search tree relationships for both of
+the existing left and right subtrees. The node that will do this is the
+node that has the next-largest key in the tree. We call this node the
+<strong>successor</strong>, and we will look at a way to find the successor shortly.
+The successor is guaranteed to have no more than one child, so we know
+how to remove it using the two cases for deletion that we have already
+implemented. Once the successor has been removed, we simply put it in
+the tree in place of the node to be deleted.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-bstdel3"></span><img alt="../_images/bstdel31.png" src="../_images/bstdel31.png" />
+<p class="caption"><span class="caption-text">Figure 5: Deleting Node 5, a Node with Two Children</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>The code to handle the third case is shown in the next listing.
+Notice that we make use of the helper methods <code class="docutils literal notranslate"><span class="pre">findSuccessor</span></code> and
+<code class="docutils literal notranslate"><span class="pre">findMin</span></code> to find the successor. To remove the successor, we make use
+of the method <code class="docutils literal notranslate"><span class="pre">spliceOut</span></code>. The reason we use <code class="docutils literal notranslate"><span class="pre">spliceOut</span></code> is that it
+goes directly to the node we want to splice out and makes the right
+changes. We could call <code class="docutils literal notranslate"><span class="pre">delete</span></code> recursively, but then we would waste
+time re-searching for the key node.</p>
+<p id="lst-bst10"><strong>Listing 10</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasBothChildren</span><span class="p">():</span> <span class="c1">#interior</span>
+        <span class="n">succ</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+        <span class="n">succ</span><span class="o">.</span><span class="n">spliceOut</span><span class="p">()</span>
+        <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">key</span>
+        <span class="n">currentNode</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">payload</span>
+</pre></div>
+</div>
+<p>The code to find the successor is shown below (see <a class="reference internal" href="#lst-bst11"><span class="std std-ref">Listing 11</span></a>) and as
+you can see is a method of the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class. This code makes use
+of the same properties of binary search trees that cause an inorder
+traversal to print out the nodes in the tree from smallest to largest.
+There are three cases to consider when looking for the successor:</p>
+<ol class="arabic simple">
+<li><p>If the node has a right child, then the successor is the smallest key
+in the right subtree.</p></li>
+<li><p>If the node has no right child and is the left child of its parent,
+then the parent is the successor.</p></li>
+<li><p>If the node is the right child of its parent, and itself has no right
+child, then the successor to this node is the successor of its
+parent, excluding this node.</p></li>
+</ol>
+<p>The first condition is the only one that matters for us when deleting a
+node from a binary search tree. However, the <code class="docutils literal notranslate"><span class="pre">findSuccessor</span></code> method
+has other uses that we will explore in the exercises at the end of this
+chapter.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">findMin</span></code> method is called to find the minimum key in a subtree.
+You should convince yourself that the minimum valued key in any binary
+search tree is the leftmost child of the tree. Therefore the <code class="docutils literal notranslate"><span class="pre">findMin</span></code>
+method simply follows the <code class="docutils literal notranslate"><span class="pre">leftChild</span></code> references in each node of the
+subtree until it reaches a node that does not have a left child.</p>
+<p id="lst-bst11"><strong>Listing 11</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">findSuccessor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">succ</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+        <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">findMin</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                   <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+               <span class="k">else</span><span class="p">:</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+                   <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span>
+    <span class="k">return</span> <span class="n">succ</span>
+
+<span class="k">def</span> <span class="nf">findMin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span>
+    <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">leftChild</span>
+    <span class="k">return</span> <span class="n">current</span>
+
+<span class="k">def</span> <span class="nf">spliceOut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasAnyChildren</span><span class="p">():</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+               <span class="k">else</span><span class="p">:</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+        <span class="k">else</span><span class="p">:</span>
+               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+               <span class="k">else</span><span class="p">:</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+</pre></div>
+</div>
+<p>We need to look at one last interface method for the binary search tree.
+Suppose that we would like to simply iterate over all the keys in the
+tree in order. This is definitely something we have done with
+dictionaries, so why not trees? You already know how to traverse a
+binary tree in order, using the <code class="docutils literal notranslate"><span class="pre">inorder</span></code> traversal algorithm.
+However, writing an iterator requires a bit more work, since an iterator
+should return only one node each time the iterator is called.</p>
+<p>Python provides us with a very powerful function to use when creating an
+iterator. The function is called <code class="docutils literal notranslate"><span class="pre">yield</span></code>. <code class="docutils literal notranslate"><span class="pre">yield</span></code> is similar to
+<code class="docutils literal notranslate"><span class="pre">return</span></code> in that it returns a value to the caller. However, <code class="docutils literal notranslate"><span class="pre">yield</span></code>
+also takes the additional step of freezing the state of the function so
+that the next time the function is called it continues executing from
+the exact point it left off earlier. Functions that create objects that
+can be iterated are called generator functions.</p>
+<p>The code for an <code class="docutils literal notranslate"><span class="pre">inorder</span></code> iterator of a binary tree is shown in the next
+listing. Look at this code carefully; at first glance you
+might think that the code is not recursive. However, remember that
+<code class="docutils literal notranslate"><span class="pre">__iter__</span></code> overrides the <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span></code> operation for iteration, so it
+really is recursive! Because it is recursive over <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> instances
+the <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> method is defined in the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="k">if</span> <span class="bp">self</span><span class="p">:</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChiLd</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">elem</span>
+      <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">elem</span>
+</pre></div>
+</div>
+<p>At this point you may want to download the entire file containing the
+full version of the <code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code> and <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> classes.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<span class="docutils literal">/Users/hitoshi/git/github/pythonds/2019/livro/_sources/Trees/SearchTreeImplementation.rst</span>, line 620)</p>
+<p>Duplicate ID – see Arvores/SearchTreeImplementation, line 624</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">activecode</span><span class="p">::</span> <span class="n">completebstcode</span>
+
+    <span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">left</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">right</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+
+        <span class="k">def</span> <span class="nf">hasLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+        <span class="k">def</span> <span class="nf">hasRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+
+        <span class="k">def</span> <span class="nf">isLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">==</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="nf">isRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">==</span> <span class="bp">self</span>
+
+        <span class="k">def</span> <span class="nf">isRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+
+        <span class="k">def</span> <span class="nf">isLeaf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">hasAnyChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+        <span class="k">def</span> <span class="nf">hasBothChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+        <span class="k">def</span> <span class="nf">replaceNodeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">lc</span><span class="p">,</span><span class="n">rc</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">lc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">rc</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+
+
+    <span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                       <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                       <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="n">currentNode</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+               <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+               <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                      <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">payload</span>
+               <span class="k">else</span><span class="p">:</span>
+                      <span class="k">return</span> <span class="kc">None</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+           <span class="k">if</span> <span class="ow">not</span> <span class="n">currentNode</span><span class="p">:</span>
+               <span class="k">return</span> <span class="kc">None</span>
+           <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+               <span class="k">return</span> <span class="n">currentNode</span>
+           <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+           <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">):</span>
+               <span class="k">return</span> <span class="kc">True</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+             <span class="n">nodeToRemove</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+             <span class="k">if</span> <span class="n">nodeToRemove</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">nodeToRemove</span><span class="p">)</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span>
+             <span class="k">else</span><span class="p">:</span>
+                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+          <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+          <span class="k">else</span><span class="p">:</span>
+             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Error, key not in tree&#39;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">spliceOut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span>
+               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="kc">None</span>
+               <span class="k">else</span><span class="p">:</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+           <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasAnyChildren</span><span class="p">():</span>
+               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+                      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+                      <span class="k">else</span><span class="p">:</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+               <span class="k">else</span><span class="p">:</span>
+                      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+                      <span class="k">else</span><span class="p">:</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+
+        <span class="k">def</span> <span class="nf">findSuccessor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+          <span class="n">succ</span> <span class="o">=</span> <span class="kc">None</span>
+          <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+              <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">findMin</span><span class="p">()</span>
+          <span class="k">else</span><span class="p">:</span>
+              <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                         <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+                     <span class="k">else</span><span class="p">:</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+                         <span class="n">succ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span>
+          <span class="k">return</span> <span class="n">succ</span>
+
+        <span class="k">def</span> <span class="nf">findMin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+          <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span>
+          <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+              <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">leftChild</span>
+          <span class="k">return</span> <span class="n">current</span>
+
+        <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">currentNode</span><span class="p">):</span>
+             <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeaf</span><span class="p">():</span> <span class="c1">#leaf</span>
+               <span class="k">if</span> <span class="n">currentNode</span> <span class="o">==</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span><span class="p">:</span>
+                   <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="kc">None</span>
+               <span class="k">else</span><span class="p">:</span>
+                   <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="kc">None</span>
+             <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasBothChildren</span><span class="p">():</span> <span class="c1">#interior</span>
+               <span class="n">succ</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">findSuccessor</span><span class="p">()</span>
+               <span class="n">succ</span><span class="o">.</span><span class="n">spliceOut</span><span class="p">()</span>
+               <span class="n">currentNode</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">key</span>
+               <span class="n">currentNode</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">payload</span>
+
+             <span class="k">else</span><span class="p">:</span> <span class="c1"># this node has one child</span>
+               <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+                 <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+                 <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span>
+                 <span class="k">else</span><span class="p">:</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+               <span class="k">else</span><span class="p">:</span>
+                 <span class="k">if</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isLeftChild</span><span class="p">():</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+                 <span class="k">elif</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">isRightChild</span><span class="p">():</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span>
+                 <span class="k">else</span><span class="p">:</span>
+                     <span class="n">currentNode</span><span class="o">.</span><span class="n">replaceNodeData</span><span class="p">(</span><span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">leftChild</span><span class="p">,</span>
+                                        <span class="n">currentNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+
+
+
+
+    <span class="n">mytree</span> <span class="o">=</span> <span class="n">BinarySearchTree</span><span class="p">()</span>
+    <span class="n">mytree</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>
+    <span class="n">mytree</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>
+    <span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span>
+    <span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;at&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mytree</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+
+</pre></div>
+</div>
+</div>
+</div>
+
+
+  
+      
+
+<script type="text/javascript">
+
+  $('#relations-prev').tooltip({'placement':'right', 'selector': '', 'delay': { show: 100, hide: 50}});
+  $('#relations-next').tooltip({'placement':'left', 'selector': '', 'delay': { show: 100, hide: 50}});
+
+</script>
+  
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      
+      | <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017 DCC IME USP.
+      Created using <a href="http://runestoneinteractive.org/">Runestone</a> 3.4.5.
+    </p>
+  </div>
+</footer>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32029811-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  </body>
+</html>

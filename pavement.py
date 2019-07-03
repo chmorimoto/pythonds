@@ -1,58 +1,61 @@
 import paver
 from paver.easy import *
-from socket import gethostname
 import paver.setuputils
 paver.setuputils.install_distutils_tasks()
-from os import environ
+import os, sys
+from runestone.server import get_dburl
+from sphinxcontrib import paverutils
+import pkg_resources
+from socket import gethostname
 
-######## CHANGE THIS ##########
-project_name = "pythonds"
-###############################
+sys.path.append(os.getcwd())
 
-# if you want to override the master url do it here.  Otherwise setting it to None
-# configures it for the default case of wanting to use localhost for development
-# and interactivepython for deployment
-
-master_url = None
-if master_url is None:
-    if gethostname() == 'web407.webfaction.com':
-        master_url = 'http://interactivepython.org'
-        doctrees = '../../custom_courses/{}/doctrees'.format(project_name)
-    else:
-        master_url = 'http://127.0.0.1:8000'
-        doctrees = './build/{}/doctrees'.format(project_name)
-
-master_app = 'runestone'
-serving_dir = './build/pythonds'
-dest = '../../static'
+# The project name, for use below.
+project_name = "LivroAlgoritmos"
+# The root directory for ``runestone serve``.
+serving_dir = "./build/" + project_name
+# The destination directory for ``runestone deploy``.
+dest = "../../static"
 
 options(
     sphinx = Bunch(docroot=".",),
 
     build = Bunch(
-        builddir="./build/"+project_name,
-        sourcedir="./_sources/",
-        outdir="./build/"+project_name,
+        builddir=serving_dir,
+        sourcedir="_sources",
+        outdir=serving_dir,
         confdir=".",
-        project_name = project_name,
-        doctrees = doctrees,
-        template_args = {
-            'course_id':project_name,
-            'login_required':'false',
-            'appname':master_app,
-            'loglevel':10,
-            'course_url':master_url,
-            'use_services': 'true',
-            'python3': 'true',
-            'dburl': 'postgresql://bmiller@localhost/runestone',
-            'basecourse': 'pythonds',
-        }
+        template_args={'course_id': project_name,
+                       'login_required':'false',
+                       'appname': 'runestone',
+                       'loglevel': 0,
+                       'course_title': 'LivroAlgoritmos',
+                       'course_url': 'http://127.0.0.1:8000',
+                       'use_services': 'false',
+                       'python3': 'true',
+                       'dburl': '',
+                       'default_ac_lang': 'python',
+                       'basecourse': 'LivroAlgoritmos',
+                       'jobe_server': 'http://jobe2.cosc.canterbury.ac.nz',
+                       'proxy_uri_runs': '/jobe/index.php/restapi/runs/',
+                       'proxy_uri_files': '/jobe/index.php/restapi/files/',
+                       'downloads_enabled': 'false',
+                       'enable_chatcodes': 'false',
+                       'allow_pairs': 'false'
+                        }
     )
 )
 
-# Check to see if we are building on our Jenkins build server, if so use the environment variables
-# to update the DB information for this build
-if 'DBHOST' in environ and  'DBPASS' in environ and 'DBUSER' in environ and 'DBNAME' in environ:
-    options.build.template_args['dburl'] = 'postgresql://{DBUSER}:{DBPASS}@{DBHOST}/{DBNAME}'.format(**environ)
+# if we are on runestone-deploy then use the proxy server not canterbury
+if gethostname() == 'runestone-deploy':
+    del options.build.template_args['jobe_server']
+    del options.build.template_args['proxy_uri_runs']
+    del options.build.template_args['proxy_uri_files']
+
+version = pkg_resources.require("runestone")[0].version
+options.build.template_args['runestone_version'] = version
+
+# If DBURL is in the environment override dburl
+options.build.template_args['dburl'] = get_dburl(outer=locals())
 
 from runestone import build  # build is called implicitly by the paver driver.

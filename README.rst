@@ -30,6 +30,11 @@ Os capítulos em português estão listados em _sources/index.rst.
 Padronização das traduções
 ==========================
 
+- **Abstract Data Type**: tipo de dado abstrato [ao invé de: tipo abstrato de dado]
+- **ADT**: manter ou traduzir para TDA?
+- **procedural abstraction**: abstração procedimental
+- **information hiding**: ocultação de informação
+- **range object**: objeto de intervalo
 - **Big-O**: ???
 - **Benchmark analysis**: análise de aferição(?)
 - **Tuple**: tupla

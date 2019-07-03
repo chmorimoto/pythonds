@@ -1,13 +1,37 @@
+Julho 2019
+
+Após um logo inverno, resolvemos retomar esse projeto.
+O último commit foi em 2016/12. 
+
+Julho 2019: Hitoshi criou um fork
+https://github.com/chmorimoto/pythonds.git
+fez uma leve organização das pastas, atualizou
+o runestone e começou a traduzir a introdução.
+
+Capítulo 1: Introdução: Hitoshi
+Capítulo 2: ED: Coelho
+Capítulo 3: Algoritmos: Toshi
+Capítulo 4: Recursão: Hitoshi
+Capítulo 5: Ordenação: Cadu
+Capítulo 6: Árvores
+Capítulo 7: Grafos
+
+Em README.rst 
+estamos colocando uma tabela de traduções adotadas.
+
 
 Agosto 2016
+https://github.com/toshikurauchi/pythonds.git
 
 Início da tradução
 
-Capítulo 1:
-Capítulo 2: Coelho
-Capítulo 3: Toshi
-Capítulo 4: Hitoshi
-Capítulo 5: Cadu
-Capítulo 6:
+Capítulo 1: Introdução
+Capítulo 2: ED: Coelho
+Capítulo 3: Algoritmos: Toshi
+Capítulo 4: Recursão: Hitoshi
+Capítulo 5: Ordenação: Cadu
+Capítulo 6: Árvores
+Capítulo 7: Grafos
+
 
 
