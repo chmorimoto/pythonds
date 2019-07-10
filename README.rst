@@ -35,6 +35,7 @@ Padronização das traduções
 - **procedural abstraction**: abstração procedimental
 - **information hiding**: ocultação de informação
 - **range object**: objeto de intervalo
+- **prompt**: 
 - **Big-O**: ???
 - **Benchmark analysis**: análise de aferição(?)
 - **Tuple**: tupla
@@ -53,3 +54,5 @@ Padronização das traduções
 - **Social Security (...) **: INSS
 - **folding method**: ???
 - **mid-square method**: método do quadrado do meio ?
+- **list comprehension**: preenchimento de lista.
+- **hill clibing**: 

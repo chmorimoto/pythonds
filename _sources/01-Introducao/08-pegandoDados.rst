@@ -4,7 +4,7 @@
 
 ..  Getting Started with Data
 
-Primeiros passos com dados
+Primeiros Passos com Dados
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ..  We stated above that Python supports the object-oriented programming
@@ -27,7 +27,7 @@ um usuário de uma classe só vê o estado e o comportamento de um item de dados
 Os itens de dados são chamados de **objetos** no paradigma orientado a objeto. Um objeto
 é uma instância de uma classe.
 
-Tipos de dados atômicos nativos
+Tipos de Dados Atômicos Nativos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..  We will begin our review by considering the atomic data types. Python
@@ -101,7 +101,7 @@ Objetos de dados booleanos também são usados como resultado para operadores de
 como igualdade (==) e maior que (:math:`>`). Além disso, 
 operadores relacionais e operadores lógicos podem ser combinados para
 formar questões lógicas complexas. A :ref:`Tabela 1 <tab_relational>` mostra 
-os operadores relacionais e lógicos com exemplos mostrados na seção a seguir.
+os operadores relacionais e lógicos com exemplos mostrados no trecho de código seguinte.
 
 
 .. _tab_relational:
@@ -152,19 +152,19 @@ de seu programa seja mais fácil de ler e entender.
 Uma variável em Python é criada quando um nome é usado pela primeira vez
 do lado esquerdo de um comando de atribuição. Comandos de atribuição
 fornecem uma maneira de associar um nome a um valor. A variável manterá uma
-referência a um pedaço dos dados e não os dados em si. Considere a
-seguinte seção:
+referência a um pedaço dos dados e não os dados em si. Considere o seguinte
+trecho de código:
 
 ::
 
-    >>> soma = 0
-    >>> soma
+    >>> theSum = 0
+    >>> theSum
     0
-    >>> soma = soma + 1
-    >>> soma
+    >>> theSum = theSum + 1
+    >>> theSum
     1
-    >>> soma = True
-    >>> soma
+    >>> theSum = True
+    >>> theSum
     True
 
 ..  The assignment statement ``theSum = 0`` creates a variable called
@@ -180,15 +180,15 @@ seguinte seção:
     held by the variable. This is a dynamic characteristic of Python. The
     same variable can refer to many different types of data.
 
-O comando de atribuição ``soma = 0`` cria uma variável chamada
-``soma`` e permite manter a referência ao objeto de dados ``0`` (veja
+O comando de atribuição ``theSum = 0`` cria uma variável chamada
+``theSum`` e permite manter a referência ao objeto de dados ``0`` (veja
 :ref:`Figura 3 <fig_assignment1>`). Em geral, o lado direito do comando
 de atribuição é avaliado e uma referência ao objeto de dados resultante é
 “atribuída” ao nome no lado esquerdo. Neste ponto em nosso
 exemplo, o tipo da variável é inteiro por ser esse o tipo de
-dado atualmente sendo referido por ``soma``. Se o tipo de dado for
+dado atualmente sendo referido por ``theSum``. Se o tipo de dado for
 modificado (veja :ref:`Figura 4 <fig_assignment2>`), como mostrado acima com o 
-valor booleano ``True``, o mesmo acontece com o tipo da variável (``soma`` é agora 
+valor booleano ``True``, o mesmo acontece com o tipo da variável (``theSum`` é agora 
 do tipo booleano). O comando de atribuição altera a referência sendo
 mantida pela variável. Essa é uma característica dinâmica do Python.
 A mesma variável pode se referir a muitos tipos diferentes de dados.
@@ -210,7 +210,7 @@ A mesma variável pode se referir a muitos tipos diferentes de dados.
 
 ..  Built-in Collection Data Types
 
-Tipos Nativos de Dados Coletivos
+Tipos de Dados Coletivos Nativos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..  In addition to the numeric and boolean classes, Python has a number of
@@ -239,7 +239,7 @@ objetos de dados em Python. As listas são escritas como valores separados por v
 delimitadas por colchetes. A lista vazia é simplesmente ``[]``. Listas são
 heterogêneas, o que significa que os objetos de dados não precisam ser todos da
 mesma classe e a coleção pode ser atribuída a uma variável como abaixo.
-O fragmento a seguir mostra vários objetos de dados do Python em uma lista.
+O trecho de código a seguir mostra vários objetos de dados do Python em uma lista.
 
 ::
 
@@ -263,8 +263,8 @@ sua referência precisa ser atribuída a uma variável.
     gives examples of their use.
 
 Como as listas são consideradas sequencialmente ordenadas, elas suportam
-um número de operações que podem ser aplicadas a qualquer sequência do Python.
-:ref:`Tabela 2 <tab_sequence>` revisa essas operações e a seguinte seção
+um número de operações que podem ser aplicadas a qualquer sequência do Python. A
+:ref:`Tabela 2 <tab_sequence>` revisa essas operações e o trecho de código seguinte 
 fornece exemplos de seu uso.
 
 .. _tab_sequence:
@@ -310,7 +310,8 @@ realizado rapidamente usando repetição. Por exemplo,
 
 Um lado muito importante relacionado ao operador de repetição é que o
 resultado é uma repetição de referências aos objetos de dados na
-sequência. Isso pode ser melhor visto considerando a seguinte seção:
+sequência. Isso pode ser melhor visto considerando o seguinte trecho
+de código:
 
 
 .. activecode:: intro_3
@@ -336,8 +337,8 @@ lista original chamada ``minhaLista``. Observe que uma alteração em um element
     use follow.
 
 As listas suportam vários métodos que serão usados para criar estruturas de 
-dados. :ref:`Tabela 3 <tab_listmethods>` fornece um resumo. Exemplos de seus
-use seguir.
+dados. A :ref:`Tabela 3 <tab_listmethods>` fornece um resumo. Exemplos são mostrados
+em seguida.
 
 
 .. _tab_listmethods:
@@ -347,16 +348,16 @@ use seguir.
     ======================== ========================== =======================================================
           **Nome do Método**         **Exemplo de Uso**                                           **Descrição**
     ======================== ========================== =======================================================
-                  ``append``     ``alist.append(item)``             Adiciona um novo item ao final de uma lista
-                  ``insert``   ``alist.insert(i,item)``          Insere um item na i-ésima posição de uma lista
-                     ``pop``            ``alist.pop()``             Remove e retorna o último item de uma lista
-                     ``pop``           ``alist.pop(i)``            Remove e retorna o i-ésimo item de uma lista
-                    ``sort``           ``alist.sort()``                  Modifica uma lista para ficar ordenada
-                 ``reverse``        ``alist.reverse()``        Modifica uma lista, invertendo a ordem dos itens
-                ``del``           ``del alist[i]``                                   Exclui o item na posição i
-                   ``index``      ``alist.index(item)``     Retorna o índice da primeira ocorrência de ``item``
-                   ``count``      ``alist.count(item)``             Retorna o número de ocorrências de ``item``
-                  ``remove``     ``alist.remove(item)``                Remove a primeira ocorrência de ``item``
+                  ``append``     ``lista.append(item)``             Adiciona um novo item ao final de uma lista
+                  ``insert``   ``lista.insert(i,item)``          Insere um item na i-ésima posição de uma lista
+                     ``pop``            ``lista.pop()``             Remove e retorna o último item de uma lista
+                     ``pop``           ``lista.pop(i)``            Remove e retorna o i-ésimo item de uma lista
+                    ``sort``           ``lista.sort()``                  Modifica uma lista para ficar ordenada
+                 ``reverse``        ``lista.reverse()``        Modifica uma lista, invertendo a ordem dos itens
+                     ``del``           ``del lista[i]``                              Exclui o item na posição i
+                   ``index``      ``lista.index(item)``     Retorna o índice da primeira ocorrência de ``item``
+                   ``count``      ``lista.count(item)``             Retorna o número de ocorrências de ``item``
+                  ``remove``     ``lista.remove(item)``                Remove a primeira ocorrência de ``item``
     ======================== ========================== =======================================================
 
 
@@ -430,7 +431,7 @@ nesta seção.
     illustrated below.
 
 Uma função comum do Python que é frequentemente discutida em conjunto com
-listas é a função ``range``. ``range`` produz um objeto de intervalo que
+listas é a função ``range``. A função ``range`` produz um **objeto de intervalo** (*range object*) que
 representa uma sequência de valores. Usando a função ``list``, é
 possível ver o valor do objeto de intervalo como uma lista. Isto é
 ilustrado abaixo.
@@ -482,7 +483,7 @@ usando aspas (simples ou duplas).
 ::
 
     >>> "David"
-    'daniel'
+    'David'
     >>> meuNome = "David"
     >>> meuNome[3]
     'i'
@@ -498,7 +499,7 @@ usando aspas (simples ou duplas).
 
 Como strings são sequências, todas as operações de sequência descritas
 acima funcionam como seria de se esperar. Além disso, as strings têm vários
-métodos, alguns dos quais são mostrados em :ref:`Tabela 4 <tab_stringmethods>`. Por exemplo,
+métodos, alguns dos quais são mostrados na :ref:`Tabela 4 <tab_stringmethods>`. Por exemplo,
 
 
 ::
@@ -531,17 +532,17 @@ caracteres de espaço em branco, como tabulação, nova linha e espaço.
 
 .. table:: **Tabela 4: Métodos Nativos do Python para Strings**
 
-    ======================== ========================= =======================================================================
-          **Nome do método**        **Exemplo de Uso**                                                           **Descrição**
-    ======================== ========================= =======================================================================
-                  ``center``     ``astring.center(w)``                Retorna uma string centrada em um campo de tamanho ``w``
-                   ``count``   ``astring.count(item)``                   Retorna o número de ocorrências de ``item`` na string
-                   ``ljust``      ``astring.ljust(w)``  Retorna uma string justificada à esquerda em um campo de tamanho ``w``
-                   ``lower``       ``astring.lower()``                                        Retorna uma string em minúsculas
-                   ``rjust``      ``astring.rjust(w)``    etorna uma string justificada à direita em um campo de tamanho ``w``
-                    ``find``    ``astring.find(item)``                     Retorna o índice da primeira ocorrência de ``item``
-                   ``split``  ``astring.split(schar)``                            Divide uma string em substrings em ``schar``
-    ======================== ========================= =======================================================================
+    ======================== =========================== =======================================================================
+          **Nome do método**          **Exemplo de Uso**                                                           **Descrição**
+    ======================== =========================== =======================================================================
+                  ``center``     ``umastring.center(w)``                Retorna uma string centrada em um campo de tamanho ``w``
+                   ``count``   ``umastring.count(item)``                   Retorna o número de ocorrências de ``item`` na string
+                   ``ljust``      ``umastring.ljust(w)``  Retorna uma string justificada à esquerda em um campo de tamanho ``w``
+                   ``lower``       ``umastring.lower()``                                        Retorna uma string em minúsculas
+                   ``rjust``      ``umastring.rjust(w)``   Retorna uma string justificada à direita em um campo de tamanho ``w``
+                    ``find``    ``umastring.find(item)``                     Retorna o índice da primeira ocorrência de ``item``
+                   ``split``  ``umastring.split(schar)``                            Divide uma string em substrings em ``schar``
+    ======================== =========================== =======================================================================
 
 
 ..  A major difference between lists and strings is that lists can be
@@ -633,9 +634,9 @@ uma variável como abaixo.
 
 ::
 
-    >>> {3,6,"cat",4.5,False}
+    >>> {3,6,"gato",4.5,False}
     {False, 4.5, 3, 6, 'gato'}
-    >>> umConjunto = {3,6,"cat",4.5,False}
+    >>> umConjunto = {3,6,"gato",4.5,False}
     >>> umConjunto
     {False, 4.5, 3, 6, 'gato'}
     >>>
@@ -646,7 +647,7 @@ uma variável como abaixo.
 
 Mesmo que os conjuntos não sejam considerados sequenciais, eles suportam algumas 
 das operações familiares apresentadas anteriormente. A :ref:`Tabela 5 <tab_setops>`
-descreve estas operações e a seção seguinte dá exemplos de seu uso.
+descreve estas operações e o trecho de código seguinte dá exemplos de seu uso.
 
 .. _tab_setops:
 
@@ -657,10 +658,10 @@ descreve estas operações e a seção seguinte dá exemplos de seu uso.
     =========================== ===================== ==================================================================================
                     pertinência                    in                                                            se pertence ao conjunto
                          length                   len                                                Retorna a cardinalidade do conjunto
-                          ``|``   ``aset | otherset``              Retorna um novo conjunto com todos os elementos de ambos os conjuntos
-                          ``&``   ``aset & otherset``                    Retorna um novo conjunto com apenas os elementos comuns a ambos
-                          ``-``   ``aset - otherset``   Retorna um novo conjunto com todos os itens do primeiro conjunto, não no segundo
-                         ``<=``  ``aset <= otherset``               Pergunta se todos os elementos do primeiro conjunto estão no segundo
+                          ``|``     ``conj1 | conj2``              Retorna um novo conjunto com todos os elementos de ambos os conjuntos
+                          ``&``     ``conj1 & conj2``                    Retorna um novo conjunto com apenas os elementos comuns a ambos
+                          ``-``     ``conj1 - conj2``   Retorna um novo conjunto com todos os itens do primeiro conjunto, não no segundo
+                         ``<=``    ``conj1 <= conj2``               Pergunta se todos os elementos do primeiro conjunto estão no segundo
     =========================== ===================== ==================================================================================
 
 
@@ -672,7 +673,7 @@ descreve estas operações e a seção seguinte dá exemplos de seu uso.
     5
     >>> False in umConjunto
     True
-    >>> "dog" in umConjunto
+    >>> "rato" in umConjunto
     False
     >>>
 
@@ -696,14 +697,14 @@ que pode ser usados também.
     ======================== ================================= ==================================================================================
           **Nome do Método**                **Exemplo de Uso**                                                                      **Descrição**
     ======================== ================================= ==================================================================================
-                   ``union``          ``aset.union(otherset)``              Retorna um novo conjunto com todos os elementos de ambos os conjuntos
-            ``intersection``   ``aset.intersection(otherset)``       Retorna um novo conjunto com apenas os elementos comuns a ambos os conjuntos
-              ``difference``     ``aset.difference(otherset)``   Retorna um novo conjunto com todos os itens do primeiro conjunto, não no segundo
-                ``issubset``       ``aset.issubset(otherset)``                       Pergunta se todos os elementos de um conjunto estão no outro
-                     ``add``                ``aset.add(item)``                                                          Adiciona item ao conjunto     
-                  ``remove``             ``aset.remove(item)``                                                            Remove item do conjunto
-                     ``pop``                    ``aset.pop()``                                          Remove um elemento arbitrário do conjunto
-                   ``clear``                  ``aset.clear()``                                              Remove todos os elementos do conjunto   
+                   ``union``          ``conj.union(otherset)``              Retorna um novo conjunto com todos os elementos de ambos os conjuntos
+            ``intersection``   ``conj.intersection(otherset)``       Retorna um novo conjunto com apenas os elementos comuns a ambos os conjuntos
+              ``difference``     ``conj.difference(otherset)``   Retorna um novo conjunto com todos os itens do primeiro conjunto, não no segundo
+                ``issubset``       ``conj.issubset(otherset)``                       Pergunta se todos os elementos de um conjunto estão no outro
+                     ``add``                ``conj.add(item)``                                                          Adiciona item ao conjunto     
+                  ``remove``             ``conj.remove(item)``                                                            Remove item do conjunto
+                     ``pop``                    ``conj.pop()``                                          Remove um elemento arbitrário do conjunto
+                   ``clear``                  ``conj.clear()``                                              Remove todos os elementos do conjunto   
     ======================== ================================= ==================================================================================
 
 
@@ -728,7 +729,7 @@ que pode ser usados também.
     True
     >>> {3,100}<=outroConjunto
     True
-    >>> umConjunto.add("house")
+    >>> umConjunto.add("casa")
     >>> umConjunto
     {False, 4.5, 3, 6, 'casa', 'gato'}
     >>> umConjunto.remove(4.5)
@@ -802,10 +803,12 @@ usamos o valor da chave. Para adicionar um novo valor é semelhante.
     length function performing the same role as with previous collections.
 
 É importante notar que o dicionário é mantido sem nenhuma
-ordem em particular com relação às chaves. O primeiro par adicionado
-(``'Amazonas':`` ``'Manaus'``) foi colocado primeiro no dicionário e
-o segundo par adicionado (``'Bahia':`` ``'Salvador'``) foi colocado por
-último. A colocação de uma chave depende da ideia de "hashing"
+ordem em particular com relação às chaves. Assim, apesar do 
+primeiro par adicionado tenha sido 
+``'Amazonas':`` ``'Manaus'`` e o último ``'Bahia':`` ``'Salvador'``,
+ao percorrer o dicionário usando o comando ``for`` por exemplo (linha 7), 
+a ordem das chaves é incerta.
+A ordem de uma chave depende da ideia de "hashing"
 que será explicada em mais detalhes no Capítulo 4. Também mostramos
 a função length executando o mesmo papel que nas coleções anteriores.
 
@@ -833,13 +836,13 @@ especificar um outro valor de retorno.
 
 .. table:: **Tabela 7: Operadores Fornecidos por Dicionários em Python**
 
-    ===================== ================== =============================================================================
-             **Operador**        **Exemplo**                                                                 **Descrição**
-    ===================== ================== =============================================================================
-                   ``[]``      ``myDict[k]``                   Retorna o valor associado a ``k``, caso contrário é um erro
-                   ``in``   ``key in adict``   Retorna ``True`` se key estiver no dicionário, ``False`` caso contrário
-                  ``del`` del ``adict[key]``                                   Remove o item do dicionário associado a key       
-    ===================== ================== =============================================================================
+    ===================== ==================== =============================================================================
+             **Operador**          **Exemplo**                                                                 **Descrição**
+    ===================== ==================== =============================================================================
+                   ``[]``        ``myDict[k]``                   Retorna o valor associado a ``k``, caso contrário é um erro
+                   ``in``     ``key in dicio``   Retorna ``True`` se key estiver no dicionário, ``False`` caso contrário
+                  ``del``   del ``dicio[key]``                                   Remove o item do dicionário associado a key       
+    ===================== ==================== =============================================================================
 
 
 
@@ -872,15 +875,15 @@ especificar um outro valor de retorno.
     ======================== ==================== ===============================================================
           **Nome do Método**   **Exemplo de Uso**                                                   **Descrição**
     ======================== ==================== ===============================================================
-                    ``keys``     ``adict.keys()``          Retorna as chaves do dicionário em um objeto dict_keys
-                  ``values``   ``adict.values()``       Retorna os valores do dicionário em um objeto dict_values
-                   ``items``    ``adict.items()``         Retorna os pares de chave-valor em um objeto dict_items
-                     ``get``     ``adict.get(k)``      Retorna o valor associado a ``k``, ``None`` caso contrário
-                     ``get`` ``adict.get(k,alt)``       Retorna o valor associado a ``k``, ``alt`` caso contrário
+                    ``keys``     ``dicio.keys()``          Retorna as chaves do dicionário em um objeto dict_keys
+                  ``values``   ``dicio.values()``       Retorna os valores do dicionário em um objeto dict_values
+                   ``items``    ``dicio.items()``         Retorna os pares de chave-valor em um objeto dict_items
+                     ``get``     ``dicio.get(k)``      Retorna o valor associado a ``k``, ``None`` caso contrário
+                     ``get`` ``dicio.get(k,alt)``       Retorna o valor associado a ``k``, ``alt`` caso contrário
     ======================== ==================== ===============================================================
 
 
-.. note::
+.. admonition:: Rascunho
 
     Essa área de trabalho é fornecida para sua conveniência. Você pode usar essa janela de activecode para testar qualquer coisa que desejar. 
 

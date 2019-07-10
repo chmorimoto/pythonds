@@ -4,7 +4,7 @@
 
 .. Why Study Data Structures and Abstract Data Types?
 
-Por que estudar Estruturas de Dados e Tipos de Dados Abstratos?
+Por Que Estudar Estruturas de Dados e Tipos de Dados Abstratos?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ..  To manage the complexity of problems and the problem-solving process,

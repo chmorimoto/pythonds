@@ -12,11 +12,11 @@ Introdução
     06-porqueAlgoritmos.rst
     07-revisaoPython.rst
     08-pegandoDados.rst
-    InputandOutput.rst
-    ControlStructures.rst
-    ExceptionHandling.rst
-    DefiningFunctions.rst
-    ObjectOrientedProgramminginPythonDefiningClasses.rst
+    09-entradaSaida.rst
+    10-controle.rst
+    11-exceptions.rst
+    12-funcoes.rst
+    13-poo.rst
     Summary.rst
     KeyTerms.rst
     DiscussionQuestions.rst
