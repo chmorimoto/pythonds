@@ -19,17 +19,11 @@ Objetivos
 
 Os objetivos desse capítulo são os seguintes:
 
--  Entender que problemas complexos que de outra forma seriam difíceis de resolver
-   podem ter soluções recursivas simples.
-
--  Aprender como formular problemas recursivamente.
-
+-  Entender que problemas complexos que de outra forma seriam difíceis de resolver podem ter soluções recursivas simples.
+-  Aprender como formular programas recursivamente.
 -  Entender e aplicar as três leis da recursão.
-
 -  Entender recursão como uma forma de iteração.
-
 -  Implementar a formulação recursiva de um problema.
-
 -  Entender como recursão é implementada em um sistema computacional.
 
 .. index:: mutable, immutable, tuple

@@ -20,7 +20,7 @@ Nós vamos iniciar nossa investigação com um problema simples que
 você já sabe resolver sem usar recursão. Imagine que você queira
 calcular a soma de uma lista de números tal como:
 :math:`[1, 3, 5, 7, 9]`. Uma função iterativa que calcula
-a soma é mostrada em :ref:`ActiveCode 1<lst_itsum>`.
+a soma é mostrada no :ref:`ActiveCode 1<lst_itsum>`.
 A função usa uma variável acumuladora ("soma") que calcula
 a somatória de todos os números da lista começando com
 :math:`0` e adicionando cada número da lista. 
@@ -28,13 +28,13 @@ a somatória de todos os números da lista começando com
 .. activecode:: lst_itsum
     :caption: Somatória Iterativa
 
-    def somaLista(numeros):
+    def sum(numeros):
         soma = 0
         for i in numeros:
             soma = soma + i
         return soma
         
-    print(somaLista([1,3,5,7,9]))
+    print(sum([1,3,5,7,9]))
 
 .. Pretend for a minute that you do not have ``while`` loops or ``for``
    loops. How would you compute the sum of a list of numbers? If you were a
@@ -55,8 +55,7 @@ poderia ser como essa:
 .. math::
     ((((1 + 3) + 5) + 7) + 9)
     
-.. We can also parenthesize
-   the expression the other way around,
+.. We can also parenthesize the expression the other way around,
 
 Nós podemos também formar uma expressão com parênteses em ordem contrária:
 
@@ -97,7 +96,7 @@ que a soma da lista ``numeros`` é a soma do primeiro elemento da lista
 
 .. math::
 
-      somaLista(numeros) = primeiro(numeros) + somaLista(resto(numeros))
+    sum(numeros) = primeiro(numeros) + sum(resto(numeros))
     \label{eqn:listsum}
 
 
@@ -107,20 +106,20 @@ que a soma da lista ``numeros`` é a soma do primeiro elemento da lista
    :ref:`ActiveCode 2 <lst_recsum>`.
 
 Nessa equação :math:`primeiro(numeros)` retorna o primeiro elemento da lista
-e :math:`resto(numeros)` retorna a lista menos o primeiro elemento. Isso é
-facilmente expresso em Python como mostrado em
+:math:`resto(numeros)` e retorna a lista menos o primeiro elemento. Isso é
+facilmente expresso em Python como mostrado no
 :ref:`ActiveCode 2 <lst_recsum>`.
       
 .. activecode:: lst_recsum
     :caption: Somatória Recursiva
 
-    def somaLista(numeros):
+    def sum(numeros):
        if len(numeros) == 1:
             return numeros[0]
        else:
-            return numeros[0] + somaLista(numeros[1:])
+            return numeros[0] + sum(numeros[1:])
             
-    print(somaLista([1,3,5,7,9]))
+    print(sum([1,3,5,7,9]))
 
 .. There are a few key ideas in this listing to look at. First, on line 2 we are checking to see if the list is one element long. This
    check is crucial and is our escape clause from the function. The sum of
@@ -134,7 +133,7 @@ na linha 2 nós verificamos se a lista possui apenas um elemento. Essa
 verificação é crucial e é a forma de sair da função. A soma de uma lista
 de comprimento 1 é trivial; é simplesmente o número que está na lista.
 Segundo, na linha 5, nossa função chama a si mesma! Essa é a razão
-pela qual chamamos o algoritmo ``somaLista`` de recursivo. Uma função
+pela qual chamamos o algoritmo ``sum`` de recursivo. Uma função
 recursiva é uma função que chama a si mesma.
 
 .. :ref:`Figure 1 <fig_recsumin>` shows the series of **recursive calls** that are
@@ -147,7 +146,7 @@ A :ref:`figura 1 <fig_recsumin>` mostra a série de **chamadas recursivas**
 necessárias para somar a lista :math:`[1, 3, 5, 7, 9]`. Você deve considerar
 essa série de chamadas como um série de simplificações. Cada vez que fazemos
 uma chamada recursiva estamos resolvendo um problema menor, até chegar a um
-ponto onde o problema não precisa ficar menor.
+ponto onde o problema não precisa mais ficar menor.
 
 .. _fig_recsumin:
 
@@ -165,11 +164,11 @@ ponto onde o problema não precisa ficar menor.
    through the series of calls. When ``listsum`` returns from the topmost
    problem, we have the solution to the whole problem.
 
-Quando chegamos ao ponto onde o problema se torna o mais simples possível, nós
+Quando chegamos ao ponto onde o problema se torna tão simples quanto possível,
 passamos a montar as soluções de cada um dos problemas menores até resolver
 o problema inicial. A :ref:`figura 2 <fig_recsumout>` mostra as adições
-realizadas a medida que ``somaLista`` vai retornando pela série de chamadas.
-Quando ``somaLista`` retorna da primeira chamada, nós obtemos a solução de todo o
+realizadas a medida que ``sum`` vai retornando pela série de chamadas.
+Quando ``sum`` retorna da primeira chamada, nós obtemos a solução de todo o
 problema.
 
 .. _fig_recsumout:

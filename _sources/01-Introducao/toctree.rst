@@ -17,7 +17,7 @@ Introdução
     11-exceptions.rst
     12-funcoes.rst
     13-poo.rst
-    Summary.rst
-    KeyTerms.rst
-    DiscussionQuestions.rst
-    ProgrammingExercises.rst
+    14-resumo.rst
+    15-termos.rst
+    16-discussao.rst
+    17-exercicios.rst

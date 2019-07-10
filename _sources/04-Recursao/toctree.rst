@@ -1,8 +1,8 @@
-Recursion
+Recursão
 :::::::::
 
 .. toctree::
-    :caption: Recursion
+    :caption: Recursão
     :maxdepth: 2
 
     00-objetivos.rst
