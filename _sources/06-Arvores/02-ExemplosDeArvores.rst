@@ -38,35 +38,37 @@ descemos na árvore taxonômica: todos os organismos sempre são animais.
 
    Figura 1: Taxonomia de Alguns Animais Comuns Mostrada como uma Árvore
 
-Notice that you can start at the top of the tree and follow a path made
-of circles and arrows all the way to the bottom. At each level of the
-tree we might ask ourselves a question and then follow the path that
-agrees with our answer. For example we might ask, “Is this animal a
-Chordate or an Arthropod?” If the answer is “Chordate” then we follow
-that path and ask, “Is this Chordate a Mammal?” If not, we are stuck
-(but only in this simplified example). When we are at the Mammal level
-we ask, “Is this Mammal a Primate or a Carnivore?” We can keep following
-paths until we get to the very bottom of the tree where we have the
-common name.
+Note que você pode começar pelo topo da árvore e descer por um caminho
+definido por círculos e setas até a base. A cada nível da árvore podemos
+fazer uma pergunta e seguir o caminho que está de acordo com a resposta
+que procuramos. Por exemplo, podemos perguntar: "Este animal é um
+Cordado ou um Artrópode?" Se a resposta for "Cordado", então seguimos
+por esse caminho. Em seguida, podemos perguntar: "Este Cordado é um 
+Mamífero?" Se não for, não temos mais como descer na árvore (pelo menos 
+neste exemplo simplificado). Se estivermos no nível de Mamífero, podemos
+perguntar: "Este Mamífero é um Primata ou um Carnívoro?" Nós podemos
+continuar seguindo pelo caminho até que cheguemos às folhas da árvore,
+onde está o nome comum.
 
-A second property of trees is that all of the children of one node are
-independent of the children of another node. For example, the Genus
-Felis has the children Domestica and Leo. The Genus Musca also has a
-child named Domestica, but it is a different node and is independent of
-the Domestica child of Felis. This means that we can change the node
-that is the child of Musca without affecting the child of Felis.
+Uma segunda propriedade das árvores é que todos os filhos de um nó são
+independentes dos filhos de um outro nó. Por exemplo, o Gênero Felis
+tem como filhos Domestica e Leo. O Gênero Musca também tem um filho
+denominado Domestica, mas trata-se de um nó diferente, não relacionado
+com o filho Domestica de Felis. Isso significa que nós podemos mudar o
+nó filho de Musca sem afetar os filhos de Felis.
 
-A third property is that each leaf node is unique. We can specify a path
-from the root of the tree to a leaf that uniquely identifies each
-species in the animal kingdom; for example, Animalia
+Uma terceira propriedade é que folha é única. Nós podemos especificar um
+caminho da raiz da árvore até uma folha que identifica univocamente
+cada espécie do reino animal. Por exemplo: Animalia
 :math:`\rightarrow` Chordate :math:`\rightarrow` Mammal
 :math:`\rightarrow` Carnivora :math:`\rightarrow` Felidae
 :math:`\rightarrow` Felis :math:`\rightarrow` Domestica.
 
-Another example of a tree structure that you probably use every day is a
-file system. In a file system, directories, or folders, are structured
-as a tree. :ref:`Figure 2 <fig_filetree>` illustrates a small part of a Unix file
-system hierarchy.
+Outro exemplo de uma estrutura em árvore que você provavelmente utiliza
+todo dia é a de um sistema de arquivos. Em um sistema de arquivos, diretórios
+(ou pastas) estão estruturados como uma árvore. A :ref:`Figura 2 <fig_filetree>`
+ilustra uma pequena amostra da hierarquia de um sistema de arquivos da
+família Unix.
 
 .. _fig_filetree:
 
@@ -75,23 +77,23 @@ system hierarchy.
    :align: center
    :alt: image
 
-   Figure 2: A Small Part of the Unix File System Hierarchy
+   Figura 2: Uma amostra da hierarquia de um sistema de arquivos Unix
 
-The file system tree has much in common with the biological
-classification tree. You can follow a path from the root to any
-directory. That path will uniquely identify that subdirectory (and all
-the files in it). Another important property of trees, derived from
-their hierarchical nature, is that you can move entire sections of a
-tree (called a **subtree**) to a different position in the tree without
-affecting the lower levels of the hierarchy. For example, we could take
-the entire subtree staring with /etc/, detach etc/ from the root and
-reattach it under usr/. This would change the unique pathname to httpd
-from /etc/httpd to /usr/etc/httpd, but would not affect the contents or
-any children of the httpd directory.
+A árvore do sistema de arquivos tem muito em comum com a árvore taxonômica.
+Você pode seguir um caminho da raiz até qualquer diretório. Esse caminho
+irá identificar univocamente esse subdiretório (e todos os arquivos
+contidos nele). Uma outra propriedade importante das árvores, derivada
+da sua natureza hierárquica, é que você pode mover porções inteiras de uma
+árvore (chamada **subárvore**) para algum outro braço sem afetar seus níveis
+hierárquicos inferiores. Por exemplo, nós poderíamos pegar a subárvore
+com raiz em /etc/, desacoplar o diretório etc/ da raiz e reacoplá-lo
+dentro de /usr/. Isso iria mudar o caminho que leva à pasta httpd de 
+/etc/httpd para /usr/etc/httpd, mas não iria afetar o conteúdo ou os filhos
+do diretório httpd.
 
-A final example of a tree is a web page. The following is an example of
-a simple web page written using HTML. :ref:`Figure 3 <fig_html>` shows the tree
-that corresponds to each of the HTML tags used to create the page.
+Um último exemplo de um árvore é uma página web. O exemplo a seguir mostra
+uma simples página web escrita em HTML. A :ref:`Figura 3 <fig_html>` mostra
+a árvore que corresponde a cada tag HTML usada para criar a página. 
 
 ::
 
@@ -119,13 +121,13 @@ that corresponds to each of the HTML tags used to create the page.
    :align: center
    :alt: image
 
-   Figure 3: A Tree Corresponding to the Markup Elements of a Web Page
+   Figure 4: Uma árvore criada a partir de elementos de marcação de uma página web
 
+O código fonte HTML e a árvore que acompanha esse código ilustram outro
+tipo de hierarquia. Note que cada nível da árvore corresponde a uma nível de
+aninhamento dentro das tags HTML. A primeira tag no código é ``<html>``
+e a última é ``</html>``. Todas as demais tags na página estão contidas
+dentro desse par. Se você verificar, irá constatar que essa propriedade
+hierárquica de aninhamento vale para todos os níveis da árvore.
 
-The HTML source code and the tree accompanying the source illustrate
-another hierarchy. Notice that each level of the tree corresponds to a
-level of nesting inside the HTML tags. The first tag in the source is
-``<html>`` and the last is ``</html>`` All the rest of the tags in the
-page are inside the pair. If you check, you will see that this nesting
-property is true at all levels of the tree.
 
