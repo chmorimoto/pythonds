@@ -10,7 +10,7 @@ Estruturas de Dados Básicas
     03-Pilhas.rst
     04-PilhaADT.rst
     05-PilhaImplementacao.rst
-    SimpleBalancedParentheses.rst
+    06-ParentesesBalanceados.rst
     BalancedSymbols(AGeneralCase).rst
     ConvertingDecimalNumberstoBinaryNumbers.rst
     InfixPrefixandPostfixExpressions.rst
