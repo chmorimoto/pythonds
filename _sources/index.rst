@@ -36,8 +36,8 @@ José Coelho de Pina, `IME-USP <https://www.ime.usp.br>`_.
    :maxdepth: 3
 
    01-Introducao/toctree.rst
-   02-EDBasicos/toctree.rst
-   03-AnaliseDeAlgoritmos/toctree.rst
+   02-AnaliseDeAlgoritmos/toctree.rst
+   03-EDBasicos/toctree.rst
    04-Recursao/toctree.rst
    05-OrdenacaoBusca/toctree.rst
    06-Arvores/toctree.rst
