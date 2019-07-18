@@ -11,8 +11,8 @@ Estruturas de Dados Básicas
     04-PilhaADT.rst
     05-PilhaImplementacao.rst
     06-ParentesesBalanceados.rst
-    BalancedSymbols(AGeneralCase).rst
-    ConvertingDecimalNumberstoBinaryNumbers.rst
+    07-SimbolosBalanceados.rst
+    08-DecimalParaBinario.rst
     InfixPrefixandPostfixExpressions.rst
     WhatIsaQueue.rst
     TheQueueAbstractDataType.rst

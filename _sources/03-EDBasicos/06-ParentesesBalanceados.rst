@@ -92,7 +92,7 @@ O código Python que implementa esse algoritmo é mostrado em
 .. _lst_parcheck1:
 
 .. activecode:: parcheck1
-    :caption: Solving the Balanced Parentheses Problem
+    :caption: Solução do Problema dos Parenteses Balanceados
     :nocodelens:
 
     from pythonds.basic.stack import Stack
