@@ -28,10 +28,10 @@ e
 :math:`1\times2^{7} + 1\times2^{6} + 1\times2^{5} + 0\times2^{4} + 1\times2^{3} + 0\times2^{2} + 0\times2^{1} + 1\times2^{0}`
 
 Mas como podemos facilmente converter valores inteiros da representação decimal para a binária? A
-resposta é um algoritmo chamado de "Divisão por 2" ("*Divide by 2*"),
+resposta é um algoritmo chamado de "Divisão por 2" (*Divide by 2*),
 que usa uma pilha para manter os dígitos da representação binária.
 
-O algoritmo *Divisão por 2" supõe que inicialmente temos um inteiro maior
+O algoritmo "Divisão por 2" supõe que inicialmente temos um inteiro maior
 de 0. Em cada iteração do algoritmo dividimos o número decimal
 por 2 e mantemos o resto dessa divisão em uma pilha.
 O valor do primeiro resto da divisão por 2 nos diz se o o valor é par ou ímpar.
@@ -166,32 +166,31 @@ dígito resultante pode ser anexado à resposta.
 Por exemplo, se o resto 13 é removido da pilha, o dígito D é anexado a
 string resultante.
 
-
-.. admonition:: Self Check
+.. admonition:: Teste seu conhecimento
 
    .. fillintheblank:: baseconvert1
 
       .. blank:: bcblank1
          :correct: \\b31\\b
-         :feedback1: (".*", "Incorrect")
-                     
-         Qual é o valor de 25 na base octal
+         :feedback1: (".*", "Incorreto")
 
+         Qual é o valor de 25 na base octal
+         
    .. fillintheblank:: baseconvert2
 
       .. blank:: bcblank2
          :correct: \\b100\\b
 
          Qual é o valor of 256 na base hexadecimal
-
+                   
    .. fillintheblank:: baseconvert3
 
       .. blank:: bcblank3
          :correct: \\b10\\b
-         :feedback1: ('.*', 'You may need to modify the baseConverter function, or simply find a pattern in the conversion of bases.')
+         :feedback1: ('.*', 'Talvez você precise modificar a função baseConverter, ou simplesmente encontre o padrão na conversão de bases.')
 
          Qual é o valor de 26 na base 26
-
+                     
 
 .. video:: video_Stack2
     :controls:

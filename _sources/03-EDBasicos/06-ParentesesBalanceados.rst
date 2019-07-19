@@ -56,10 +56,11 @@ O desafio então é escrever um algoritmo que leia uma string de
 parênteses da esquerda para a direita e decida se os parênteses
 estão balanceados. Para resolver este problema, precisamos fazer uma observação
 importante. Ao examinar da esquerda para a direita os símbolos na string,
-cada fecha parênteses deve ser associado ao abre parênteses que foi examinado mais recentemente e ainda não foi associado a um fecha parênteses
+cada fecha parêntese deve ser associado ao abre parêntese
+que foi examinado mais recentemente e ainda não foi associado a um fecha parêntese
 (veja :ref:`Figura 4 <fig_parmatch>`).
-Além disso, o primeiro abre parênteses examinado pode ter que
-esperar até o último símbolo da string para encontrar o seu fecha parênteses.
+Além disso, o primeiro abre parêntese examinado pode ter que
+esperar até o último símbolo da string para encontrar o seu fecha parêntese.
 Fecha parênteses são associados a abre parênteses na ordem inversa que foram examinados; eles são emparelhados de "dentro para fora".
 Este é um indício de que pilhas podem ser usadas para resolver
 problema.
@@ -74,15 +75,15 @@ problema.
 Uma vez que você concorda que uma pilha é a estrutura de dados apropriada para
 mantermos os parênteses, a descrição do algoritmo é clara. Começando com uma
 pilha vazia, processe os parênteses na string da esquerda para a direita.
-Se um símbolo é um abre parênteses, insira-o (``push()``)
-na pilha para indicar queo fecha parênteses correspondente precisa
+Se um símbolo é um abre parêntese, insira-o (``push()``)
+na pilha para indicar que o fecha parêntese correspondente precisa
 aparecer mais tarde.
-Se, por outro lado, um símbolo é um fecha parênteses, remova (``pop()``)
+Se, por outro lado, um símbolo é um fecha parêntese, remova (``pop()``)
 um abre da pilha. Contanto que seja possível realizarmos um ``pop()`` na
-pilha para corresponder a cada fecha parênteses encontrado,
+pilha para corresponder a cada fecha parêntese encontrado,
 os parênteses estarão balanceados. Se em qualquer
-momento não houver um abre parênteses na pilha para corresponder
-a um fecha parênteses, a string não está balanceada. No final da
+momento não houver um abre parêntese na pilha para corresponder
+a um fecha parêntese, a string não está balanceada. No final da
 string, quando todos os símbolos tiverem sido processados, a pilha
 deve estar vazia.
 O código Python que implementa esse algoritmo é mostrado em
@@ -131,8 +132,8 @@ não há razão para supor o contrário.
 Se o símbolo atual é ``(``, então ele é inserido na pilha
 (linhas 9-10). Note também na linha 15 que ``pop()`` simplesmente remove
 um símbolo da pilha. O valor retornado não é usado, pois sabemos que é
-um abre parênteses visto anteriormente. No final (linhas 19 a 22),
-desde que os fecha parenteses tenha encontrado os correspondentes abre
+um abre parêntese visto anteriormente. No final (linhas 19 a 22),
+desde que os fecha parentese tenha encontrado os correspondentes abre
 e a pilha tenha sido completamente limpa,
 a string representa uma sequência de parênteses balanceada.
 

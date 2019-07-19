@@ -13,10 +13,10 @@ Estruturas de Dados Básicas
     06-ParentesesBalanceados.rst
     07-SimbolosBalanceados.rst
     08-DecimalParaBinario.rst
-    InfixPrefixandPostfixExpressions.rst
-    WhatIsaQueue.rst
-    TheQueueAbstractDataType.rst
-    ImplementingaQueueinPython.rst
+    09-ExpressoesInfixaPrefixaPosfixa.rst
+    10-Filas.rst
+    11-FilaADT.rst
+    12-FilaImplementacao.rst
     SimulationHotPotato.rst
     SimulationPrintingTasks.rst
     WhatIsaDeque.rst
