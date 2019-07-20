@@ -4,8 +4,8 @@
 
 ..  Discussion Questions
 
-Questões para Discussão
------------------------
+Questões de Discussão
+---------------------
 
 #. Construa uma hierarquia de classes para pessoas em um campus universitário. Inclua professores, funcionários e alunos. O que eles têm em comum? O que os distingue um dos outros?
 

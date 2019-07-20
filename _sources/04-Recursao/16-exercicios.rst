@@ -92,8 +92,8 @@
       algorithm that gives you the smallest edit distance between any two
       words.
 
-Exercícios Programa
--------------------
+Exercícios de Programação
+-------------------------
 
 #. Escreva uma função recursiva para calcular o fatorial de um número.
 
