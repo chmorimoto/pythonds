@@ -28,13 +28,13 @@ a somatória de todos os números da lista começando com
 .. activecode:: lst_itsum
     :caption: Somatória Iterativa
 
-    def sum(numeros):
+    def somalista(numeros):
         soma = 0
         for i in numeros:
             soma = soma + i
         return soma
         
-    print(sum([1,3,5,7,9]))
+    print(somalista([1,3,5,7,9]))
 
 .. Pretend for a minute that you do not have ``while`` loops or ``for``
    loops. How would you compute the sum of a list of numbers? If you were a
@@ -96,7 +96,7 @@ que a soma da lista ``numeros`` é a soma do primeiro elemento da lista
 
 .. math::
 
-    sum(numeros) = primeiro(numeros) + sum(resto(numeros))
+    somalista(numeros) = primeiro(numeros) + somalista(resto(numeros))
     \label{eqn:listsum}
 
 
@@ -113,13 +113,13 @@ facilmente expresso em Python como mostrado no
 .. activecode:: lst_recsum
     :caption: Somatória Recursiva
 
-    def sum(numeros):
+    def somalista(numeros):
        if len(numeros) == 1:
             return numeros[0]
        else:
-            return numeros[0] + sum(numeros[1:])
+            return numeros[0] + somalista(numeros[1:])
             
-    print(sum([1,3,5,7,9]))
+    print(somalista([1,3,5,7,9]))
 
 .. There are a few key ideas in this listing to look at. First, on line 2 we are checking to see if the list is one element long. This
    check is crucial and is our escape clause from the function. The sum of
@@ -155,7 +155,7 @@ ponto onde o problema não precisa mais ficar menor.
    :alt: image
 
 
-   Figura 1: Série de chamadas recursivas somando a lista de números
+   Figura 1: Série de chamadas recursivas para somar (*sum*) uma lista de números
 
 .. When we reach the point where the problem is as simple as it can get, we
    begin to piece together the solutions of each of the small problems
@@ -177,5 +177,5 @@ problema.
    :align: center
    :alt: image
 
-   Figura 2: Série de returns recursivos da adição de uma lista de números
+   Figura 2: Série de returns das chamadas recursivas para somar (*sum*) uma lista de números
 

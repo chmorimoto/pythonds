@@ -56,3 +56,6 @@ Padronização das traduções
 - **mid-square method**: método do quadrado do meio ?
 - **list comprehension**: preenchimento de lista.
 - **hill clibing**: 
+- **stack frame**: bloco de pilha (Cap 4) -- usada para salvar contexto
+- **call stack**: pilha de chamadas --> pilha de execução?
+- **memoization**: memoização
