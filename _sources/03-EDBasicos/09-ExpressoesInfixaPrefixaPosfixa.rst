@@ -359,90 +359,92 @@ Mais alguns exemplos de conversão no Python shell estão logo abaixo.
     'A B C * +'
     >>>
 
-Postfix Evaluation
+Avaliação Posfixa
 ^^^^^^^^^^^^^^^^^^
 
-As a final stack example, we will consider the evaluation of an
-expression that is already in postfix notation. In this case, a stack is
-again the data structure of choice. However, as you scan the postfix
-expression, it is the operands that must wait, not the operators as in
-the conversion algorithm above. Another way to think about the solution
-is that whenever an operator is seen on the input, the two most recent
-operands will be used in the evaluation.
+Como um exemplo de final do uso de pilhas, vamos considerar a avaliação de um
+expressão que já está em notação posfixa.
+Neste caso, uma pilha é novamente a estrutura de dados de escolha.
+No entanto, enquanto você examina a expressão posfixa, são os operandos
+que devem esperar, não os operadores como no algoritmo de conversão acima.
+Outra maneira de pensar sobre a solução 
+é que sempre que um operador é visto na entrada, os dois 
+operandos mais recentes serão utilizados na avaliação.
 
-To see this in more detail, consider the postfix expression
-``4 5 6 * +``. As you scan the expression from left to right, you first
-encounter the operands 4 and 5. At this point, you are still unsure what
-to do with them until you see the next symbol. Placing each on the stack
-ensures that they are available if an operator comes next.
+Para ver isso em mais detalhes, considere a expressão postfix
+``4 5 6 * +``. Ao examinar a expressão da esquerda para a direita, você primeiro
+encontrar os operandos 4 e 5. Neste ponto, você ainda não tem certeza do que
+fazer com eles até ver o próximo símbolo. Colocando cada em uma pilha
+garante que eles estejam disponíveis se um operador vier em seguida.
 
-In this case, the next symbol is another operand. So, as before, push it
-and check the next symbol. Now we see an operator, \*. This means that
-the two most recent operands need to be used in a multiplication
-operation. By popping the stack twice, we can get the proper operands
-and then perform the multiplication (in this case getting the result
-30).
+Nesse caso, o próximo símbolo é outro operando. Então, como antes, insira (``push()``)
+o operando na pilha e verifique o próximo símbolo. Agora vemos um operador, \*.
+Isso significa que os dois operandos mais recentes precisam ser multiplicados.
+Removendo (``pop()``) dois itens da pilha, podemos obter os
+operandos apropriados e então realizar a multiplicação (nesse caso, obtendo o
+resultado 30).
 
-We can now handle this result by placing it back on the stack so that it
-can be used as an operand for the later operators in the expression.
-When the final operator is processed, there will be only one value left
-on the stack. Pop and return it as the result of the expression.
-:ref:`Figure 10 <fig_evalpost1>` shows the stack contents as this entire example
-expression is being processed.
+Agora podemos lidar com esse resultado colocando-o na pilha para que ele
+possa ser usado como um operando dos operadores posteriores na expressão.
+Quando o operador final é processado, haverá apenas um valor restante
+na pilha. Remova-o e devolva-o como resultado da expressão.
+:ref:`Figura 10 <fig_evalpost1>` mostra o conteúdo da pilha como essa
+expressão está sendo processada.
+
 
 .. _fig_evalpost1:
 
 .. figure:: Figures/evalpostfix1.png
    :align: center
 
-   Figure 10: Stack Contents During Evaluation
+   Figure 10: Conteúdo da Pilha Durante a Avaliação
 
-
-:ref:`Figure 11 <fig_evalpost2>` shows a slightly more complex example, 7 8 + 3 2
-+ /. There are two things to note in this example. First, the stack size
-grows, shrinks, and then grows again as the subexpressions are
-evaluated. Second, the division operation needs to be handled carefully.
-Recall that the operands in the postfix expression are in their original
-order since postfix changes only the placement of operators. When the
-operands for the division are popped from the stack, they are reversed.
-Since division is *not* a commutative operator, in other words
-:math:`15/5` is not the same as :math:`5/15`, we must be sure that
-the order of the operands is not switched.
+:ref:`Figura 11 <fig_evalpost2>` mostra um exemplo um pouco mais complexo,
+7 8 + 3 2 + /.
+Há duas coisas a serem observadas neste exemplo.
+Primeiro, o tamanho da pilha cresce, encolhe e cresce novamente à medida que as subexpressões
+são avaliadas.
+Em segundo lugar, a operação de divisão precisa ser tratada com cuidado.
+Lembre-se de que os operandos na expressão posfixa estão em sua 
+ordem original, na expressão posfixa mudamos apenas a colocação de operadores.
+Quando o operandos para a divisão são retirados da pilha, eles estão invertidos.
+Como a divisão *não é* um operador comutativo, em outras palavras
+:math:`15/5` não é o mesmo que :math:`5/15`, devemos ter certeza que
+a ordem dos operandos não é alterada.
 
 .. _fig_evalpost2:
 
 .. figure:: Figures/evalpostfix2.png
    :align: center
 
-   Figure 11: A More Complex Example of Evaluation
+   Figura 11: Um Exemplo Mais Complexo de Avaliação
 
+Suponha que a expressão posfixa seja uma string de itens (*tokens*) delimitados por espaços.
+Os operadores são \*, /, + e - e supomos que os operandos são valores inteiros de um dígito.
+A saída será um resultado inteiro.
 
-Assume the postfix expression is a string of tokens delimited by spaces.
-The operators are \*, /, +, and - and the operands are assumed to be
-single-digit integer values. The output will be an integer result.
+#. Crie uma pilha vazia chamada ``operandStack``.
 
-#. Create an empty stack called ``operandStack``.
+#. Converta a string para uma lista usando o método string ``split()``.
 
-#. Convert the string to a list by using the string method ``split``.
+#. Digitalize a lista de itens da esquerda para a direita.
 
-#. Scan the token list from left to right.
+   - Se o item for um operando, converta-o de uma string para um inteiro
+      e insira-o em ``operandStack``.
 
-   -  If the token is an operand, convert it from a string to an integer
-      and push the value onto the ``operandStack``.
+   - Se o item for um operador, \*, /, + ou -, serão necessários dois
+     operandos. Faça duas remoções de ``operandStack``. O primeiro valor removido é o
+     segundo operando e o segundo valor removido é o primeiro operando. Execute
+     a operação aritmética. Insira o resultado em ``operandStack``.
 
-   -  If the token is an operator, \*, /, +, or -, it will need two
-      operands. Pop the ``operandStack`` twice. The first pop is the
-      second operand and the second pop is the first operand. Perform
-      the arithmetic operation. Push the result back on the
-      ``operandStack``.
+#. Quando a expressão de entrada foi completamente processada, o resultado
+   está na pilha. Remova de ``operandStack`` o valor e retorne-o.
 
-#. When the input expression has been completely processed, the result
-   is on the stack. Pop the ``operandStack`` and return the value.
+A função completa para a avaliação de expressões posfixa é mostrada
+em :ref:`ActiveCode 2 <lst_postfixeval>`. Para ajudar com a aritmética,
+usamos uma função auxiliar ``doMath()`` que recebe dois operandos e um
+operador e, em seguida, executa e retorna o resultado da operação sobre os operandos.
 
-The complete function for the evaluation of postfix expressions is shown
-in :ref:`ActiveCode 2 <lst_postfixeval>`. To assist with the arithmetic, a helper
-function ``doMath`` is defined that will take two operands and an
-operator and then perform the proper arithmetic operation.
 
 .. _lst_postfixeval:
 
@@ -478,38 +480,41 @@ operator and then perform the proper arithmetic operation.
 
    print(postfixEval('7 8 + 3 2 + /'))
 
-It is important to note that in both the postfix conversion and the
-postfix evaluation programs we assumed that there were no errors in the
-input expression. Using these programs as a starting point, you can
-easily see how error detection and reporting can be included. We leave
-this as an exercise at the end of the chapter.
+É importante notar que tanto na conversão para posfixa quanto no
+programa de avaliação da expressão posfixa supomos que não havia erros no
+expressão de entrada. Usando esses programas como ponto de partida, você pode
+ver facilmente como a detecção e o relatório de erros podem ser incluídos.
+Nós deixamos isso como um exercício no final do capítulo.
 
+..                       
+      -  :\\b10\\s+3\\s+5\\s*\*\\s*16\\s+4\\s*-\\s*\/\\s*\+: Correto
+         :.*10.*3.*5.*16.*4.*: Os números estão na ordem correta, verifique os operadores
+         :'.*': Lembre que os números aparecem na mesma ordem que a expressão original
+                
 .. admonition:: Self Check
 
    .. fillintheblank:: postfix1
 
-      .. blank:: pfblank1
-         :correct: \\b10\\s+3\\s+5\\s*\\*\\s*16\\s+4\\s*-\\s*/\\s*\\+
-         :feedback1:  ('10.*3.*5.*16.*4', 'The numbers appear to be in the correct order check your operators')
-         :feedback2: ('.*', 'Remember the numbers will be in the same order as the original equation')
+      Sem utilizar executar a ``infixToPostfix()``, converta a expressão ``10 + 3 * 5 / (16 - 4)`` para a notação posfixa.
 
-         Without using the activecode infixToPostfix function, convert the following expression to postfix  ``10 + 3 * 5 / (16 - 4)``
-
+                       
+      -  :10 3 5 \* 16 4 \- \/ \+: Correto
+         :.*10.*3.*5.*16.*4.*: Os números estão na ordem correta, verifique os operadores, eles não devem estar juntos
+         :'.*': Lembre que os números aparecem na mesma ordem que a expressão original              
    .. fillintheblank:: postfix2
 
-      .. blank:: pfblank2
-         :correct: \\b9\\b
-         :feedback1: ('.*', "Remember to push each intermediate result back on the stack" )
+      Qual é o valor da expressão ``17 10 + 3 * 9 /``?
 
-         What is the result of evaluating the following: ``17 10 + 3 * 9 / ==``
+      - :9: Correto
+        :'.*': Lembre de empilhar os valores dos resultados intermediários
+      
 
    .. fillintheblank:: postfix3
 
-      .. blank:: pfblank3
-         :correct: 5\\s+3\\s+4\\s+2\\s*-\\s*\\^\\s*\\*
-         :feedback1: ('.*', 'Hint: You only need to add one line to the function!!')
+      Modifique a função ``infixToPosfix()`` de tal maneira que converta a expressão: ``5 * 3 ^ (4 - 2)``   Cole aqui a expressão posfixa resultante.
 
-         Modify the infixToPostfix function so that it can convert the following expression:  ``5 * 3 ^ (4 - 2)``   Paste the answer here:
+      - :5 3 4 2 \- \^ \*: correto
+        :'.*': Você precisa apenas adicionar a função uma linha! Deixe um espaço entre os operadores.
 
 
 .. video:: video_Stack3

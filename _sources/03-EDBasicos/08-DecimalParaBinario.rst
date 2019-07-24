@@ -169,27 +169,28 @@ string resultante.
 .. admonition:: Teste seu conhecimento
 
    .. fillintheblank:: baseconvert1
+      
+      Qual é o valor de 25 na base octal?                       
 
-      .. blank:: bcblank1
-         :correct: \\b31\\b
-         :feedback1: (".*", "Incorreto")
+      - :31: Correto
+        :".*": Incorreto
 
-         Qual é o valor de 25 na base octal
          
    .. fillintheblank:: baseconvert2
 
-      .. blank:: bcblank2
-         :correct: \\b100\\b
+      Qual é o valor of 256 na base hexadecimal?
 
-         Qual é o valor of 256 na base hexadecimal
+      - :100: Correto
+        :".*": Incorreto
+         
                    
    .. fillintheblank:: baseconvert3
 
-      .. blank:: bcblank3
-         :correct: \\b10\\b
-         :feedback1: ('.*', 'Talvez você precise modificar a função baseConverter, ou simplesmente encontre o padrão na conversão de bases.')
+      Qual é o valor de 26 na base 26?
 
-         Qual é o valor de 26 na base 26
+      - :10: Correto.
+        :".*": Talvez você precise modificar a função baseConverter, ou simplesmente encontre o padrão na conversão de bases.
+ 
                      
 
 .. video:: video_Stack2
