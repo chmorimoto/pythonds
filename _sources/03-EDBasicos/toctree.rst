@@ -17,7 +17,7 @@ Estruturas de Dados Básicas
     10-Filas.rst
     11-FilaADT.rst
     12-FilaImplementacao.rst
-    SimulationHotPotato.rst
+    13-SimulacaoBatataQuente.rst
     SimulationPrintingTasks.rst
     WhatIsaDeque.rst
     TheDequeAbstractDataType.rst

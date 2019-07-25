@@ -146,7 +146,7 @@ Claramente, mesmo que as implementações sejam logicamente
 equivalentes, tenham o mesmo comportamento, elas apresentarão desempenhos
 diferentes ao serem executadas.
 
-.. admonition:: Self Check
+.. admonition:: Teste a sua compreensão
 
    .. mchoice:: stack_1
       :answer_a: 'x'

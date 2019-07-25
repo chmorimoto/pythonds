@@ -2,53 +2,55 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-What Is a Queue?
-~~~~~~~~~~~~~~~~
+O que é uma Fila?
+~~~~~~~~~~~~~~~~~
 
-A queue is an ordered collection of items where the addition of new
-items happens at one end, called the “rear,” and the removal of existing
-items occurs at the other end, commonly called the “front.” As an
-element enters the queue it starts at the rear and makes its way toward
-the front, waiting until that time when it is the next element to be
-removed.
+Uma **fila** (*queue*)  é uma coleção ordenada de itens em que a inserção de novos
+itens acontece em uma extremidade, chamado de "fim" (*rear*), e a remoção de itens existente
+ocorre no outro extremo, comumente chamado de "início" (*front*).
+Um elemento é inserido no fim da fila  e faz o seu caminho em direção
+ao início, esperando até aquele momento em que é o próximo elemento a ser
+removido.
 
-The most recently added item in the queue must wait at the end of the
-collection. The item that has been in the collection the longest is at
-the front. This ordering principle is sometimes called **FIFO**,
-**first-in first-out**. It is also known as “first-come first-served.”
+O item inserido mais recentemente na fila deve aguardar no final do
+coleção. O item que está na coleção há mais tempo está mais próximo do início.
+Este princípio de ordenação é às vezes chamado de **FIFO**,
+**primeiro a entrar, primeiro a sair** (*first-in first-out*).
+Também é conhecido como “primeiro a chegar, primeiro a ser servido” (*first-come first-serverd*).
 
-The simplest example of a queue is the typical line that we all
-participate in from time to time. We wait in a line for a movie, we wait
-in the check-out line at a grocery store, and we wait in the cafeteria
-line (so that we can pop the tray stack). Well-behaved lines, or queues,
-are very restrictive in that they have only one way in and only one way
-out. There is no jumping in the middle and no leaving before you have
-waited the necessary amount of time to get to the front.
-:ref:`Figure 1 <fig_qubasicqueue>` shows a simple queue of Python data objects.
+O exemplo mais simples de uma fila é a fila típica que todos nós
+participarmos de tempos em tempos. Nós esperamos em uma fila do cinema00000000000000000,
+esperamos na fila do supermercado, e esperamos na fila da lanchonete
+(para pegarmos uma bandeja da pilha de bandejas). Filas bem comportadas 
+são muito restritivas em que elas têm apenas uma maneira de entrarmos e apenas uma maneira
+de sairmos. Não é permitido furar a fila e sair antes de você ter
+esperado o tempo necessário para chegar ao início.
+:ref:`Figura 1 <fig_qubasicqueue>` mostra uma fila simples de objetos de dados Python.
 
 .. _fig_qubasicqueue:
 
 .. figure:: Figures/basicqueue.png
    :align: center
 
-   Figure 1: A Queue of Python Data Objects
+   Figure 1: Um fila de objetos de Python
 
 
-Computer science also has common examples of queues. Our computer
-laboratory has 30 computers networked with a single printer. When
-students want to print, their print tasks “get in line” with all the
-other printing tasks that are waiting. The first task in is the next to
-be completed. If you are last in line, you must wait for all the other
-tasks to print ahead of you. We will explore this interesting example in
-more detail later.
+iência da computação também tem exemplos comuns de filas.
+Nosso laboratório tem 30 computadores em rede com uma única impressora.
+Quando os alunos querem imprimir, suas tarefas de impressão "entram na fila" com todas as
+outras tarefas de impressão que estão aguardando. A primeira tarefa é a próxima a
+ser completada. Se a sua tarefa de impressão é a última na fila,
+você deve esperar que todas as outras tarefas que chegaram antes sejam
+impressas antes que a sua possa ser impressa.
+Vamos explorar este exemplo interessante em mais detalhes depois.
 
-In addition to printing queues, operating systems use a number of
-different queues to control processes within a computer. The scheduling
-of what gets done next is typically based on a queuing algorithm that
-tries to execute programs as quickly as possible and serve as many users
-as it can. Also, as we type, sometimes keystrokes get ahead of the
-characters that appear on the screen. This is due to the computer doing
-other work at that moment. The keystrokes are being placed in a
-queue-like buffer so that they can eventually be displayed on the screen
-in the proper order.
-
+Além de filas de impressão, os sistemas operacionais usam várias
+filas diferentes para controlar processos dentro de um computador.
+O escalonamento (*scheduling*) da tarefa que será feita em seguida é tipicamente baseado
+em um algoritmo de enfileiramento que
+tenta executar programas o mais rápido possível e atender a tantos usuários
+quanto possível. Além disso, à medida que digitamos, às vezes, as
+os caracteres das teclas pressionadas ficam à frente de
+caracteres que aparecem na tela. Isto é devido ao computador estar fazendo
+outro trabalho naquele momento. Os caracteres a serem exibidos estão sendo colocadas
+em um *buffer* de fila, para que possam ser exibidos na tela na ordem correta.

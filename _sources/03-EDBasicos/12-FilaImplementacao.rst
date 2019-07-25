@@ -2,21 +2,21 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Implementing a Queue in Python
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Implementando uma Fila em Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It is again appropriate to create a new class for the implementation of
-the abstract data type queue. As before, we will use the power and
-simplicity of the list collection to build the internal representation
-of the queue.
+É novamente apropriado criar uma nova classe para a implementação do
+tipo abstrato de dados fila, a classe ``Queue``. Como antes, vamos usar o poder e
+simplicidade das  listas de python (``list``) para construir a representação
+interna da fila.
 
-We need to decide which end of the list to use as the rear and which to
-use as the front. The implementation shown in :ref:`Listing 1 <lst_queuecode>`
-assumes that the rear is at position 0 in the list. This allows us to
-use the ``insert`` function on lists to add new elements to the rear of
-the queue. The ``pop`` operation can be used to remove the front element
-(the last element of the list). Recall that this also means that enqueue
-will be O(n) and dequeue will be O(1). 
+Precisamos decidir qual extremidade da lista usar como parte de fim e qual
+usa como  início. A implementação mostrada em :ref:`Listagem 1 <lst_queuecode>`
+supõe que o fim está na posição 0 da lista. Isso nos permite
+usemos a função ``insert()`` nas listas para adicionar novos elemetos ao final da fila.
+A operação ``pop()`` pode ser usada para remover o elemento do início
+(o último elemento da lista). Lembre-se de que isso também significa que o consumo de tempo
+de ``enqueue()`` será O(n) e o consumo de tempo de ``dequeue()`` será será O(1).
 
 .. _lst_queuecode:
 
@@ -40,9 +40,8 @@ will be O(n) and dequeue will be O(1).
         def size(self):
             return len(self.items)
 
-CodeLens 1 shows the ``Queue`` class in
-action as we perform the sequence of operations from
-:ref:`Table 1 <tbl_queueoperations>`.
+CodeLens 1 mostra a classe ``Queue`` em ação
+durante uma sequência de operações da :ref:`Tabela 1 <tbl_queueoperations>`.
 
 .. codelens:: ququeuetest
    :caption: Example Queue Operations
@@ -71,7 +70,7 @@ action as we perform the sequence of operations from
    print(q.size())
 
 
-Further manipulation of this queue would give the following results:
+Outras manipulações de dessa fila produz os seguintes resultados:
 
 
 ::
@@ -88,7 +87,7 @@ Further manipulation of this queue would give the following results:
     >>> q.size()
     2
 
-.. admonition:: Self Check
+.. admonition:: Teste a sua compreensão
 
    .. mchoice:: queue_1
       :correct: b
@@ -96,12 +95,12 @@ Further manipulation of this queue would give the following results:
       :answer_b: 'dog', 3
       :answer_c: 'hello', 3
       :answer_d: 'hello', 'dog', 3
-      :feedback_a: Remember the first thing added to the queue is the first thing removed.  FIFO
-      :feedback_b: Yes, first in first out means that hello is gone
-      :feedback_c: Queues, and Stacks are both data structures where you can only access the first and the last thing.
-      :feedback_d: Ooops, maybe you missed the dequeue call at the end?
+      :feedback_a: Lembre-se de que a primeira coisa inserida à fila é a primeira coisa removida. FIFO
+      :feedback_b: Sim, primeiro que entra primeiro que sai significa que o 'hello' se foi.
+      :feedback_c: Filas e Pilhas são estruturas de dados nas quais você só pode acessar a primeira e a última coisa.
+      :feedback_d: Ooops, talvez você tenha perdido a chamada dequeue() no final?
 
-      Suppose you have the following series of queue operations.
+      Suppose que realizamos as seguintes operações.
 
       ::
       
@@ -111,5 +110,5 @@ Further manipulation of this queue would give the following results:
           q.enqueue(3)
           q.dequeue()
 
-      What items are left on the queue?
+      Quais itens são deixados na fila?
 
