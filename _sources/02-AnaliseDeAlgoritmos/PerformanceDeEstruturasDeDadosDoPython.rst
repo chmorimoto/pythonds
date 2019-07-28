@@ -2,7 +2,7 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Performance de Estruturas de Dados do Python
+Desempenho de Estruturas de Dados do Python
 --------------------------------------------
 
 Agora que você tem uma ideia geral sobre a notação O

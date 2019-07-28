@@ -18,17 +18,17 @@ Estruturas de Dados Básicas
     11-FilaADT.rst
     12-FilaImplementacao.rst
     13-SimulacaoBatataQuente.rst
-    SimulationPrintingTasks.rst
-    WhatIsaDeque.rst
-    TheDequeAbstractDataType.rst
-    ImplementingaDequeinPython.rst
-    PalindromeChecker.rst
-    Lists.rst
-    TheUnorderedListAbstractDataType.rst
-    ImplementinganUnorderedListLinkedLists.rst
-    TheOrderedListAbstractDataType.rst
-    ImplementinganOrderedList.rst
-    Summary.rst
-    KeyTerms.rst
-    DiscussionQuestions.rst
-    ProgrammingExercises.rst
+    14-SimulacaoTarefas.rst
+    15-Deques.rst 
+    16-DequeADT.rst 
+    17-DequeImplementacao.rst 
+    18-Palindrome.rst 
+    19-Listas.rst
+    20-ListaADT.rst 
+    21-ListaImplementacao.rst 
+    22-ListaOrdenadaADT.rst 
+    23-ImplementacaoListaOrdenada.rst 
+    24-Resumo.rst 
+    25-PalavrasChaves.rst 
+    26-DiscussaoQuestoes.rst 
+    27-Exercicos.rst 

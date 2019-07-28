@@ -20,7 +20,7 @@ Resolução de Problemas com Algoritmos e Estruturas de Dados usando Python
 por Brad Miller e David Ranum, `Luther College <https://www.luther.edu/>`__.
 
 
-Traduzido em português por 
+Traduzido por 
 Andrew Toshiaki Nakayama Kurauchi,
 Carlos Eduardo Leão Elmadjian, 
 Carlos Hitoshi Morimoto e

@@ -2,21 +2,21 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Implementing a Deque in Python
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Implementação de uma Deque in Python
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As we have done in previous sections, we will create a new class for the
-implementation of the abstract data type deque. Again, the Python list
-will provide a very nice set of methods upon which to build the details
-of the deque. Our implementation (:ref:`Listing 1 <lst_dequecode>`) will assume that
-the rear of the deque is at position 0 in the list.
+Como fizemos nas seções anteriores, criaremos uma nova classe para o
+implementação do tipo de dados abstrato deque. Novamente, a lista do Python
+irá fornecer um conjunto muito bom de métodos sobre os quais construir os detalhes
+do deque. Nossa implementação (:ref:`Listagem 1 <lst_dequecode>`) assumirá que
+o fim da deque está na posição 0 na lista.
 
 .. _lst_dequecode:
 
 .. highlight:: python
    :linenothreshold: 5
 
-**Listing 1**
+**Listagem 1**
 
 ::
 
@@ -45,18 +45,19 @@ the rear of the deque is at position 0 in the list.
 .. highlight:: python
    :linenothreshold: 500
 
-In ``removeFront`` we use the ``pop`` method to remove the last element
-from the list. However, in ``removeRear``, the ``pop(0)`` method must
-remove the first element of the list. Likewise, we need to use the
-``insert`` method (line 12) in ``addRear`` since the ``append`` method
-assumes the addition of a new element to the end of the list.
+Em ``removeFront()`` usamos o método ``pop()`` para remover o último elemento
+da lista. No entanto, em ``removeRear()``, o método ``pop(0)`` deve
+remover o primeiro elemento da lista. Da mesma forma, precisamos usar o
+método ``insert()`` (linha 12) em ``addRear()`` desde o método ``append()``
+pressupõe a adição de um novo elemento ao final da lista.
 
-CodeLens 1 shows the ``Deque`` class in
-action as we perform the sequence of operations from
-:ref:`Table 1 <tbl_dequeoperations>`.
+CodeLens 1 mostra a classe ``Deque`` em
+ação como nós executamos a seqüência de operações de
+:ref:`Tabela 1 <tbl_dequeoperations>`.
+
 
 .. codelens:: deqtest
-   :caption: Example Deque Operations
+   :caption: Exemplo de Operações sobre uma Deque
 
    class Deque:
        def __init__(self):
@@ -93,11 +94,11 @@ action as we perform the sequence of operations from
    print(d.removeFront())
    
 
-You can see many similarities to Python code already described for
-stacks and queues. You are also likely to observe that in this
-implementation adding and removing items from the front is O(1) whereas
-adding and removing from the rear is O(n). This is to be expected given
-the common operations that appear for adding and removing items. Again,
-the important thing is to be certain that we know where the front and
-rear are assigned in the implementation.
+Você pode ver muitas semelhanças com o código Python já descrito para
+pilhas (``Stack``)  e filas (``Queue``). É provável que você também observe que nesta
+implementação inserir e remover itens do início consomem tempo O(1) enquanto
+inserir e remover da parte do fim consome tempo  O(n). Isto é de se esperar dado
+que as operações comuns que aparecem para adicionar e remover itens. Novamente,
+o importante é ter certeza de que sabemos onde o  início e
+parte do fim são atribuídos na implementação.
 
