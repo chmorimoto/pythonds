@@ -2,60 +2,61 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Implementing an Unordered List: Linked Lists
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Implementando uma Lista Desordenada: Listas Ligadas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to implement an unordered list, we will construct what is
-commonly known as a **linked list**. Recall that we need to be sure that
-we can maintain the relative positioning of the items. However, there is
-no requirement that we maintain that positioning in contiguous memory.
-For example, consider the collection of items shown in
-:ref:`Figure 1 <fig_idea>`. It appears that these values have been placed
-randomly. If we can maintain some explicit information in each item,
-namely the location of the next item (see :ref:`Figure 2 <fig_idea2>`), then the
-relative position of each item can be expressed by simply following the
-link from one item to the next.
+Para implementar uma lista desordenada, vamos construir o que é
+comumente conhecido como **lista ligada**. Lembre-se de que precisamos ter certeza de que
+podemos manter o posicionamento relativo dos itens. No entanto, não existe
+exigência alguma de que mantemos esse posicionamento na memória.
+Por exemplo, considere a coleção de itens mostrados em
+:ref:`Figura 1 <fig_idea>`. Parece que esses valores foram colocados
+aleatoriamente. Se pudermos manter algumas informações explícitas em cada item,
+ou seja, a localização do próximo item (ver :ref:`Figura 2 <fig_idea2>`), então o
+posição relativa de cada item pode ser expressa simplesmente seguindo o
+link/ligaçcão de um item para o outro.
 
 .. _fig_idea:
 
 .. figure:: Figures/idea.png
    :align: center
 
-   Figure 1: Items Not Constrained in Their Physical Placement
+   Figure 1: Itens dispostos de maneira não restrita
 
 .. _fig_idea2:
 
 .. figure:: Figures/idea2.png
    :align: center
 
-   Figure 2: Relative Positions Maintained by Explicit Links.
+   Figure 2: Posição Relativa Mantida por Links Explícitos
 
 
-It is important to note that the location of the first item of the list
-must be explicitly specified. Once we know where the first item is, the
-first item can tell us where the second is, and so on. The external
-reference is often referred to as the **head** of the list. Similarly,
-the last item needs to know that there is no next item.
+É importante observar que a localização do primeiro item da lista
+deve ser explicitamente especificada. Uma vez que sabemos onde está o primeiro item, 
+o primeiro item pode nos dizer onde está o segundo e assim por diante. A referência externa é 
+geralmente chamada de **cabeça** (*head*) da lista. Similarmente,
+o último item precisa saber que não há próximo item.
 
-The ``Node`` Class
-^^^^^^^^^^^^^^^^^^
+A classe ``Node``
+^^^^^^^^^^^^^^^^^
 
-The basic building block for the linked list implementation is the
-**node**. Each node object must hold at least two pieces of information.
-First, the node must contain the list item itself. We will call this the
-**data field** of the node. In addition, each node must hold a reference
-to the next node. :ref:`Listing 1 <lst_nodeclass>` shows the Python
-implementation. To construct a node, you need to supply the initial data
-value for the node. Evaluating the assignment statement below will yield
-a node object containing the value 93 (see :ref:`Figure 3 <fig_node>`). You
-should note that we will typically represent a node object as shown in
-:ref:`Figure 4 <fig_node2>`. The ``Node`` class also includes the usual methods
-to access and modify the data and the next reference.
+O bloco básico para a construção da implementação da lista ligada é o
+**nó** (``Node``). Cada objeto nó deve conter pelo menos duas informações.
+Primeiro, o nó deve conter um item da lista. Vamos chamar isso de
+**campo de dados** (*data field*) do nó. Além disso, cada nó deve conter uma referência
+para o próximo nó. :ref:`Listagem 1 <lst_nodeclass>` mostra uma 
+implementação em Python. Para construir um nó, você precisa fornecer os dados valores dos
+dados iniciais para o nó. Executar a declaração de atribuição abaixo produzirá
+um objeto de nó (``Node``) contendo o valor 93 (veja :ref:`Figura 3 <fig_node>`).
+Você deve notar que normalmente representamos um objeto nó como mostrado
+:ref:`Figura 4 <fig_node2>`. A classe ``Node`` também inclui os métodos usuais
+para acessar e modificar os dados e a próxima referência.
+
 
 
 .. _lst_nodeclass:
 
-**Listing 1**
+**Listagem 1**
 
 .. sourcecode:: python
 
@@ -76,7 +77,7 @@ to access and modify the data and the next reference.
        def setNext(self,newnext):
            self.next = newnext
            
-We create ``Node`` objects in the usual way.
+Criamos um objeto ``Node`` da maneira usual.
 
 ::
 
@@ -84,15 +85,13 @@ We create ``Node`` objects in the usual way.
         >>> temp.getData()
         93
 
-The special Python reference value ``None`` will play an important role
-in the ``Node`` class and later in the linked list itself. A reference
-to ``None`` will denote the fact that there is no next node. Note in the
-constructor that a node is initially created with ``next`` set to
-``None``. Since this is sometimes referred to as “grounding the node,”
-we will use the standard ground symbol to denote a reference that is
-referring to ``None``. It is always a good idea to explicitly assign
-``None`` to your initial next reference values.
-
+O valor de referência especial do Python, ``None``, terá um papel importante
+na classe ``Node`` e depois na própria lista ligada. Uma referência
+para ``None`` denota o fato de que não há próximo nó. Observe no
+construtor que um nó é inicialmente criado com o ``next`` configurado para
+``None``. Como isso às vezes é chamado de “aterramento do nó” (*grounding the node*)
+vamos usar o símbolo padrão de terra (como em eletricidade) para denotar uma referência para ``None``.
+É sempre uma boa ideia atribuir explicitamente ``None`` para seus valores de referência iniciais.
 
 
 .. _fig_node:
@@ -100,31 +99,31 @@ referring to ``None``. It is always a good idea to explicitly assign
 .. figure:: Figures/node.png
    :align: center
 
-   Figure 3: A Node Object Contains the Item and a Reference to the Next Node
+   Figura 3: Um objeto ``Node`` Contém um Item e uma Referência para o Próximo ``Node``
 
 .. _fig_node2:
 
 .. figure:: Figures/node2.png
    :align: center
 
-   Figure 4: A Typical Representation for a Node
+   Figura 4: Uma Representação Típica de um ``Node``
 
 
-The ``Unordered List`` Class
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+A Classe ``UnordenedList``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As we suggested above, the unordered list will be built from a
-collection of nodes, each linked to the next by explicit references. As
-long as we know where to find the first node (containing the first
-item), each item after that can be found by successively following the
-next links. With this in mind, the ``UnorderedList`` class must maintain
-a reference to the first node. :ref:`Listing 2 <lst_listclass>` shows the
-constructor. Note that each list object will maintain a single reference
-to the head of the list.
+Como sugerimos acima, a lista desordenada será construída a partir de um
+coleção de nós, cada um ligado ao próximo por referências explícitas. Como
+desde que saibamos onde encontrar o primeiro nó (contendo o primeiro
+item), cada item depois disso pode ser encontrado seguindo sucessivamente
+os próximos links. Com isto em mente, a classe ``UnorderedList`` deve manter
+uma referência ao primeiro nó. :ref:`Listagem 2 <lst_listclass>` mostra o
+construtor. Observe que cada objeto da lista manterá uma única referência
+para a cabeça da lista.
 
 .. _lst_listclass:
 
-**Listing 2**
+**Listagem 2**
 
 .. sourcecode:: python
 
@@ -133,31 +132,32 @@ to the head of the list.
         def __init__(self):
             self.head = None
 
-Initially when we construct a list, there are no items. The assignment
-statement
+Inicialmente, quando construímos uma lista, não há itens na lista.
+O comnado de atribuição
 
 ::
 
     >>> mylist = UnorderedList()
 
-creates the linked list representation shown in
-:ref:`Figure 5 <fig_initlinkedlist>`. As we discussed in the ``Node`` class, the
-special reference ``None`` will again be used to state that the head of
-the list does not refer to anything. Eventually, the example list given
-earlier will be represented by a linked list as shown in
-:ref:`Figure 6 <fig_linkedlist>`. The head of the list refers to the first node
-which contains the first item of the list. In turn, that node holds a
-reference to the next node (the next item) and so on. It is very
-important to note that the list class itself does not contain any node
-objects. Instead it contains a single reference to only the first node
-in the linked structure.
+cria a representação da lista encadeada mostrada em
+:ref:`Figura 5 <fig_initlinkedlist>`. Como discutimos na classe ``Node``, o
+valor especial ``None`` será novamente usada para indicar que a cabeça da
+a lista não se refere a nada. Eventualmente, a lista de exemplos dada
+anteriormente será representada por uma lista ligada, conforme
+:ref:`Figura 6 <fig_linkedlist>`. A cabeça da lista refere-se ao primeiro nó
+que contém o primeiro item da lista. Por sua vez, esse nó detém um
+referência ao próximo nó (o próximo item) e assim por diante. É muito
+importante observar que a classe da lista em si não contém nenhum objeto ``Node``.
+Em vez disso, contém uma única referência para apenas o primeiro nó
+na estrutura ligada.
+
 
 .. _fig_initlinkedlist:
 
 .. figure:: Figures/initlinkedlist.png
    :align: center
 
-   Figure 5: An Empty List
+   Figura 5: Uma Lista Vazia
 
 
 .. _fig_linkedlist:
@@ -165,48 +165,46 @@ in the linked structure.
 .. figure:: Figures/linkedlist.png
    :align: center
 
-   Figure 6: A Linked List of Integers
+   Figura 6: Uma Lista de Inteiros
 
 
-
-
-The ``isEmpty`` method, shown in :ref:`Listing 3 <lst_isempty>`, simply checks to
-see if the head of the list is a reference to ``None``. The result of
-the boolean expression ``self.head==None`` will only be true if there
-are no nodes in the linked list. Since a new list is empty, the
-constructor and the check for empty must be consistent with one another.
-This shows the advantage to using the reference ``None`` to denote the
-“end” of the linked structure. In Python, ``None`` can be compared to
-any reference. Two references are equal if they both refer to the same
-object. We will use this often in our remaining methods.
+O método ``isEmpty()``, mostrado em :ref:`Listagem 3 <lst_isempty>`, simplesmente verifica se
+a cabeça da lista é uma referência a ``None``. O resultado da expressão booleana ``self.head == None``
+só será verdadeira se não há nós na lista ligada. Como uma nova lista está vazia, o
+construtor e a verificação de vazio devem ser consistentes uns com os outros.
+Isto mostra a vantagem de usar a referência ``None`` para indicar o
+"Fim" da estrutura ligada. Em Python, ``None`` pode ser comparado a
+qualquer referência. Duas referências são iguais se ambas se referirem ao mesmo
+objeto. Nós vamos usar isso com freqüência em nossos métodos restantes.
 
 .. _lst_isempty:
 
-**Listing 3**
+**Listagem 3**
 
 ::
 
     def isEmpty(self):
         return self.head == None
 
-So, how do we get items into our list? We need to implement the ``add``
-method. However, before we can do that, we need to address the important
-question of where in the linked list to place the new item. Since this
-list is unordered, the specific location of the new item with respect to
-the other items already in the list is not important. The new item can
-go anywhere. With that in mind, it makes sense to place the new item in
-the easiest location possible.
+    
+Então, como inserimos itens em nossa lista? Precisamos implementar o método
+``add``. No entanto, antes de podermos fazer isso, precisamos abordar a questão
+importante de onde a lista ligada deve colocar o novo item. Como essa
+lista é desordenada, a localização específica do novo item em relação a
+os outros itens já na lista não são importantes. O novo item pode
+ser colocado em qualquer lugar. Com isso em mente, faz sentido colocar o novo item em
+a localização mais fácil possível de ser acessada.
 
-Recall that the linked list structure provides us with only one entry
-point, the head of the list. All of the other nodes can only be reached
-by accessing the first node and then following ``next`` links. This
-means that the easiest place to add the new node is right at the head,
-or beginning, of the list. In other words, we will make the new item the
-first item of the list and the existing items will need to be linked to
-this new first item so that they follow.
+Lembre-se de que a estrutura da lista ligada nos fornece apenas um ponto de entrada, a cabeça da lista.
+Todos os outros nós só podem ser alcançados
+acessando o primeiro nó e depois seguindo os links ``next``. Isto
+significa que o lugar mais fácil para inserir o novo nó é como cabeça,
+ou início da lista. Em outras palavras, vamos fazer o novo item ser o
+primeiro item da lista e os itens existentes precisarão ser ligados a
+este novo primeiro item.
 
-The linked list shown in :ref:`Figure 6 <fig_linkedlist>` was built by calling
-the ``add`` method a number of times.
+A lista encadeada mostrada em: ref:`Figura 6 <fig_linkedlist>` foi construída chamando
+o método ``add()`` várias vezes.
 
 ::
 
@@ -217,31 +215,31 @@ the ``add`` method a number of times.
     >>> mylist.add(26)
     >>> mylist.add(54)
 
-Note that since 31 is the first item added to the list, it will
-eventually be the last node on the linked list as every other item is
-added ahead of it. Also, since 54 is the last item added, it will become
-the data value in the first node of the linked list.
+Observe que, como 31 é o primeiro item adicionado à lista, ele será
+eventualmente, o último nó na lista ligada como qualquer outro item é
+inserido à frente dele. Além disso, como 54 é o último item inserido, ele se tornará
+o valor no primeiro nó da lista ligada.
 
-The ``add`` method is shown in :ref:`Listing 4 <lst_add>`. Each item of the list
-must reside in a node object. Line 2 creates a new node and places the
-item as its data. Now we must complete the process by linking the new
-node into the existing structure. This requires two steps as shown in
-:ref:`Figure 7 <fig_addtohead>`. Step 1 (line 3) changes the ``next`` reference
-of the new node to refer to the old first node of the list. Now that the
-rest of the list has been properly attached to the new node, we can
-modify the head of the list to refer to the new node. The assignment
-statement in line 4 sets the head of the list.
+O método ``add()`` é mostrado em :ref:`Listagem 4 <lst_add>`.
+Cada item da lista deve residir em um objeto ``Node``.
+A linha 2 cria um novo nó e coloca o item como seus dados.
+Agora devemos concluir o processo ligando o novo
+nó na estrutura existente. Isso requer dois passos, conforme mostrado
+:ref:`Figura 7 <fig_addtohead>`. O passo 1 (linha 3) muda a referência ``next``
+do novo nó para se referir ao antigo primeiro nó da lista. Agora que o
+resto da lista foi devidamente ligado ao novo nó, podemos
+modificar a cabeçã da lista para se referir ao novo nó.
+A atribuição na linha 4 define a cabeça da lista.
 
-The order of the two steps described above is very important. What
-happens if the order of line 3 and line 4 is reversed? If the
-modification of the head of the list happens first, the result can be
-seen in :ref:`Figure 8 <fig_wrongorder>`. Since the head was the only external
-reference to the list nodes, all of the original nodes are lost and can
-no longer be accessed.
+A ordem dos dois passos descritos acima é muito importante. O que
+acontece se a ordem das linhas 3 e 4 for invertida? Se o
+modificação da cabeça da lista acontece em primeiro lugar, o resultado pode ser
+visto em :ref:`Figura 8 <fig_wrongorder>`. Já que a cabeça era a única referência externa
+aos nós da lista, todos os nós originais são perdidos e podem não mais ser acessado.
 
 .. _lst_add:
 
-**Listing 4**
+**Listagem 4**
 
 ::
 
@@ -255,40 +253,39 @@ no longer be accessed.
 .. figure:: Figures/addtohead.png
    :align: center
 
-   Figure 7: Adding a New Node is a Two-Step Process
+   Figura 7: Inserido um Novo Nó Atraves de Dois Passos
 
 .. _fig_wrongorder:
 
 .. figure:: Figures/wrongorder.png
    :align: center
 
-   Figure 8: Result of Reversing the Order of the Two Steps
+   Figura 8: Resultado da Inversão dos Dois Passos
 
+Os próximos métodos que vamos implementar  – ``size()``, ``search()`` e
+``remove()`` – são todos baseados em uma técnica conhecida como **varredura de lista ligada**
+Varredura de refere-se ao processo de visitar sistemática cada nó.
+Para fazer isso, usamos uma referência externa que começa no
+primeiro nó da lista. Ao visitarmos cada nó, movemos a referência para
+o próximo nó "percorrendo" a próxima referência.
 
-The next methods that we will implement–``size``, ``search``, and
-``remove``–are all based on a technique known as **linked list
-traversal**. Traversal refers to the process of systematically visiting
-each node. To do this we use an external reference that starts at the
-first node in the list. As we visit each node, we move the reference to
-the next node by “traversing” the next reference.
-
-To implement the ``size`` method, we need to traverse the linked list
-and keep a count of the number of nodes that occurred.
-:ref:`Listing 5 <lst_length>` shows the Python code for counting the number of
-nodes in the list. The external reference is called ``current`` and is
-initialized to the head of the list in line 2. At the start of the
-process we have not seen any nodes so the count is set to :math:`0`.
-Lines 4–6 actually implement the traversal. As long as the current
-reference has not seen the end of the list (``None``), we move current
-along to the next node via the assignment statement in line 6. Again,
-the ability to compare a reference to ``None`` is very useful. Every
-time current moves to a new node, we add :math:`1` to ``count``.
-Finally, ``count`` gets returned after the iteration stops.
-:ref:`Figure 9 <fig_traversal>` shows this process as it proceeds down the list.
+Para implementar o método ``size()``, precisamos percorrer a lista ligada
+e manter uma contagem do número de nós que ocorreram.
+:ref:`Listagem 5 <lst_length>` mostra o código Python para contar o número de
+nós na lista. A referência externa é chamada ``current`` e é
+inicializada com a cabeça da lista na linha 2. No início do
+processo não vimos nenhum nó, então a contagem está definida como :math:`0`.
+As linhas 4 a 6 realmente implementam o percurso. Enquanto a a
+referência  ``current`` não chegar ao final da lista (``None``), nos movemos ``current``
+para o próximo nó através da atribuição na linha 6. Mais uma vez,
+a capacidade de comparar uma referência a ``None`` é muito útil.
+Cada vez que nos movemos para um novo nó, adicionamos: math:`1` a ``count``.
+Finalmente, ``count`` é retornado após a iteração parar.
+:ref:`Figura 9 <fig_traversal>` mostra este processo à medida que varremos a lista.
 
 .. _lst_length:
 
-**Listing 5**
+**Listagem 5**
 
 .. highlight:: python
   :linenothreshold: 5
@@ -311,32 +308,33 @@ Finally, ``count`` gets returned after the iteration stops.
 .. figure:: Figures/traversal.png
    :align: center
 
-   Figure 9: Traversing the Linked List from the Head to the End
+   Figura 9: Varredura de uma lista ligada da Cabeça (``Head``) até o fim
 
 
-Searching for a value in a linked list implementation of an unordered
-list also uses the traversal technique. As we visit each node in the
-linked list we will ask whether the data stored there matches the item
-we are looking for. In this case, however, we may not have to traverse
-all the way to the end of the list. In fact, if we do get to the end of
-the list, that means that the item we are looking for must not be
-present. Also, if we do find the item, there is no need to continue.
+Pesquisando por um valor em uma implementação de lista ligada desordenado
+também usa a técnica de travessia. À medida que visitamos cada nó na
+lista ligada, vamos perguntar se os dados armazenados lá correspondem ao item
+que estamos procurando. Neste caso, no entanto, podemos não ter que atravessar
+todo o caminho até o final da lista. Na verdade, se chegarmos ao fim da
+lista, isso significa que o item que estamos procurando não está
+presente. Além disso, se encontrarmos o item, não há necessidade de continuar.
 
-:ref:`Listing 6 <lst_search>` shows the implementation for the ``search`` method.
-As in the ``size`` method, the traversal is initialized to start at
-the head of the list (line 2). We also use a boolean variable called
-``found`` to remember whether we have located the item we are searching
-for. Since we have not found the item at the start of the traversal,
-``found`` can be set to ``False`` (line 3). The iteration in line 4
-takes into account both conditions discussed above. As long as there are
-more nodes to visit and we have not found the item we are looking for,
-we continue to check the next node. The question in line 5 asks whether
-the data item is present in the current node. If so, ``found`` can be
-set to ``True``.
+:ref:`Listagem 6 <lst_search>` mostra a implementação do método ``search()``.
+Como no método ``size()``, a varredura é iniciada na cabeça
+da lista (linha 2). Nós também usamos uma variável booleana chamada
+``found`` para lembrar se localizamos o item que estamos procurando
+para. Como no início da travessia aina não encontramos o item,
+``found`` pode ser definido como ``False`` (linha 3). A iteração na linha 4
+leva em conta ambas as condições discutidas acima. Enquanto houver
+mais nós para visitar e não encontramos o item que estamos procurando,
+prosseguimos com verificar dos próximos nós. A comparação na linha 5 pergunta se
+o item está no nó ``currente``. Se assim for, ``found`` pode ser
+definido como ``True``.
+
 
 .. _lst_search:
 
-**Listing 6**
+**Listagem 6**
 
 ::
 
@@ -351,83 +349,82 @@ set to ``True``.
 
         return found
 
-As an example, consider invoking the ``search`` method looking for the
-item 17.
+Como exemplo, considere a invocação de ``search(17)``.
 
 ::
 
     >>> mylist.search(17)
     True
 
-Since 17 is in the list, the traversal process needs to move only to the
-node containing 17. At that point, the variable ``found`` is set to
-``True`` and the ``while`` condition will fail, leading to the return
-value seen above. This process can be seen in :ref:`Figure 10 <fig_searchpic>`.
+Como 17 está na lista, o percurso precisa se mover apenas até o
+nó contendo 17. Nesse ponto, a variável ``found`` é definida como
+``True`` e a condição ``while`` falhará, levando ao retorno
+valor visto acima. Este processo pode ser visto em :ref:`Figura 10 <fig_searchpic>`.
+
 
 .. _fig_searchpic:
 
 .. figure:: Figures/search.png
    :align: center
 
-   Figure 10: Successful Search for the Value 17
+   Figura 10: Busca Bem Sucedida do Valor 17
 
+O método ``remove()`` requer dois passos lógicos. Primeiro, precisamos
+percorrer a lista procurando o item que queremos remover. Uma vez encontrado
+o item (lembre-se que supomos que o item está na lista), devemos removê-lo. 
+O primeiro passo é muito parecido com ``search()``. Começando com uma 
+referência externa definida para a cabeça da lista, percorremos os links até que
+encontrar o item que estamos procurando. Como supomos que o item está na lista,
+sabemos que a iteração irá parar antes de ``current`` chegar a ``None``.
+Isso significa que podemos simplesmente usar o booleano ``found`` na
+condição.
 
-The ``remove`` method requires two logical steps. First, we need to
-traverse the list looking for the item we want to remove. Once we find
-the item (recall that we assume it is present), we must remove it. The
-first step is very similar to ``search``. Starting with an external
-reference set to the head of the list, we traverse the links until we
-discover the item we are looking for. Since we assume that item is
-present, we know that the iteration will stop before ``current`` gets to
-``None``. This means that we can simply use the boolean ``found`` in the
-condition.
+Quando ``found`` se tornar ``True``, ``current`` será uma referência para o
+nó contendo o item a ser removido. Mas como podemos removê-lo? Uma
+possibilidade seria substituir o valor do item com algum marcador.
+Isso sugere que o item não está mais presente. O problema com essa
+abordagem é o número de nós já não corresponderá ao número de items.
+Seria muito melhor remover o item removendo todo o nó.
 
-When ``found`` becomes ``True``, ``current`` will be a reference to the
-node containing the item to be removed. But how do we remove it? One
-possibility would be to replace the value of the item with some marker
-that suggests that the item is no longer present. The problem with this
-approach is the number of nodes will no longer match the number of
-items. It would be much better to remove the item by removing the entire
-node.
+Para remover o nó que contém o item, precisamos modificar o
+link do nó anterior para que ele se refira ao nó que vem depois de
+``current``. Infelizmente, não há como voltar atrás no lista
+ligada. Já que ``current`` se refere ao nó à frente do nó onde nós
+gostaria de fazer a mudança, é tarde demais para fazer a modificação
+necessária.
 
-In order to remove the node containing the item, we need to modify the
-link in the previous node so that it refers to the node that comes after
-``current``. Unfortunately, there is no way to go backward in the linked
-list. Since ``current`` refers to the node ahead of the node where we
-would like to make the change, it is too late to make the necessary
-modification.
+A solução para este dilema é usar duas referências externas à medida que
+percorremos a lista encadeada. ``current`` vai se comportar como fez
+antes, marcando a localização atual da travessia. A nova referência,
+que vamos chamar ``previous``, sempre viajará um nó atrás
+``current``. Dessa forma, quando ``current`` pára no nó a ser removido,
+``previous`` será referente ao local apropriado na lista encadeada
+para a modificação.
 
-The solution to this dilemma is to use two external references as we
-traverse down the linked list. ``current`` will behave just as it did
-before, marking the current location of the traverse. The new reference,
-which we will call ``previous``, will always travel one node behind
-``current``. That way, when ``current`` stops at the node to be removed,
-``previous`` will be referring to the proper place in the linked list
-for the modification.
+:ref:`Listagem 7 <lst_remove>` mostra o método ``remove()`` completo.
+Linhas 2–3 atribuem valores iniciais às duas referências.
+Note que ``current`` começa na cabeça da lista como nos outros exemplos de travessia.
+``previous``, no entanto, é suposto estar sempre um nó atrás
+``current``. Por esta razão, ``previous`` começa com um valor o ``None`` já que não há
+nó antes da cabeça (veja :ref:`Figura 11 <fig_removeinit>`).
+A variável booleana ``found`` será novamente
+usada para controlar a iteração.
 
-:ref:`Listing 7 <lst_remove>` shows the complete ``remove`` method. Lines 2–3
-assign initial values to the two references. Note that ``current``
-starts out at the list head as in the other traversal examples.
-``previous``, however, is assumed to always travel one node behind
-current. For this reason, ``previous`` starts out with a value of
-``None`` since there is no node before the head (see
-:ref:`Figure 11 <fig_removeinit>`). The boolean variable ``found`` will again be
-used to control the iteration.
+Nas linhas 6 a 7, perguntamos se o item armazenado no nó atual é o
+item que desejamos remover. Se assim for, ``found`` pode ser definido como ``True``. Se nós
+não encontramos o item, ``previous`` e ``current`` devem ser movidos
+um nó à frente. Mais uma vez, a ordem dessas duas atribuições é crucial.
+``previous`` deve primeiro ser movido um nó adiante para o local de
+``current``. Nesse ponto, ``current`` pode ser movido. Este processo é
+muitas vezes referido como "andar de lesma" ("*inch-worming*") como ``previous`` deve ir até
+``current`` antes de ``current`` seguir em frente. :ref:`Figura 12 <fig_prevcurr>` mostra
+o movimento de ``previous`` e ``current`` à medida que avançam pela
+lista procurando o nó contendo o valor 17.
 
-In lines 6–7 we ask whether the item stored in the current node is the
-item we wish to remove. If so, ``found`` can be set to ``True``. If we
-do not find the item, ``previous`` and ``current`` must both be moved
-one node ahead. Again, the order of these two statements is crucial.
-``previous`` must first be moved one node ahead to the location of
-``current``. At that point, ``current`` can be moved. This process is
-often referred to as “inch-worming” as ``previous`` must catch up to
-``current`` before ``current`` moves ahead. :ref:`Figure 12 <fig_prevcurr>` shows
-the movement of ``previous`` and ``current`` as they progress down the
-list looking for the node containing the value 17.
 
 .. _lst_remove:
 
-**Listing 7**
+**Listagem 7**
 
 ::
 
@@ -452,7 +449,7 @@ list looking for the node containing the value 17.
 .. figure:: Figures/removeinit.png
    :align: center
 
-   Figure 11: Initial Values for the ``previous`` and ``current`` References
+   Figura 11: Valores Iniciais de ``previous`` and ``current``
 
 
 .. _fig_prevcurr:
@@ -460,26 +457,27 @@ list looking for the node containing the value 17.
 .. figure:: Figures/prevcurr.png
    :align: center
 
-   Figure 12: ``previous`` and ``current`` Move Down the List
+   Figura 12: ``previous`` e ``current`` se Movendo na Lista
 
 
-Once the searching step of the ``remove`` has been completed, we need to
-remove the node from the linked list. :ref:`Figure 13 <fig_removepic1>` shows the
-link that must be modified. However, there is a special case that needs
-to be addressed. If the item to be removed happens to be the first item
-in the list, then ``current`` will reference the first node in the
-linked list. This also means that ``previous`` will be ``None``. We said
-earlier that ``previous`` would be referring to the node whose next
-reference needs to be modified in order to complete the remove. In this
-case, it is not ``previous`` but rather the head of the list that needs
-to be changed (see :ref:`Figure 14 <fig_removehead>`).
+Uma vez que o passo de busca do ``remove()`` tenha sido completado, precisamos
+remover o nó da lista ligada. :ref:`Figura 13 <fig_removepic1>` mostra o
+link que deve ser modificado. No entanto, há um caso especial que precisa
+se abordado. Se o item a ser removido for o primeiro item
+na lista, então ``current`` fará referência ao primeiro nó na
+lista ligada. Isto também significa que ``previous`` será ``None``. Nós dissemos
+anteriormente que ``previous`` estaria se referindo ao nó cuja referência ``next``
+precisa ser modificada para concluir a remoção. Nesse
+caso, não é "previous", mas sim a cabeça da lista que precisa
+a ser alterado (veja :ref:`Figura 14 <fig_removehead>`).
+
 
 .. _fig_removepic1:
 
 .. figure:: Figures/remove.png
    :align: center
 
-   Figure 13: Removing an Item from the Middle of the List
+   Figura 13: Removendo o Item de Meio da Lista
 
 
 .. _fig_removehead:
@@ -487,25 +485,25 @@ to be changed (see :ref:`Figure 14 <fig_removehead>`).
 .. figure:: Figures/remove2.png
    :align: center
 
-   Figure 14: Removing the First Node from the List
+   Figura 14: Removendo o Primeiro Nó da Lista
 
 
-Line 12 allows us to check whether we are dealing with the special case
-described above. If ``previous`` did not move, it will still have the
-value ``None`` when the boolean ``found`` becomes ``True``. In that case
-(line 13) the head of the list is modified to refer to the node after
-the current node, in effect removing the first node from the linked
-list. However, if previous is not ``None``, the node to be removed is
-somewhere down the linked list structure. In this case the previous
-reference is providing us with the node whose next reference must be
-changed. Line 15 uses the ``setNext`` method from ``previous`` to
-accomplish the removal. Note that in both cases the destination of the
-reference change is ``current.getNext()``. One question that often
-arises is whether the two cases shown here will also handle the
-situation where the item to be removed is in the last node of the linked
-list. We leave that for you to consider.
+A linha 12 nos permite verificar se estamos lidando com o caso especial
+descrito acima. Se ``previous`` não foi movido, ele ainda terá o
+valor ``None`` quando o booleano ``found`` se torna ``True``. Nesse caso
+(linha 13) a cebaça da lista é modificado para se referir ao nó após
+o nó ``current``, na verdade, removendo o primeiro nó da lista ligada.
+No entanto, se previous não é ``None``, o nó a ser removido está
+em algum lugar mais adiante na estrutura da lista ligada. Neste caso, a 
+referência ``previous`` está nos fornecendo o nó cuja referência ``next`` deve ser
+modificada. A linha 15 usa o método ``setNext()`` de ``previous`` para
+realizar a remoção. Note que em ambos os casos o destino do
+a mudança de referência é ``current.getNext ()``. Uma pergunta que muitas vezes
+surge é se os dois casos mostrados aqui também vão lidar com a
+situação em que o item a ser removido está no último nó do lista
+Ligada. Nós deixamos isso para você considerar.
 
-You can try out the ``UnorderedList`` class in ActiveCode 1.  
+Você pode experimentar a classe ``UnorderedList`` no ActiveCode 1.
 
 .. activecode:: unorderedlistcomplete
    :caption: The Complete UnorderedList Class
@@ -604,16 +602,16 @@ You can try out the ``UnorderedList`` class in ActiveCode 1.
    print(mylist.size())
    print(mylist.search(93))
 
-The remaining methods ``append``, ``insert``, ``index``, and ``pop`` are
-left as exercises. Remember that each of these must take into account
-whether the change is taking place at the head of the list or someplace
-else. Also, ``insert``, ``index``, and ``pop`` require that we name the
-positions of the list. We will assume that position names are integers
-starting with 0.
+Os métodos restantes ``append()``, ``insert()``, ``index()`` e ``pop()`` são
+deixados como exercícios. Lembre-se que cada um deles deve levar em conta
+se a mudança está ocorrendo na cabeça da lista ou em algum outro lugar.
+Além disso, ``insert()``, ``index()`` e ``pop()`` exigem que demos nomes às
+posições da lista. Vamos supor que os nomes das posições sejam inteiros
+começando com 0.
 
-.. admonition:: Self Check
+.. admonition:: Teste a sua compreensão
    
-   Part I:  Implement the append method for UnorderedList.  What is the time complexity of the method you created?
+   Parte I:  Implemente o método ``append()`` para ``UnorderedList``.  Qual é o consumo de tempo do seu método?
 
    .. actex:: self_check_list1
        :nocodelens:
@@ -689,7 +687,7 @@ starting with 0.
    
    
 
-   Part II:  In the previous problem, you most likely created an append method that was :math:`O(n)`  If you add an instance variable to the UnorderedList class you can create an append method that is :math:`O(1)`.  Modify your append method to be :math:`O(1)`  Be Careful!  To really do this correctly you will need to consider a couple of special cases that may require you to make a modification to the add method as well.
+   Parte II: No problema anterior, você provavelmente criou um método ``append()`` que consome tempo :math:`O(n)`. Se você adicionar uma variável de instância à classe ``UnorderedList``, você pode criar um método ``append()`` que consuma tempo :math:`O(1)`. Modifique seu método ``append()`` de tal forma que consuma tempo constante. Tenha cuidado! Para realmente fazer isso corretamente, você precisará considerar alguns casos especiais que podem exigir que você também modifique o método ``add()``.
 
    .. actex:: self_check_list2
        :nocodelens:

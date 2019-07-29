@@ -2,32 +2,30 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Implementing an Ordered List
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Implementando uma Lista Ordenada
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to implement the ordered list, we must remember that the
-relative positions of the items are based on some underlying
-characteristic. The ordered list of integers given above (17, 26, 31,
-54, 77, and 93) can be represented by a linked structure as shown in
-:ref:`Figure 15 <fig_orderlinked>`. Again, the node and link structure is ideal
-for representing the relative positioning of the items.
+Para implementar a lista ordenada, devemos lembrar que a
+posições relativas dos itens são baseadas em algumas
+característica. A lista ordenada de números inteiros dada acima (17, 26, 31,
+54, 77 e 93) pode ser representada por uma estrutura ligada, como
+:ref:`Figura 15 <fig_orderlinked>`. Novamente, o nó e a estrutura de links são ideais
+por representar o posicionamento relativo dos itens.
 
 .. _fig_orderlinked:
 
 .. figure:: Figures/orderlinkedlist.png
    :align: center
 
-   Figure 15: An Ordered Linked List
+   Figura 15: Uma Lista Ligada Ordenada
 
-
-To implement the ``OrderedList`` class, we will use the same technique
-as seen previously with unordered lists. Once again, an empty list will
-be denoted by a ``head`` reference to ``None`` (see
-:ref:`Listing 8 <lst_orderlist>`).
+Para implementar a classe ``OrderedList``, vamos usar a mesma técnica
+que visto anteriormente com listas desordenadas. Mais uma vez, uma lista vazia
+será indicada por uma referência ``head`` a ``None`` (ver :ref:`Listagem 8 <lst_orderlist>`).
 
 .. _lst_orderlist:
 
-**Listing 8**
+**Listagem 8**
 
 ::
 
@@ -35,56 +33,54 @@ be denoted by a ``head`` reference to ``None`` (see
         def __init__(self):
             self.head = None
 
-As we consider the operations for the ordered list, we should note that
-the ``isEmpty`` and ``size`` methods can be implemented the same as
-with unordered lists since they deal only with the number of nodes in
-the list without regard to the actual item values. Likewise, the
-``remove`` method will work just fine since we still need to find the
-item and then link around the node to remove it. The two remaining
-methods, ``search`` and ``add``, will require some modification.
+Ao considerarmos as operações da lista ordenada, devemos observar que
+os métodos ``isEmpty()`` e ``size()`` podem ser implementados da mesma forma que
+com listas não ordenadas, uma vez que lidam apenas com o número de nós em
+uma lista sem levar em conta os valores dos itens. Da mesma forma,
+O método ``remove()`` funcionará bem, pois ainda precisamos encontrar o
+item e, em seguida, criar links em torno do nó para removê-lo.
+Os dois métodos restantes, ``search()`` e ``add()``, requerem algumas modificações.
 
-The search of an unordered linked list required that we traverse the
-nodes one at a time until we either find the item we are looking for or
-run out of nodes (``None``). It turns out that the same approach would
-actually work with the ordered list and in fact in the case where we
-find the item it is exactly what we need. However, in the case where the
-item is not in the list, we can take advantage of the ordering to stop
-the search as soon as possible.
+A busca de uma lista encadeada não ordenada exigiu que percorrêssemos
+nós, um de cada vez, até encontrarmos o item que estamos procurando ou
+ficar sem nós a ser examinados (``None``). Acontece que a mesma abordagem 
+realmente funcionaria com a lista ordenada e, de fato, no caso em que
+encontramos o item é exatamente o que precisamos fazer. No entanto, no caso em que o
+item não está na lista, podemos aproveitar a ordenação para parar
+a busca o mais breve possível.
 
-For example, :ref:`Figure 16 <fig_stopearly>` shows the ordered linked list as a
-search is looking for the value 45. As we traverse, starting at the head
-of the list, we first compare against 17. Since 17 is not the item we
-are looking for, we move to the next node, in this case 26. Again, this
-is not what we want, so we move on to 31 and then on to 54. Now, at this
-point, something is different. Since 54 is not the item we are looking
-for, our former strategy would be to move forward. However, due to the
-fact that this is an ordered list, that will not be necessary. Once the
-value in the node becomes greater than the item we are searching for,
-the search can stop and return ``False``. There is no way the item could
-exist further out in the linked list.
+Por exemplo, :ref:`Figura 16 <fig_stopearly>` mostra a lista ligada ordenada como uma
+procura pelo valor 45. A medida que percorremos, começando na cabeça
+da lista, primeiro comparamos com 17. Já que 17 não é o item que
+estamos procurando, passamos para o próximo nó, neste caso 26. Novamente,
+não é o que queremos, então passamos para 31 e depois para 54. Agora, neste
+ponto, algo é diferente. Já que 54 não é o item que estamos procurando
+nossa antiga estratégia seria avançar. No entanto, devido à
+fato de que esta é uma lista ordenada, isso não será necessário. Uma vez o
+valor no nó se torna maior que o item que estamos procurando,
+a pesquisa pode parar e retornar ``False``. Não há mais possibilidade do item 
+estar na lista.
 
 .. _fig_stopearly:
 
 .. figure:: Figures/orderedsearch.png
    :align: center
 
-   Figure 16: Searching an Ordered Linked List
+   Figura 16: Busca em Uma Lista Ordenada
 
 
-:ref:`Listing 9 <lst_ordersearch>` shows the complete ``search`` method. It is
-easy to incorporate the new condition discussed above by adding another
-boolean variable, ``stop``, and initializing it to ``False`` (line 4).
-While ``stop`` is ``False`` (not ``stop``) we can continue to look
-forward in the list (line 5). If any node is ever discovered that
-contains data greater than the item we are looking for, we will set
-``stop`` to ``True`` (lines 9–10). The remaining lines are identical to
-the unordered list search.
+:ref:`Listagem 9 <lst_ordersearch>` mostra o método ``search()`` completo.
+É fácil incorporar a nova condição discutida acima, adicionando outra
+variável booleana, ``stop``, e inicializando-a para ``False`` (linha 4).
+Enquanto ``stop`` é ``False`` (não ``stop``) podemos continuar a procurar
+na lista (linha 5). Se descobrirmos algum nó que
+contém dados maiores que o item que estamos procurando, definimos
+``stop`` como sendo ``True`` (linhas 9–10). As linhas restantes são idênticas às
+a pesquisa de lista desordenada.
 
 .. _lst_ordersearch:
 
-**Listing 9**
-
-
+**Listagem 9**
 
 ::
 
@@ -103,51 +99,49 @@ the unordered list search.
 
         return found
 
-The most significant method modification will take place in ``add``.
-Recall that for unordered lists, the ``add`` method could simply place a
-new node at the head of the list. It was the easiest point of access.
-Unfortunately, this will no longer work with ordered lists. It is now
-necessary that we discover the specific place where a new item belongs
-in the existing ordered list.
+A modificação mais significativa ocorrerá no método ``add()``.
+Lembre-se que para listas desordenadas, o método ``add()`` poderia simplesmente colocar um
+novo nó no topo da lista. Foi o ponto de acesso mais fácil.
+Infelizmente, isso não funcionará mais com listas ordenadas. Agora é
+necessário que descobramos o local específico onde um novo item deve ser inserido 
+na lista ordenada existente.
 
-Assume we have the ordered list consisting of 17, 26, 54, 77, and 93 and
-we want to add the value 31. The ``add`` method must decide that the new
-item belongs between 26 and 54. :ref:`Figure 17 <fig_orderinsert>` shows the setup
-that we need. As we explained earlier, we need to traverse the linked
-list looking for the place where the new node will be added. We know we
-have found that place when either we run out of nodes (``current``
-becomes ``None``) or the value of the current node becomes greater than
-the item we wish to add. In our example, seeing the value 54 causes us
-to stop.
+Suponha que temos a lista ordenada que consiste em 17, 26, 54, 77 e 93 e
+queremos adicionar o valor 31. O método ``add()`` deve decidir que o novo
+item deve ser inserido entre 26 e 54. :ref:`Figura 17 <fig_orderinsert>`
+mostra a configuração que precisamos. Como explicamos anteriormente,
+precisamos percorres a lista procurando o lugar onde o novo nó será inserido.
+Nós sabemos descobrir aquele lugar quando ou ficamos sem nós (``current``
+torna-se ``None``) ou o valor do nó atual torna-se maior que
+o item que desejamos inserir. Em nosso exemplo, o valor 54 faz o método 
+parar.
 
 .. _fig_orderinsert:
 
 .. figure:: Figures/linkedlistinsert.png
    :align: center
 
-   Figure 17: Adding an Item to an Ordered Linked List
+   Figura 17: Inserindo um Item em Uma Lista Ordenada
 
+Como vimos com listas desordenadas, é necessário ter uma referência adicional,
+novamente chamada de ``previous``, já que ``current`` não fornecerá
+acesso ao nó que deve ser modificado. :ref:`Listagem 10 <lst_orderadd>` mostra
+o método ``add()`` completo. Linhas 2–3 configuram as duas referência externas
+e linhas 9–10 permitem novamente ``previous`` seguir atrás de ``current``
+através da iteração. A condição (linha 5) permite que a iteração
+continue enquanto houver mais nós e o valor no nó atual não é maior que o item.
+Em ambos os casos, quando a iteração falha, encontramos o local para o novo
+nó.
 
-As we saw with unordered lists, it is necessary to have an additional
-reference, again called ``previous``, since ``current`` will not provide
-access to the node that must be modified. :ref:`Listing 10 <lst_orderadd>` shows
-the complete ``add`` method. Lines 2–3 set up the two external
-references and lines 9–10 again allow ``previous`` to follow one node
-behind ``current`` every time through the iteration. The condition (line
-5) allows the iteration to continue as long as there are more nodes and
-the value in the current node is not larger than the item. In either
-case, when the iteration fails, we have found the location for the new
-node.
-
-The remainder of the method completes the two-step process shown in
-:ref:`Figure 17 <fig_orderinsert>`. Once a new node has been created for the item,
-the only remaining question is whether the new node will be added at the
-beginning of the linked list or some place in the middle. Again,
-``previous == None`` (line 13) can be used to provide the answer.
+O restante do método completa o processo de dois passos mostrado em
+:ref:`Figura 17 <fig_orderinsert>`. Depois que um novo nó for criado para o item,
+a única questão que resta é se o novo nó será inserido no
+início da lista ligada ou algum lugar no meio. Novamente,
+``previous == None`` (linha 13) pode ser usado para fornecer a resposta.
 
 .. _lst_orderadd:
 
-**Listing 10**
+**Listagem 10**
 
 ::
 
@@ -169,15 +163,15 @@ beginning of the linked list or some place in the middle. Again,
         else:
             temp.setNext(current)
             previous.setNext(temp)
-            
-The ``OrderedList`` class with methods discussed thus far can be found
-in ActiveCode 1.
-We leave the remaining methods as exercises. You should carefully
-consider whether the unordered implementations will work given that the
-list is now ordered.
+
+A classe ``OrderedList`` com métodos discutidos até agora pode ser encontrada
+no ActiveCode 1.
+Deixamos os métodos restantes como exercícios. Você deve considerar cuidadosamente
+se as implementações não ordenadas funcionarão, dado que o lista agora está ordenada.
+
 
 .. activecode:: orderedlistclass
-   :caption: OrderedList Class Thus Far
+   :caption: Classe OrderedList até agora
    :hidecode:
    :nocodelens:
    
@@ -264,24 +258,26 @@ list is now ordered.
    
    
 
-Analysis of Linked Lists
-^^^^^^^^^^^^^^^^^^^^^^^^
+Análise de Listas Ligadas   
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To analyze the complexity of the linked list operations, we need to
-consider whether they require traversal. Consider a linked list that has
-*n* nodes. The ``isEmpty`` method is :math:`O(1)` since it requires
-one step to check the head reference for ``None``. ``size``, on the
-other hand, will always require *n* steps since there is no way to know
-how many nodes are in the linked list without traversing from head to
-end. Therefore, ``length`` is :math:`O(n)`. Adding an item to an
-unordered list will always be O(1) since we simply place the new node at
-the head of the linked list. However, ``search`` and ``remove``, as well
-as ``add`` for an ordered list, all require the traversal process.
-Although on average they may need to traverse only half of the nodes,
-these methods are all :math:`O(n)` since in the worst case each will
-process every node in the list.
+Para analisar a consumo de tempo das operações sobre listas ligadas, precisamos
+considere se eles exigem que sejam percorridas. Considere uma lista ligada que tenha
+*n* nós. O método ``isEmpty()`` consome tempo : math: `O(1)` já que requer
+apenas um passo para verificar se a referência da cabeça é para ``None``.
+``size()``, por outro lado, sempre exigirá etapas *n*, pois não há como saber
+quantos nós estão na lista ligada sem percorrê-la do início ao fim.
+Portanto, ``length()`` consome tempo  :math:`O(n)`.
+Inserir um item a um lista não ordenada consumirá sempre tempo :math:`O(1)`
+uma vez que simplesmente o novo nó é inserido como cabeça 
+da lista ligada. No entanto, ``search()`` e ``remove()``, bem
+como ``add()`` para uma lista ordenada, todos requerem que a lista sejá percorrida.
+Embora, em média, possam precisar atravessar apenas metade dos nós,
+estes todos esses métodos consomem tempo :math:`O (n)` já que no pior dos casos devemos
+processar todos os nós da lista.
 
-You may also have noticed that the performance of this implementation
-differs from the actual performance given earlier for Python lists. This
-suggests that linked lists are not the way Python lists are implemented.
-The actual implementation of a Python list is based on the notion of an array.  We discuss this in more detail in Chapter 8.
+Você também pode ter notado que o desempenho desta implementação
+difere do desempenho real dado anteriormente para listas do Python.
+Isto sugere que as listas ligadas não são a maneira como as listas do Python são implementadas.
+A implementação real de uma lista do Python é baseada na noção de um vetor.
+Discutimos isso com mais detalhes no Capítulo 8.

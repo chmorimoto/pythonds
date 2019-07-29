@@ -14,7 +14,7 @@ lista deve ser implementada pelo programador.
 
 Uma **lista** é uma coleção de itens em que cada item tem uma 
 posição relativa em relação aos outros.
-Mais especificamente, nos referiremos este tipo de lista como uma lista não ordenada.
+Mais especificamente, nos referiremos este tipo de lista como uma lista desordenada.
 Podemos considerar que a lista possui um primeiro item,
 um segundo item,
 um terceiro item e assim por diante.
@@ -23,7 +23,7 @@ lista (o último item). Por simplicidade, vamos supor que as listas não podem
 conter itens duplicados.
 
 Por exemplo, a coleção dos inteiros 54, 26, 93, 17, 77 e 31 pode
-representar uma lista simples e não ordenada de pontuações de um exame.
+representar uma lista simples e desordenada de pontuações de um exame.
 Note que nós os escrevemos como valores delimitados por vírgula,
 uma maneira comum de mostrar uma estrutura lista. Claro, o Python mostraria essa lista como
 :math:'[54, 26, 93, 17, 77, 31]`.

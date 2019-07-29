@@ -2,12 +2,12 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-Tipo Abstrato de Dados Lista não Ordenada
+Tipo Abstrato de Dados Lista desordenada
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A estrutura de uma lista não ordenada, como descrita acima, é uma coleção
+A estrutura de uma lista desordenada, como descrita acima, é uma coleção
 de itens em que cada item detém uma posição relativa em relação aos demais
-Algumas operações possíveis sobre lista não ordenadas são dadas abaixo.
+Algumas operações possíveis sobre lista desordenadas são dadas abaixo.
 
 - ``List()`` cria uma nova lista que está vazia. Não precisa de parâmetros
    e retorna uma lista vazia.
