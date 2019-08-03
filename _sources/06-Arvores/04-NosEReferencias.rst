@@ -1,18 +1,17 @@
 ..  Copyright (C)  Brad Miller, David Ranum
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
+Nós e Referências
+~~~~~~~~~~~~~~~~~
 
-Nodes and References
-~~~~~~~~~~~~~~~~~~~~
+Nosso segundo método para representar uma árvore usa nós e referências. Neste
+caso, iremos definir uma classe que possui atributos para o valor da raiz,
+assim como as subárvores esquerda e direita. Como esta representação está mais
+próxima do paradigma de programação orientada a objetos, iremos continuar a usá-la
+pelo restante do capítulo.
 
-Our second method to represent a tree uses nodes and references. In this
-case we will define a class that has attributes for the root value, as
-well as the left and right subtrees. Since this representation more
-closely follows the object-oriented programming paradigm, we will
-continue to use this representation for the remainder of the chapter.
-
-Using nodes and references, we might think of the tree as being
-structured like the one shown in :ref:`Figure 2 <fig_treerec>`.
+Usando nós e referências, podemos pensar em uma árvore sendo estruturada como algo
+mostrado na figura :ref:`Figura 2 <fig_treerec>`.
 
 .. _fig_treerec:
 
@@ -20,62 +19,71 @@ structured like the one shown in :ref:`Figure 2 <fig_treerec>`.
    :align: center
    :alt: image
 
-   Figure 2: A Simple Tree Using a Nodes and References Approach
+   Figura 2: Uma Árvore Simples Usando a Abordagem de Nós e Referências
 
-We will start out with a simple class definition for the nodes and
-references approach as shown in :ref:`Listing 4 <lst_nar>`. The important thing
-to remember about this representation is that the attributes ``left``
-and ``right`` will become references to other instances of the
-``BinaryTree`` class. For example, when we insert a new left child into
-the tree we create another instance of ``BinaryTree`` and modify
-``self.leftChild`` in the root to reference the new tree.
+Iremos começar com uma simples definição de classe para a abordagem de nós e
+referências, como mostrado no :ref:`Trecho 4 <lst_nar>`. O importante aqui 
+nesta representação é lembrar que os atributos ``filhoEsquerdo`` e ``filhoDireito``
+irão se tornar referências para outras instâncias da classe ``ArvoreBinaria``.
+Por exemplo, quando inserimos um novo filho à esquerda da árvore, criamos
+uma nova instância de ``ArvoreBinaria`` e modificamos ``self.filhoEsquerdo``
+na raiz para referenciar essa nova árvore.
 
 .. _lst_nar:
 
-**Listing 4**
+**Trecho 4**
 
 ::
 
-    class BinaryTree:
+    class ArvoreBinaria:
         def __init__(self,rootObj):
             self.key = rootObj
-            self.leftChild = None
-            self.rightChild = None
+            self.filhoEsquerdo = None
+            self.filhoDireito = None
         
+Note que no :ref:`Trecho 4 <lst_nar>`, o construtor espera algum tipo de objeto
+para ser armazenado na raiz. Assim como você pode guardar qualquer tipo de objeto
+que você queira em uma lista, o objeto raiz de uma árvore pode ser uma referência
+para qualquer tipo de objeto. Para os nossos primeiros exemplos, iremos armazenar
+o nome do nó como valor da raiz. Usando nós e referências para representar
+árvores como na :ref:`Figura 2 <fig_treerec>`, teríamos que criar seis instâncias
+da classe ArvoreBinaria.
 
-Notice that in :ref:`Listing 4 <lst_nar>`, the constructor function expects to
-get some kind of object to store in the root. Just like you can store
-any object you like in a list, the root object of a tree can be a
-reference to any object. For our early examples, we will store the name
-of the node as the root value. Using nodes and references to represent
-the tree in :ref:`Figure 2 <fig_treerec>`, we would create six instances of the
-BinaryTree class.
-
-Next let’s look at the functions we need to build the tree beyond the
-root node. To add a left child to the tree, we will create a new binary
-tree object and set the ``left`` attribute of the root to refer to this
-new object. The code for ``insertLeft`` is shown in
-:ref:`Listing 5 <lst_insl>`.
+Agora vamos olhar para as funções que precisamos para poder criar uma árvore
+além do nó raiz. Para adicionar um filho à esquerda, iremos criar um novo objeto
+do tipo ArvoreBinaria e definir o ``filhoEsquerdo`` como a raiz que referencia
+esse novo objeto. O código para ``insereEsquerda`` é mostrado no trecho
+:ref:`Trecho 5 <lst_insl>`.
 
 .. _lst_insl:
 
-**Listing 5**
+**Trecho 5**
 
 .. highlight:: python
     :linenothreshold: 5
 
 ::
 
-    def insertLeft(self,newNode):
-        if self.leftChild == None:
-            self.leftChild = BinaryTree(newNode)
+    def insereEsquerda(self, novoNo):
+        if self.filhoEsquerdo == None:
+            self.filhoEsquerdo = ArvoreBinaria(novoNo)
         else:  
-            t = BinaryTree(newNode)
-            t.leftChild = self.leftChild
-            self.leftChild = t
+            t = ArvoreBinaria(novoNo)
+            t.filhoEsquerdo = self.filhoEsquerdo
+            self.filhoEsquerdo = t
             
 .. highlight:: python
     :linenothreshold: 500
+
+
+
+
+#########################
+
+
+
+
+
 
 We must consider two cases for insertion. The first case is
 characterized by a node with no existing left child. When there is no
