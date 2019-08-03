@@ -40,55 +40,49 @@ Pai
     arestas de saída. Na :ref:`Figure 2 <fig_filetree>`, o nó var/ é o pai dos nós
     log/, spool/ e yp/.
 
+Irmão
+    Nós de uma árvore que são filhos de um mesmo pai são chamados de irmãos. 
+    Os nós etc/ e usr/ são irmãos na árvore do sistema de arquivos.
 
+Subárvore
+    Uma subárvore é um conjunto de nós e arestas formado por um nó pai e todos
+    os descendentes desse pai.
 
+Folha
+    Uma folha é um nó que não possui filhos. Por exemplo, Homem e Chimpanzé
+    são folhas na :ref:`Figura 1 <fig_biotree>`.
 
+Nível
+    O nível de um nó :math:`n` é o número de arestas no caminho da
+    formado entre a raiz e o nó :math:`n`. Por exemplo, o nível do nó Felis
+    na :ref:`Figura 1 <fig_biotree>` é cinco. Por definição, o nível da raiz 
+    é sempre zero.
 
+Altura
+    A altura de uma árvore de uma árvore é igual ao nível máximo de qualquer nó
+    na árvore. A altura da árvore na :ref:`Figura 2 <fig_filetree>` é igual a dois.
 
-Sibling
-    Nodes in the tree that are children of the same parent are said to
-    be siblings. The nodes etc/ and usr/ are siblings in the filesystem
-    tree.
+Com o vocabulário básico estabelecido, agora podemos ir para uma definição
+formal de árvore. Na verdade, iremos fornecer duas definições. Uma delas
+envolve nós e arestas. A outra, a qual se mostrará bastante útil, é
+uma definição recursiva.
 
-Subtree
-    A subtree is a set of nodes and edges comprised of a parent and all
-    the descendants of that parent.
+*Definição Um:* Uma árvore consiste de um conjunto de nós e um conjunto de
+arestas que conectam pares de nós. Uma árvore tem as seguintes propriedades:
 
-Leaf Node
-    A leaf node is a node that has no children. For example, Human and
-    Chimpanzee are leaf nodes in :ref:`Figure 1 <fig_biotree>`.
+-  Um nó da árvore é designado como o nó raiz.
 
-Level
-    The level of a node :math:`n` is the number of edges on the path
-    from the root node to :math:`n`. For example, the level of the
-    Felis node in :ref:`Figure 1 <fig_biotree>` is five. By definition, the level
-    of the root node is zero.
+-  Todo nó :math:`n`, exceto o nó raiz, é conectado a uma aresta vinda de
+   exatamente um outro nó :math:`p`, onde :math:`p` é denominado o pai
+   de :math:`n`.
 
-Height
-    The height of a tree is equal to the maximum level of any node in
-    the tree. The height of the tree in :ref:`Figure 2 <fig_filetree>` is two.
+-  Há apenas um único caminho entre a raiz e qualquer outro nó.
 
-With the basic vocabulary now defined, we can move on to a formal
-definition of a tree. In fact, we will provide two definitions of a
-tree. One definition involves nodes and edges. The second definition,
-which will prove to be very useful, is a recursive definition.
+-  Se cada nó em uma árvore possui, no máximo, dois filhos, dizemos que
+   essa estrutura é uma **árvore binária**.
 
-*Definition One:* A tree consists of a set of nodes and a set of
-edges that connect pairs of nodes. A tree has the following properties:
-
--  One node of the tree is designated as the root node.
-
--  Every node :math:`n`, except the root node, is connected by an edge
-   from exactly one other node :math:`p`, where :math:`p` is the
-   parent of :math:`n`.
-
--  A unique path traverses from the root to each node.
-
--  If each node in the tree has a maximum of two children, we say that
-   the tree is a **binary tree**.
-
-:ref:`Figure 3 <fig_nodeedgetree>` illustrates a tree that fits definition one.
-The arrowheads on the edges indicate the direction of the connection.
+A :ref:`Figura 3 <fig_nodeedgetree>` mostra uma árvore que se encaixa na
+Definição Um. As flechas nas arestas indicam o sentido da conexão.
 
 .. _fig_nodeedgetree:
 
@@ -96,16 +90,17 @@ The arrowheads on the edges indicate the direction of the connection.
    :align: center
    :alt: image
 
-   Figure 3: A Tree Consisting of a Set of Nodes and Edges
+   Figura 3: Uma Árvore Constituída por um Conjunto de Nós e Arestas
 
-*Definition Two:* A tree is either empty or consists of a root and zero
-or more subtrees, each of which is also a tree. The root of each subtree
-is connected to the root of the parent tree by an edge.
-:ref:`Figure 4 <fig_recursivetree>` illustrates this recursive definition of a tree.
-Using the recursive definition of a tree, we know that the tree in
-:ref:`Figure 4 <fig_recursivetree>` has at least four nodes, since each of the
-triangles representing a subtree must have a root. It may have many more
-nodes than that, but we do not know unless we look deeper into the tree.
+*Definição Dois:* Uma árvore ou é vazia ou é formada por uma raiz com zero
+ou mais subárvores (que também são uma árvore). A raiz de cada subárvore
+está conectada à raiz da árvore pai por uma aresta.
+A :ref:`Figura 4 <fig_recursivetree>` ilustra essa definição recursiva de árvore.
+Usando tal definição, nós sabemos que a árvore na :ref:`Figura 4 <fig_recursivetree>`
+tem pelo menos quatro nós, já que cada um dos triângulos representa uma
+subárvore que necessariamente possui uma raiz. Ela pode ter muitos mais nós
+do que esses, mas só conseguimos descobrir isso se olharmos para a árvore
+em toda a sua profundidade.
 
 .. _fig_recursivetree:
 
@@ -113,4 +108,4 @@ nodes than that, but we do not know unless we look deeper into the tree.
    :align: center
    :alt: image
 
-   Figure 4: A recursive Definition of a tree
+   Figura 4: Uma Definição Recursiva de uma Árvore
