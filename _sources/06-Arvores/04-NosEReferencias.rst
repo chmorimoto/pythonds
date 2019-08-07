@@ -23,10 +23,10 @@ mostrado na figura :ref:`Figura 2 <fig_treerec>`.
 
 Iremos começar com uma simples definição de classe para a abordagem de nós e
 referências, como mostrado no :ref:`Trecho 4 <lst_nar>`. O importante aqui 
-nesta representação é lembrar que os atributos ``filhoEsquerdo`` e ``filhoDireito``
+nesta representação é lembrar que os atributos ``filhoEsquerda`` e ``filhoDireita``
 irão se tornar referências para outras instâncias da classe ``ArvoreBinaria``.
 Por exemplo, quando inserimos um novo filho à esquerda da árvore, criamos
-uma nova instância de ``ArvoreBinaria`` e modificamos ``self.filhoEsquerdo``
+uma nova instância de ``ArvoreBinaria`` e modificamos ``self.filhoEsquerda``
 na raiz para referenciar essa nova árvore.
 
 .. _lst_nar:
@@ -38,8 +38,8 @@ na raiz para referenciar essa nova árvore.
     class ArvoreBinaria:
         def __init__(self,rootObj):
             self.key = rootObj
-            self.filhoEsquerdo = None
-            self.filhoDireito = None
+            self.filhoEsquerda = None
+            self.filhoDireita = None
         
 Note que no :ref:`Trecho 4 <lst_nar>`, o construtor espera algum tipo de objeto
 para ser armazenado na raiz. Assim como você pode guardar qualquer tipo de objeto
@@ -51,7 +51,7 @@ da classe ArvoreBinaria.
 
 Agora vamos olhar para as funções que precisamos para poder criar uma árvore
 além do nó raiz. Para adicionar um filho à esquerda, iremos criar um novo objeto
-do tipo ArvoreBinaria e definir o ``filhoEsquerdo`` como a raiz que referencia
+do tipo ArvoreBinaria e definir o ``filhoEsquerda`` como a raiz que referencia
 esse novo objeto. O código para ``insereEsquerda`` é mostrado no trecho
 :ref:`Trecho 5 <lst_insl>`.
 
@@ -65,145 +65,134 @@ esse novo objeto. O código para ``insereEsquerda`` é mostrado no trecho
 ::
 
     def insereEsquerda(self, novoNo):
-        if self.filhoEsquerdo == None:
-            self.filhoEsquerdo = ArvoreBinaria(novoNo)
+        if self.filhoEsquerda == None:
+            self.filhoEsquerda = ArvoreBinaria(novoNo)
         else:  
             t = ArvoreBinaria(novoNo)
-            t.filhoEsquerdo = self.filhoEsquerdo
-            self.filhoEsquerdo = t
+            t.filhoEsquerda = self.filhoEsquerda
+            self.filhoEsquerda = t
             
 .. highlight:: python
     :linenothreshold: 500
 
+Devemos considerar dois casos para inserção. O primeiro caso ocorre quando
+um nó não tem um filho à esquerda. Nesse caso, nós simplesmente adicionamos
+um nó à arvore. O segundo caso ocorre quando um nó possui um filho
+à esquerda. Nesse caso, inserimos um nó e empurramos o filho existente
+um nível para baixo na árvore. O segundo caso é tratado pelo ``else``
+na linha 4 do :ref:`Trecho 5 <lst_insl>`.
 
-
-
-#########################
-
-
-
-
-
-
-We must consider two cases for insertion. The first case is
-characterized by a node with no existing left child. When there is no
-left child, simply add a node to the tree. The second case is
-characterized by a node with an existing left child. In the second
-case, we insert a node and push the existing child down one level in the
-tree. The second case is handled by the ``else`` statement on line
-4 of :ref:`Listing 5 <lst_insl>`.
-
-The code for ``insertRight`` must consider a symmetric set of cases.
-There will either be no right child, or we must insert the node between
-the root and an existing right child. The insertion code is shown in
-:ref:`Listing 6 <lst_insr>`.
+O código para ``insereDireita`` considera um conjunto de casos simétricos.
+Dependendo do caso, se houver ou não um filho à direita, precisamos inserir
+o nó entre a raiz e um filho existente à direita. O código de inserção
+é mostrado no :ref:`Trecho 6 < lst_insr>`.
 
 .. _lst_insr:
 
-**Listing 6**
+**Trecho 6**
 
 ::
 
-    def insertRight(self,newNode):
-        if self.rightChild == None:
-            self.rightChild = BinaryTree(newNode)
+    def insereDireita(self,novoNo):
+        if self.filhoDireita == None:
+            self.filhoDireita = BinaryTree(novoNo)
         else:
-            t = BinaryTree(newNode)
-            t.rightChild = self.rightChild
-            self.rightChild = t
+            t = BinaryTree(novoNo)
+            t.filhoDireita = self.filhoDireita
+            self.filhoDireita = t
 
-To round out the definition for a simple binary tree data structure, we
-will write accessor methods (see :ref:`Listing 7 <lst_naracc>`) for the left and right children, as well as
-the root values.
+Para completar a definição da estrutura de uma árvore binária simples, nós iremos
+escrever métodos auxiliares (veja :ref:`Trecho 7 <lst_naracc>`) para os filhos
+à esquerda e à direita, bem como para os valores da raiz.
 
 .. _lst_naracc:
 
-**Listing 7**
+**Trecho 7**
 
 ::
 
-    def getRightChild(self):
-        return self.rightChild
+    def pegueFilhoDireita(self):
+        return self.filhoDireita
 
-    def getLeftChild(self):
-        return self.leftChild
+    def pegueFilhoEsquerda(self):
+        return self.filhoEsquerda
 
-    def setRootVal(self,obj):
+    def definaValorRaiz(self,obj):
         self.key = obj
 
-    def getRootVal(self):
+    def pegueValorRaiz(self):
         return self.key
         
-
-Now that we have all the pieces to create and manipulate a binary tree,
-let’s use them to check on the structure a bit more. Let’s make a simple
-tree with node a as the root, and add nodes b and c as children. :ref:`ActiveCode 1 <lst_comptest>` creates the tree and looks at the some of the
-values stored in ``key``, ``left``, and ``right``. Notice that both the
-left and right children of the root are themselves distinct instances of
-the ``BinaryTree`` class. As we said in our original recursive
-definition for a tree, this allows us to treat any child of a binary
-tree as a binary tree itself.
+Agora que já temos todas as peças para criar e manipular uma árvore binária,
+vamos usá-las para estudar melhor sua estrutura. Vamos criar uma árvore
+simples com o nó `a` como raiz e adicionar os nós `b` e `c` como filhos.
+O :ref:`ActiveCode 1<lst_comptest>` cria a árvore e olha para alguns dos
+valores armazenados em ``key``, ``esquerda`` e ``direita``. Note que 
+tanto os filhos à esquerda quanto os filhos à direita da raiz são
+eles próprios instâncias distintas da classe ``ArvoreBinaria``. Como
+dissemos na nossa definição original recursiva de árvore, isso permite que 
+a gente trate qualquer filho em uma árvore binária como uma outra
+árvore binária.
 
 .. _lst_comptest:
 
 
 
 .. activecode:: bintree
-    :caption: Exercising the Node and Reference Implementation
+    :caption: Exercitando Implementação de Nó e Referência
 
 
-    class BinaryTree:
+    class ArvoreBinaria:
         def __init__(self,rootObj):
             self.key = rootObj
-            self.leftChild = None
-            self.rightChild = None
+            self.filhoEsquerda = None
+            self.filhoDireita = None
 
-        def insertLeft(self,newNode):
-            if self.leftChild == None:
-                self.leftChild = BinaryTree(newNode)
+        def insereEsquerda(self,novoNo):
+            if self.filhoEsquerda == None:
+                self.filhoEsquerda = ArvoreBinaria(novoNo)
             else:  
-                t = BinaryTree(newNode)
-                t.leftChild = self.leftChild
-                self.leftChild = t
+                t = ArvoreBinaria(novoNo)
+                t.filhoEsquerda = self.filhoEsquerda
+                self.filhoEsquerda = t
 
-        def insertRight(self,newNode):
-            if self.rightChild == None:
-                self.rightChild = BinaryTree(newNode)
+        def insereDireita(self,novoNo):
+            if self.filhoDireita == None:
+                self.filhoDireita = BinaryTree(novoNo)
             else:
-                t = BinaryTree(newNode)
-                t.rightChild = self.rightChild
-                self.rightChild = t
+                t = BinaryTree(novoNo)
+                t.filhoDireita = self.filhoDireita
+                self.filhoDireita = t
 
+        def pegueFilhoDireita(self):
+            return self.filhoDireita
 
-        def getRightChild(self):
-            return self.rightChild
+        def pegueFilhoEsquerda(self):
+            return self.filhoEsquerda
 
-        def getLeftChild(self):
-            return self.leftChild
-
-        def setRootVal(self,obj):
+        def definaValorRaiz(self,obj):
             self.key = obj
 
-        def getRootVal(self):
-            return self.key                
+        def pegueValorRaiz(self):
+            return self.key
+
+    
+    r = ArvoreBinaria('a')
+    print(r.pegueValorRaiz())
+    print(r.pegueFilhoEsquerda())
+    r.insereEsquerda('b')
+    print(r.pegueFilhoEsquerda())
+    print(r.pegueFilhoEsquerda().pegueValorRaiz())
+    r.insereDireita('c')
+    print(r.pegueFilhoDireita())
+    print(r.pegueFilhoDireita().pegueValorRaiz())
+    r.pegueFilhoDireita().definaValorRaiz('hello')
+    print(r.pegueFilhoDireita().pegueValorRaiz())
 
 
-    r = BinaryTree('a')
-    print(r.getRootVal())
-    print(r.getLeftChild())
-    r.insertLeft('b')
-    print(r.getLeftChild())
-    print(r.getLeftChild().getRootVal())
-    r.insertRight('c')
-    print(r.getRightChild())
-    print(r.getRightChild().getRootVal())
-    r.getRightChild().setRootVal('hello')
-    print(r.getRightChild().getRootVal())
+.. admonition:: Auto-avaliação
 
-
-.. admonition:: Self Check
-
-   Write a function ``buildTree`` that returns a tree using the nodes and references implementation that looks like this:
+   Escreva uma função ``constroiArvore`` que devolve uma árvore usando a implementação de nós e referências parecida com isso:
 
    .. image:: Figures/tree_ex.png
 
@@ -211,11 +200,11 @@ tree as a binary tree itself.
 
       from test import testEqual
       
-      def buildTree():
+      def constroiArvore():
           pass
 
-      ttree = buildTree()
+      arvtest = constroiArvore()
 
-      testEqual(ttree.getRightChild().getRootVal(),'c')
-      testEqual(ttree.getLeftChild().getRightChild().getRootVal(),'d')
-      testEqual(ttree.getRightChild().getLeftChild().getRootVal(),'e')
+      testEqual(arvtest.pegueFilhoDireita().pegueValorRaiz(),'c')
+      testEqual(arvtest.pegueFilhoEsquerda().pegueFilhoDireita().pegueValorRaiz(),'d')
+      testEqual(arvtest.pegueFilhoDireita().pegueFilhoEsquerda().pegueValorRaiz(),'e')
