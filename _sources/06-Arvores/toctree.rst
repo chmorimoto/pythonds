@@ -8,20 +8,21 @@
     01-Objetivos.rst
     02-ExemplosDeArvores.rst
     03-VocabularioEDefinicoes.rst
-    04-NosEReferencias.rst
-    05-ArvoreSintatica.rst
-    06-VarreduraEmArvore.rst
-    07-FilaDePrioridadeComHeapsBinarios.rst
-    08-OperacoesComHeapsBinarios.rst
-    09-ImplementacaoDeHeapsBinarios.rst
-    10-ArvoreDeBuscaBinaria.rst
-    11-OperacoesDeArvoresDeBusca.rst
-    12-ImplementacaoDeArvoresDeBusca.rst
-    13-AnaliseDeArvoresDeBusca.rst
-    14-DesempenhoDeArvoresAVL.rst
-    15-ImplementacaoDeArvoresAVL.rst
-    16-ResumoDeImplementacoesDeMapeamentoADT.rst
-    17-Sumário.rst
-    18-TermosChave.rst
-    19-DiscussaoQuestoes.rst
-    20-ExerciciosDeProgramacao.rst
+    04-RepresentacaoListaDeListas.rst
+    05-NosEReferencias.rst
+    06-ArvoreSintatica.rst
+    07-VarreduraEmArvore.rst
+    08-FilaDePrioridadeComHeapsBinarios.rst
+    09-OperacoesComHeapsBinarios.rst
+    10-ImplementacaoDeHeapsBinarios.rst
+    11-ArvoreDeBuscaBinaria.rst
+    12-OperacoesDeArvoresDeBusca.rst
+    13-ImplementacaoDeArvoresDeBusca.rst
+    14-AnaliseDeArvoresDeBusca.rst
+    15-DesempenhoDeArvoresAVL.rst
+    16-ImplementacaoDeArvoresAVL.rst
+    17-ResumoDeImplementacoesDeMapeamentoADT.rst
+    18-Sumário.rst
+    19-TermosChave.rst
+    20-DiscussaoQuestoes.rst
+    21-ExerciciosDeProgramacao.rst
