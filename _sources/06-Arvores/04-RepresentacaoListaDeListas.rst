@@ -1,29 +1,30 @@
 ..  Copyright (C)  Brad Miller, David Ranum
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
+Representação de Lista de Listas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-List of Lists Representation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In a tree represented by a list of lists, we will begin
-with Python’s list data structure and write the functions defined above.
-Although writing the interface as a set of operations on a list is a bit
-different from the other abstract data types we have implemented, it is
-interesting to do so because it provides us with a simple recursive data
-structure that we can look at and examine directly. In a list of lists
-tree, we will store the value of the root node as the first element of
-the list. The second element of the list will itself be a list that
-represents the left subtree. The third element of the list will be
-another list that represents the right subtree. To illustrate this
-storage technique, let’s look at an example. :ref:`Figure 1 <fig_smalltree>`
-shows a simple tree and the corresponding list implementation.
+Em uma árvore representada por uma lista de listas, nós iremos começar
+com a estrutura de dados 'list' do Python e escrever as funções definidas
+anteriormente. Embora programar a interface como um conjunto de operações
+em uma lista seja um pouquinho diferente de usar outros tipos de dados
+abstratos que implementamos, ainda assim isso é interessante porque
+listas nos fornecem uma estrutura de dados simples e recursiva com
+a qual podemos trabalhar e examinar mais diretamente. Em uma árvore em
+forma de lista de listas, iremos armazenar o valor do nó raiz como o
+primeiro elemento da lista. O segundo elemento será uma lista em si,
+a qual representa uma subárvore à esquerda. O terceiro elemento da lista
+será outra lista que representa uma subárvore à direita. Para ilustrar
+essa técnica de armazenamento, vamos olhar um exemplo. A 
+:ref:`Figura 1 <fig_smalltree>` mostra uma árvore simples com sua
+respectiva implementação em lista.
 
 .. _fig_smalltree:
 
 .. figure:: Figures/smalltree.png
    :align: center
            
-   Figure 1: A Small Tree
+   Figura 1: Uma Árvore Pequena
 
 ::
 
@@ -36,6 +37,10 @@ shows a simple tree and the corresponding list implementation.
                [] ]  
              ]           
                   
+
+Note que podemos acessar
+
+----------------------------
 
 
 
