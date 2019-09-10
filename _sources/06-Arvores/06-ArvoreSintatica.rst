@@ -95,16 +95,15 @@ Usando as informações acima, podemos definir as seguintes quatro regras:
 
 #. Se o nó atual for um ``')'``, suba para o pai do nó atual.
 
---------
+Antes de irmos para o código em Python, vamos olhar alguns exemplos
+das regras mostradas acima em ação. Usaremos a expressão
+:math:`(3 + (4 * 5))`. Iremos realizar a varredura dessa expressão
+para a seguinte lista de tokens de caracteres: ``['(', '3', '+',``
+``'(', '4', '*', '5', ')', ')']``. Inicialmente, começaremos com
+uma árvore sintática que consiste em um nó vazio. 
+A :ref:`Figura 4 <fig_bldExpstep>` ilustra a estrutura e o conteúdo
+dessa árvore sintática, assim que cada novo token é processado.
 
-Before writing the Python code, let’s look at an example of the rules
-outlined above in action. We will use the expression
-:math:`(3 + (4 * 5))`. We will parse this expression into the
-following list of character tokens ``['(', '3', '+',``
-``'(', '4', '*', '5' ,')',')']``. Initially we will start out with a
-parse tree that consists of an empty root node. :ref:`Figure 4 <fig_bldExpstep>`
-illustrates the structure and contents of the parse tree, as each new
-token is processed.
 
 .. _fig_bldExpstep:
 
@@ -151,58 +150,61 @@ token is processed.
    :alt: image
 
 
-   Figure 4: Tracing Parse Tree Construction
+   Figura 4: Rastreando a Construção de uma Árvore Sintática
 
-Using :ref:`Figure 4 <fig_bldExpstep>`, let’s walk through the example step by
-step:
 
-a) Create an empty tree.
+Usando a :ref:`Figura 4 <fig_bldExpstep>` como referência, vamos analisar
+o exemplo passo a passo:
 
-b) Read ( as the first token. By rule 1, create a new node as the left
-   child of the root. Make the current node this new child.
+a) Crie uma árvore vazia.
 
-c) Read 3 as the next token. By rule 3, set the root value of the
-   current node to 3 and go back up the tree to the parent.
+b) Leia '(' como o primeiro token. Pela regra 1, crie um novo nó como o filho
+   esquerdo da raiz. Defina como nó atual esse novo filho.
 
-d) Read + as the next token. By rule 2, set the root value of the
-   current node to + and add a new node as the right child. The new
-   right child becomes the current node.
+c) Leia '3' como o próximo token. Pela regra 3, defina o valor do nó atual
+   como '3' e suba de volta para o nó pai.
 
-e) Read a ( as the next token. By rule 1, create a new node as the left
-   child of the current node. The new left child becomes the current
-   node.
+d) Leia '+' como o próximo token. Pela regra 2, defina o valor do nó atual
+   como '+' e adicione um novo nó filho direito. O novo nó filho se torna
+   o nó atual.
 
-f) Read a 4 as the next token. By rule 3, set the value of the current
-   node to 4. Make the parent of 4 the current node.
+e) Leia '(' como o próximo token. Pela regra 1, crie um novo nó como o filho
+   esquerdo do nó atual. O novo filho esquerdo se torna o nó atual.
 
-g) Read \* as the next token. By rule 2, set the root value of the
-   current node to \* and create a new right child. The new right child
-   becomes the current node.
+f) Leia '4' como o próximo token. Pela regra 3, defina o valor do nó atual
+   como '4'. Faça com que o pai de '4' seja agora o nó atual.
 
-h) Read 5 as the next token. By rule 3, set the root value of the
-   current node to 5. Make the parent of 5 the current node.
+g) Leia '*' como o próximo token. Pela regra 2, defina o valor do nó atual
+   como '*' e crie um novo filho direito. O novo filho direito se torna 
+   o nó atual.
 
-i) Read ) as the next token. By rule 4 we make the parent of \* the
-   current node.
+h) Leia '5' como o próximo token. Pela regra 3, defina o valor do nó atual
+   como '5'. Torne o pai de '5' o nó atual.
 
-j) Read ) as the next token. By rule 4 we make the parent of + the
-   current node. At this point there is no parent for + so we are done.
+i) Leia ')' como o próximo token. Pela regra 4, tornamos o pai de '*'
+   o nó atual.
 
-From the example above, it is clear that we need to keep track of the
-current node as well as the parent of the current node. The tree
-interface provides us with a way to get children of a node, through the
-``getLeftChild`` and ``getRightChild`` methods, but how can we keep
-track of the parent? A simple solution to keeping track of parents as we
-traverse the tree is to use a stack. Whenever we want to descend to a
-child of the current node, we first push the current node on the stack.
-When we want to return to the parent of the current node, we pop the
-parent off the stack.
+j) Leia ')' como o próximo token. Pela regra 4, tornamos o pai de '+'
+   o nó atual. Neste ponto, não há pai para '+', então o processamento
+   termina.
 
-Using the rules described above, along with the ``Stack`` and
-``BinaryTree`` operations, we are now ready to write a Python function
-to create a parse tree. The code for our parse tree builder is presented
-in :ref:`ActiveCode 1 <lst_buildparse>`.
+A partir do exemplo acima, fica claro que precisamos acompanhar qual
+é o nó atual, bem como o pai desse nó. A interface da árvore nos
+fornece um meio para acessarmos os filhos de um nó, por meio dos
+métodos ``getLeftChild`` e ``getRightChild``, mas como conseguimos
+acompanhar quem é o pai do nó atual? Uma solução simples para 
+lembrar dos pais conforme vamos varrendo a árvore é usar uma pilha.
+Antes de descermos para o filho de um nó, primeiro colocamos o nó
+em que estamos na pilha. Quando quisermos retornar para o pai do nó
+atual, basta desempilhá-lo.
 
+Usando as regras descritas acima, junto com as operações de ``Pilha`` 
+e ``ArvoreBinaria``, agora estamos prontos para escrever uma
+função em Python para criar uma árvore sintática. O código para o
+nosso construtor de árvore sintática está em :ref:`ActiveCode 1 <lst_buildparse>`.
+
+
+-----------------------------------------
 .. _lst_buildparse:
 
 
