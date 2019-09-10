@@ -56,44 +56,46 @@ mostrada em :ref:`Figura 3 <fig_mesimple>`.
    :align: center
    :alt: image
 
-   Figure 3: A Simplified Parse Tree for :math:`((7+3)*(5-2))`
+   Figura 3: Uma Árvore Sintática Simplificada para :math:`((7+3)*(5-2))`
 
-In the rest of this section we are going to examine parse trees in more
-detail. In particular we will look at
+No resto desta seção iremos examinar árvores sintáticas mais
+detalhadamente. Em particular, vamos ver:
 
--  How to build a parse tree from a fully parenthesized mathematical
-   expression.
+- Como construir uma árvore sintática a partir de uma expressão
+  matemática com parênteses.
 
--  How to evaluate the expression stored in a parse tree.
+- Como avaliar a expressão representada na árvore sintática.
 
--  How to recover the original mathematical expression from a parse
-   tree.
+- Como recuperar a expressão matemática original a partir da
+  árvore sintática. 
 
-The first step in building a parse tree is to break up the expression
-string into a list of tokens. There are four different kinds of tokens
-to consider: left parentheses, right parentheses, operators, and
-operands. We know that whenever we read a left parenthesis we are
-starting a new expression, and hence we should create a new tree to
-correspond to that expression. Conversely, whenever we read a right
-parenthesis, we have finished an expression. We also know that operands
-are going to be leaf nodes and children of their operators. Finally, we
-know that every operator is going to have both a left and a right child.
+O primeiro passo para construir uma árvore sintática é quebrar uma
+sequência de caracteres em uma lista de tokens. Existem quatro diferentes
+tipos de tokens que devemos considerar: parêntesis esquerdo,
+parêntesis direito, operadores e operandos. Nós sabemos que quando
+encontramos um parêntesis esquerdo, estamos no começo de uma nova
+expressão e, portanto, devemos criar uma nova árvore que corresponda a
+essa expressão. Da mesma forma, quando encontramos um parêntesis
+direito, sabemos que a expressão chegou ao fim. Também sabemos que 
+os operandos irão ser folhas e filhos de seus operadores. Finalmente,
+sabemos que todo operador irá ter um filho esquerdo e direito.
 
-Using the information from above we can define four rules as follows:
+Usando as informações acima, podemos definir as seguintes quatro regras:
 
-#. If the current token is a ``'('``, add a new node as the left child
-   of the current node, and descend to the left child.
+#. Se o token atual é um ``'('``, adicione um novo nó como filho
+   esquerdo do nó atual, e desça para o filho esquerdo.
 
-#. If the current token is in the list ``['+','-','/','*']``, set the
-   root value of the current node to the operator represented by the
-   current token. Add a new node as the right child of the current node
-   and descend to the right child.
+#. Se o token atual estiver na lista ``['+','-','/','*']``, defina o
+   valor do nó atual como o operador representado pelo nó atual.
+   Adicione um novo nó como filho direito do nó direito e desça para
+   o filho direito.
 
-#. If the current token is a number, set the root value of the current
-   node to the number and return to the parent.
+#. Se o nó atual for um número, defina o valor do nó atual como o número
+   e retorne o nó pai.
 
-#. If the current token is a ``')'``, go to the parent of the current
-   node.
+#. Se o nó atual for um ``')'``, suba para o pai do nó atual.
+
+--------
 
 Before writing the Python code, let’s look at an example of the rules
 outlined above in action. We will use the expression
