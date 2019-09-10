@@ -204,13 +204,12 @@ função em Python para criar uma árvore sintática. O código para o
 nosso construtor de árvore sintática está em :ref:`ActiveCode 1 <lst_buildparse>`.
 
 
------------------------------------------
 .. _lst_buildparse:
 
 
 
 .. activecode::  parsebuild
-    :caption: Building a Parse Tree
+    :caption: Construindo uma Árvore Sintática
     :nocodelens:
 
     from pythonds.basic.stack import Stack
@@ -243,17 +242,21 @@ nosso construtor de árvore sintática está em :ref:`ActiveCode 1 <lst_buildpar
         return eTree
 
     pt = buildParseTree("( ( 10 + 5 ) * 3 )")
-    pt.postorder()  #defined and explained in the next section
+    pt.postorder()  #definido e explicado na proxima secao
 
 
-The four rules for building a parse tree are coded as the first four
-clauses of the ``if`` statement on lines 11, 15,
-19, and 24 of :ref:`ActiveCode 1 <lst_buildparse>`. In each case you
-can see that the code implements the rule, as described above, with a
-few calls to the ``BinaryTree`` or ``Stack`` methods. The only error
-checking we do in this function is in the ``else`` clause where we
-raise a ``ValueError`` exception if we get a token from the list that we
-do not recognize.
+As quatro regras para construir uma árvore sintática estão codificadas
+nas quatro declarações condicionais presentes nas linhas 11, 15, 19 e 24
+do :ref:`ActiveCode 1 <lst_buildparse>`. Em cada caso, você pode ver
+que o código implementa a regra, como descrita acima, com algumas
+chamadas de métodos da ``ArvoreBinaria`` ou ``Pilha``. A única checagem
+de erros que fazemos nessa função está no ``else``, onde declaramos
+uma exceção do tipo ``ValueError`` se houver algum token da lista
+que não reconhecemos.
+
+Agora que construímos a árvore sintática, o que podemos fazer com ela?
+Como primeiro examplo
+----------
 
 Now that we have built a parse tree, what can we do with it? As a first
 example, we will write a function to evaluate the parse tree, returning
