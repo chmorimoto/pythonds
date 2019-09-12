@@ -34,17 +34,18 @@ posfixa
     uma varredura posfixa nas subárvores esquerda e direita,
     e só depois visitamos o nó raiz.
 
-----------------------
-
-Let’s look at some examples that illustrate each of these three kinds of
-traversals. First let’s look at the preorder traversal. As an example of
-a tree to traverse, we will represent this book as a tree. The book is
-the root of the tree, and each chapter is a child of the root. Each
-section within a chapter is a child of the chapter, and each subsection
-is a child of its section, and so on. :ref:`Figure 5 <fig_booktree>` shows a
-limited version of a book with only two chapters. Note that the
-traversal algorithm works for trees with any number of children, but we
-will stick with binary trees for now.
+Vamos ver alguns exemplos que ilustram o funcionamento de cada um
+desses três tipos de varredura. Primeiro, vamos olhar para a 
+varredura prefixa. Como exemplo de árvore para percorrer,
+vamos pegar este próprio livro. Podemos tomar o livro em si
+como a raiz da árvore e cada capítulo como filho dessa raiz.
+Cada seção dentro de um capítulo é um filho desse capítulo,
+cada subseção é um filho de uma seção, e assim por diante.
+A :ref:`Figura 5 <fig_booktree>` mostra uma versão limitada
+de um livro com apenas dois capítulos. Observe que o algoritmo
+de varredura funciona para árvores com qualquer número de filhos,
+mas vamos considerar apenas árvores binárias por enquanto.
+    
 
 .. _fig_booktree:
 
@@ -52,39 +53,42 @@ will stick with binary trees for now.
    :align: center
    :alt: image
 
-   Figure 5: Representing a Book as a Tree
+   Figura 5: Representando um Livro como uma Árvore
 
-Suppose that you wanted to read this book from front to back. The
-preorder traversal gives you exactly that ordering. Starting at the root
-of the tree (the Book node) we will follow the preorder traversal
-instructions. We recursively call ``preorder`` on the left child, in
-this case Chapter1. We again recursively call ``preorder`` on the left
-child to get to Section 1.1. Since Section 1.1 has no children, we do
-not make any additional recursive calls. When we are finished with
-Section 1.1, we move up the tree to Chapter 1. At this point we still
-need to visit the right subtree of Chapter 1, which is Section 1.2. As
-before we visit the left subtree, which brings us to Section 1.2.1, then
-we visit the node for Section 1.2.2. With Section 1.2 finished, we
-return to Chapter 1. Then we return to the Book node and follow the same
-procedure for Chapter 2.
+Suponha que você queira ler este livro do começo ao fim. A varredura
+prefixa segue exatamente essa ordem. Começando pela raiz da árvore
+(o nó Livro), iremos realizar as instruções para a varredura prefixa.
+Nós chamamos recursivamente ``preorder`` (prefixa) no filho esquerdo,
+o Capítulo 1, nesse caso. Em seguida, chamamos novamente de modo
+recursivo ``preorder`` no filho esquerdo para acessar a Seção 1.1.
+Como a Seção 1.1 não possui filhos, não fazemos mais nenhuma chamada
+recursiva. Quando terminamos com a Seção 1.1, subimos de volta na
+árvore para o Capítulo 1. Nessa altura ainda resta visitar a subárvore
+direita do Capítulo 1, que é a Seção 1.2. Como feito anteriormente,
+nós visitamos então a subárvore esquerda, o que nos leva à Seção 1.2.1,
+e depois visitamos o nó representando a Seção 1.2.2. Com a Seção 1.2
+finalizada, retornamos para o Capítulo 1. Finalmente, retornamos para
+o nó Livro e realizamos o mesmo procedimento para o Capítulo 2.
 
-The code for writing tree traversals is surprisingly elegant, largely
-because the traversals are written recursively. :ref:`Listing 2 <lst_preorder1>`
-shows the Python code for a preorder traversal of a binary tree.
+O código que descreve varredura em árvores é surpreendentemente
+elegante, possivelmente porque as varreduras são escritas de forma
+recursiva. O :ref:`Código 2 <lst_preorder1>` mostra o código em 
+Python para uma varredura prefixa de uma árvore binária.
 
-You may wonder, what is the best way to write an algorithm like preorder
-traversal? Should it be a function that simply uses a tree as a data
-structure, or should it be a method of the tree data structure itself?
-:ref:`Listing 2 <lst_preorder1>` shows a version of the preorder traversal
-written as an external function that takes a binary tree as a parameter.
-The external function is particularly elegant because our base case is
-simply to check if the tree exists. If the tree parameter is ``None``,
-then the function returns without taking any action.
+Você pode se perguntar qual seria a melhor maneira de escrever um
+algoritmo como o da varredura prefixa. Ele deve ser uma função que
+simplesmente usa uma árvore como estrutura de dados, ou um método
+em si da estrutura de dados em árvore? O :ref:`Código 2 <lst_preorder1>`
+mostra uma versão da varredura prefixa escrita como uma função
+externa que recebe uma árvore binária como parâmetro.
+A função externa é particularmente elegante porque nosso caso
+base é simplesmente checar se a árvore existe. Se o parâmetro da
+árvore for ``None``, então a função retorna sem realizar nenhuma ação.
 
 
 .. _lst_preorder1:
 
-**Listing 2**
+**Código 2**
 
 ::
 
@@ -95,17 +99,19 @@ then the function returns without taking any action.
             preorder(tree.getRightChild())  
 
 
-We can also implement ``preorder`` as a method of the ``BinaryTree``
-class. The code for implementing ``preorder`` as an internal method is
-shown in :ref:`Listing 3 <lst_preorder2>`. Notice what happens when we move the
-code from internal to external. In general, we just replace ``tree``
-with ``self``. However, we also need to modify the base case. The
-internal method must check for the existence of the left and the right
-children *before* making the recursive call to ``preorder``.
+Também podemos implementar ``preorder`` como um método da classe
+``ArvoreBinaria``. O código para a implementação de ``preorder``
+como um método interno é mostrado em :ref:`Código 3 <lst_preorder2>`.
+Observe o que acontece quando nós mudamos o código de externo
+para interno. Em geral, nós apenas substituímos ``tree``
+por ``self``. Contudo, também precisamos modificar o caso base.
+O método interno precisa checar se existem filhos esquerdo e direito
+*antes* de fazer uma chamada recursiva com ``preorder``.
+
 
 .. _lst_preorder2:
 
-**Listing 3**
+**Código 3**
 
 ::
 
@@ -117,7 +123,7 @@ children *before* making the recursive call to ``preorder``.
             self.rightChild.preorder()
 
 
-
+----------------------
 Which of these two ways to implement ``preorder`` is best? The answer is
 that implementing ``preorder`` as an external function is probably
 better in this case. The reason is that you very rarely want to just
