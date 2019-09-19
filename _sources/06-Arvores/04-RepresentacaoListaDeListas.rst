@@ -28,38 +28,33 @@ respectiva implementação em lista.
 
 ::
 
-        myTree = ['a',   #root
-              ['b',  #left subtree
+        myTree = ['a',   #raiz
+              ['b',  #subarvore esquerda
                ['d', [], []],
                ['e', [], []] ],
-              ['c',  #right subtree
+              ['c',  #subarvore direita
                ['f', [], []],
                [] ]  
              ]           
                   
 
-Note que podemos acessar
-
-----------------------------
-
-
-
-Notice that we can access subtrees of the list using standard list
-indexing. The root of the tree is ``myTree[0]``, the left subtree of the
-root is ``myTree[1]``, and the right subtree is ``myTree[2]``. :ref:`ActiveCode 1 <lst_treelist1>` illustrates creating a simple tree using a
-list. Once the tree is constructed, we can access the root and the left
-and right subtrees. One very nice property of this list of lists
-approach is that the structure of a list representing a subtree adheres
-to the structure defined for a tree; the structure itself is recursive!
-A subtree that has a root value and two empty lists is a leaf node.
-Another nice feature of the list of lists approach is that it
-generalizes to a tree that has many subtrees. In the case where the tree
-is more than a binary tree, another subtree is just another list.
+Note que podemos acessar subárvores da lista usando sua indexação padrão.
+A raiz da árvore é ``myTree[0]``, a subárvore à esquerda da raiz é
+``myTree[1]``, e a subárvore à direita é ``myTree[2]``.
+O :ref:`ActiveCode 1<lst_treelist1>` ilustra a criação de uma
+árvore simples usando uma lista. Uma vez que a árvore é construída, 
+podemos acessar a raiz e as subárvores esquerda e direita. Uma propriedade
+interessante dessa abordagem com lista de listas é que a estrutura de uma
+lista que representa uma subárvore é relativa à estrutura que define a
+árvore, isto é, a estrutura em si é recursiva! Uma subárvore que tem
+uma raiz e duas listas vazias é uma folha. Outra características interessante
+da abordagem lista de listas é que ela generaliza o conceito de árvore para
+além de árvores binárias. Nesse caso, uma subárvore é apenas só mais uma lista.
 
 .. _lst_treelist1:
 
 .. activecode:: tree_list1
-    :caption: Using Indexing to Access Subtrees
+    :caption: Usando Índices para Acessar Subárvores
 
     myTree = ['a', ['b', ['d',[],[]], ['e',[],[]] ], ['c', ['f',[],[]], []] ]
     print(myTree)
@@ -68,29 +63,31 @@ is more than a binary tree, another subtree is just another list.
     print('right subtree = ', myTree[2])
 
 
-Let’s formalize this definition of the tree data structure by providing
-some functions that make it easy for us to use lists as trees. Note that
-we are not going to define a binary tree class. The functions we will
-write will just help us manipulate a standard list as though we are
-working with a tree.
+Vamos formalizar essa definição de estrutura de dados em árvore fornecendo
+algumas funções que irão tornar mais fácil o uso de listas como árvores.
+Observe que nós não iremos definir uma classe para árvore binária. As
+funcções que iremos escrever apenas nos ajudarão a manipular uma lista
+convencional como se estivéssemos trabalhando com uma árvore.
 
 ::
 
 
-    def BinaryTree(r):
+    def ArvoreBinaria(r):
         return [r, [], []]    
 
-The ``BinaryTree`` function simply constructs a list with a root node
-and two empty sublists for the children. To add a left subtree to the
-root of a tree, we need to insert a new list into the second position of
-the root list. We must be careful. If the list already has something in
-the second position, we need to keep track of it and push it down the
-tree as the left child of the list we are adding. :ref:`Listing 1 <lst_linsleft>`
-shows the Python code for inserting a left child.
+A função ``ArvoreBinaria`` simplesmente constrói uma lista com um nó raiz
+e duas sublistas vazias para os filhos. Para adicionar uma subárvore
+esquerda à raiz da árvore, precisamos inserir uma nova lista na segunda
+posição da lista raiz. No entanto, temos que ter cuidado. Se a lista
+já tiver algum elemento na segunda posição, precisamos levar isso em
+conta e seguir árvore abaixo para inserir esse filho esquerdo.
+O :ref:`Código 1 <lst_linsleft>` mostra o código em Python para
+inserir um filho esquerdo.
+
 
 .. _lst_linsleft:
 
-**Listing 1**
+**Código 1**
 
 ::
 
@@ -102,16 +99,17 @@ shows the Python code for inserting a left child.
             root.insert(1,[newBranch, [], []])
         return root
 
-Notice that to insert a left child, we first obtain the (possibly empty)
-list that corresponds to the current left child. We then add the new
-left child, installing the old left child as the left child of the new
-one. This allows us to splice a new node into the tree at any position.
-The code for ``insertRight`` is similar to ``insertLeft`` and is shown
-in :ref:`Listing 2 <lst_linsright>`.
+Observe que para inserir um filho esquerdo, primeiro temos que obter a
+a lista (possivelmente vazia) que corresponde ao filho esquerdo. Só então
+adicionamos o novo filho esquerdo, deixando o antigo filho esquerdo como
+filho esquerdo do novo nó. Isso permite colocar um novo nó na
+árvore em qualquer posição. O código para ``insertRight`` é similar
+a ``insertLeft`` e pode ser visto em :ref:`Código 2 <lst_linsright>`.
+        
 
 .. _lst_linsright:
 
-**Listing 2**
+**Código 2**
 
 ::
 
@@ -123,13 +121,14 @@ in :ref:`Listing 2 <lst_linsright>`.
             root.insert(2,[newBranch,[],[]])
         return root
 
-To round out this set of tree-making functions(see :ref:`Listing 3 <lst_treeacc>`), let’s write a couple of
-access functions for getting and setting the root value, as well as
-getting the left or right subtrees.
-
+Para fechar esse conjunto de funções para construção de árvores 
+(veja :ref:`Código 3 <lst_treeacc>`), vamos escrever algumas 
+funções de acesso para pegar e definir o valor da raiz, bem como 
+para acessar as árvores direita e esquerda.
+        
 .. _lst_treeacc:
 
-**Listing 3**
+**Código 3**
 
 ::
 
@@ -146,18 +145,20 @@ getting the left or right subtrees.
     def getRightChild(root):
         return root[2]
 
-:ref:`ActiveCode 2 <lst_bintreetry>` exercises the tree
-functions we have just written. You should try it
-out for yourself. One of the exercises asks you to draw the tree
-structure resulting from this set of calls.
+
+O :ref:`ActiveCode 2 <lst_bintreetry>` contém exercícios
+para as funções de árvores que mencionamos anteriormente.
+Tente resolvê-los. Um dos exercícios pede para você
+desenhar a estrutura de árvore resultante desse conjunto
+de chamadas.
 
 .. _lst_bintreetry:
 
 
 .. activecode:: bin_tree
-    :caption: A Python Session to Illustrate Basic Tree Functions
+    :caption: Uma Sessão Python para Ilustrar Funções Básicas para Árvores
 
-    def BinaryTree(r):
+    def ArvoreBinaria(r):
         return [r, [], []]    
 
     def insertLeft(root,newBranch):
@@ -203,7 +204,7 @@ structure resulting from this set of calls.
     print(getRightChild(getRightChild(r)))
     
 
-.. admonition:: Self Check
+.. admonition:: Auto-Avaliação
 
    .. mchoice:: mctree_1
       :correct: c
@@ -211,24 +212,24 @@ structure resulting from this set of calls.
       :answer_b: ['a', ['c', [], ['d', ['e', [], []], []]], ['b', [], []]]
       :answer_c: ['a', ['b', [], []], ['c', [], ['d', ['e', [], []], []]]]
       :answer_d: ['a', ['b', [], ['d', ['e', [], []], []]], ['c', [], []]]
-      :feedback_a: Not quite, this tree is missing the 'e' node.
-      :feedback_b: This is close, but if you carefully you will see that the left and right children of the root are swapped.
-      :feedback_c: Very good
-      :feedback_d: This is close, but the left and right child names have been swapped along with the underlying structures.
+      :feedback_a: Não exatamente, está faltando o nó 'e' na árvore.
+      :feedback_b: Quase, mas se olhar com cuidado, você vai ver que os filhos esquerdo e direito da raiz estão trocados.
+      :feedback_c: Muito bem.
+      :feedback_d: Próximo, mas os nomes dos filhos esquerdo e direito foram trocados, junto com as estruturas subjacentes.
 
-      Given the following statments:
+      Dado o seguinte código:
 
       .. sourcecode:: python
       
-          x = BinaryTree('a')
+          x = ArvoreBinaria('a')
           insertLeft(x,'b')
           insertRight(x,'c')
           insertRight(getRightChild(x),'d')
           insertLeft(getRightChild(getRightChild(x)),'e')    
 
-      Which of the answers is the correct representation of the tree?
+      Qual das respostas contém a representação correta da árvore?
 
-   Write a function ``buildTree`` that returns a tree using the list of lists functions that looks like this:
+   Escreva uma função ``buildTree`` que retorna uma árvore usando funções de lista de listas que se parece com esta:
 
    .. image:: Figures/tree_ex.png
 
