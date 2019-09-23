@@ -357,4 +357,3 @@ Quando chegamos nesse ponto, já avaliamos todos os operandos do
 operador ``'+'``, de mais alto nível, de modo que a única coisa que resta
 a fazer é concluir a chamada de ``operator.add(3,20)``. O resultado da
 avaliação da expressão inteira :math:`(3 + (4 * 5))` é 23.
-~~~~~~~~~~~~~~~~

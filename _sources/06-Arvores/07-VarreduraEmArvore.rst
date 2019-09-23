@@ -123,24 +123,25 @@ O método interno precisa checar se existem filhos esquerdo e direito
             self.rightChild.preorder()
 
 
-----------------------
-Which of these two ways to implement ``preorder`` is best? The answer is
-that implementing ``preorder`` as an external function is probably
-better in this case. The reason is that you very rarely want to just
-traverse the tree. In most cases you are going to want to accomplish
-something else while using one of the basic traversal patterns. In fact,
-we will see in the next example that the ``postorder`` traversal pattern
-follows very closely with the code we wrote earlier to evaluate a parse
-tree. Therefore we will write the rest of the traversals as external
-functions.
+Qual dessas duas formas de implementar ``preorder`` é melhor? Nesse caso,
+provavelmente seria melhor implementar ``preorder`` como uma função
+externa. O motivo para isso é que você raramente quer somente fazer
+uma varredura na árvore. Na maioria das vezes você irá realizar alguma
+operação enquanto está processando um dos padrões de varredura. Na verdade,
+iremos verificar no exemplo seguinte que o padrão de varredura ``postorder`` 
+(posfixa) se aproxima bastante do código que escrevemos anteriormente
+para avaliar uma varredura em árvore. Portanto, vamos escrever o
+restante das varreduras como funções externas.
 
-The algorithm for the ``postorder`` traversal, shown in
-:ref:`Listing 4 <lst_postorder1>`, is nearly identical to ``preorder`` except that
-we move the call to print to the end of the function.
+O algoritmo para a varredura ``postorder``, mostrado em
+:ref:`Código 4 <lst_postorder1>`, é praticamente idêntico ao ``preorder``,
+exceto pelo fato de que movemos a chamada para ``print`` para o 
+final da função.
+
 
 .. _lst_postorder1:
 
-**Listing 4**
+**Código 4**
 
 ::
 
@@ -151,18 +152,20 @@ we move the call to print to the end of the function.
             print(tree.getRootVal())
 
 
+Já vimos um caso de um recorrente para varreduras posfixas, isto é, 
+avaliando uma árvore de varredura. Veja de novo o :ref:`Código 1<lst_eval>`.
+O que nós estamos fazendo é avaliar a subárvore esquerda, avaliar a
+subárvore direita e depois combinando-as na raiz por meio da chamada
+de função para um operador. Assuma agora que nossa árvore binária irá
+armazenar somente dados relativos a expressões em árvores. Vamos reescrever
+a função de avaliação, mas modelá-la ainda mais próxima do código em
+``postorder`` mostrado em :ref:`Código 4 <lst_postorder1>`
+(veja o :ref:`Código 5 <lst_postordereval>`).
 
-We have already seen a common use for the postorder traversal, namely
-evaluating a parse tree. Look back at :ref:`Listing 1 <lst_eval>` again. What
-we are doing is evaluating the left subtree, evaluating the right
-subtree, and combining them in the root through the function call to an
-operator. Assume that our binary tree is going to store only expression
-tree data. Let’s rewrite the evaluation function, but model it even more
-closely on the ``postorder`` code in :ref:`Listing 4 <lst_postorder1>` (see :ref:`Listing 5 <lst_postordereval>`).
-
+            
 .. _lst_postordereval:
 
-**Listing 5**
+**Código 5**
 
 ::
 
@@ -182,22 +185,23 @@ closely on the ``postorder`` code in :ref:`Listing 4 <lst_postorder1>` (see :ref
 .. highlight:: python
     :linenothreshold: 500
 
-Notice that the form in :ref:`Listing 4 <lst_postorder1>` is the same as the form
-in :ref:`Listing 5 <lst_postordereval>`, except that instead of printing the key at
-the end of the function, we return it. This allows us to save the values
-returned from the recursive calls in lines 6 and 7. We
-then use these saved values along with the operator on line 9.
+Note que a estrutura presente no :ref:`Código 4 <lst_postorder1>` é a mesma
+daquela no :ref:`Código 5 <lst_postordereval>`, exceto que em vez de exibir
+a chave no final da função, nós a retornamos. Isso nos permite armazenar os
+valores retornados pelas chamadas recursivas nas linhas 6 e 7. Então nós
+usamos esses valores salvos juntos com o operador na linha 9.
+ 
+O último tipo de varredura que iremos estudar nesta seção é a varredura
+infixa. Nessa varredura, visitamos a subárvore esquerda, depois a raiz e
+por fim a subárvore direita. O :ref:`Código 6 <lst_inorder1>` mostra uma
+implementação para varredura infixa. Observe que nas três funções de
+varredura nós apenas estamos trocando a posição do ``print`` em
+relação às duas chamadas recursivas.
 
-The final traversal we will look at in this section is the inorder
-traversal. In the inorder traversal we visit the left subtree, followed
-by the root, and finally the right subtree. :ref:`Listing 6 <lst_inorder1>` shows
-our code for the inorder traversal. Notice that in all three of the
-traversal functions we are simply changing the position of the ``print``
-statement with respect to the two recursive function calls.
 
 .. _lst_inorder1:
 
-**Listing 6**
+**Código 6**
 
 ::
 
@@ -209,18 +213,20 @@ statement with respect to the two recursive function calls.
           inorder(tree.getRightChild())
 
 
-If we perform a simple inorder traversal of a parse tree we get our
-original expression back, without any parentheses. Let’s modify the
-basic inorder algorithm to allow us to recover the fully parenthesized
-version of the expression. The only modifications we will make to the
-basic template are as follows: print a left parenthesis *before* the
-recursive call to the left subtree, and print a right parenthesis
-*after* the recursive call to the right subtree. The modified code is
-shown in :ref:`Listing 7 <lst_printexp>`.
+Se nós realizarmos uma simples varredura infixa em uma árvore, teremos
+nossa expressão original de volta, sem os parênteses. Vamos modificar o
+algoritmo infixo básico para nos permitir recuperar uma versão da
+expressão com todos os parênteses. As únicas modificações que nós
+temos que fazer nesse padrão são as seguintes: mostrar um
+parêntesis esquerdo *antes* da chamada recursiva à subárvore esquerda,
+e mostrar um parêntesis direito *depois* da chamada recursiva à
+subárvore direita. A implementação modificada pode ser vista em
+:ref:`Código 7 <lst_printexp>`.
+          
 
 .. _lst_printexp:
 
-**Listing 7**
+**Código 7**
 
 ::
 
@@ -233,8 +239,8 @@ shown in :ref:`Listing 7 <lst_printexp>`.
       return sVal
 
 
-
-Notice that the ``printexp`` function as we have implemented it puts
-parentheses around each number. While not incorrect, the parentheses are
-clearly not needed. In the exercises at the end of this chapter you are
-asked to modify the ``printexp`` function to remove this set of parentheses.
+Note que a função ``printexp``, da forma que implementamos, coloca um par
+de parênteses em torno de cada número. Embora isso não esteja incorreto,
+esses parênteses claramente não são necessários. Nos exercícios ao fim deste
+capítulo iremos pedir para que você altere a função ``printexp`` para remover
+esse conjunto de parênteses.
