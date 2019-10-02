@@ -45,16 +45,16 @@ uma árvore binária completa utilizando apenas algumas simples
 operações matemáticas. Veremos que isso também leva a uma implementação
 eficiente do nosso heap binário.
    
-----------------------------------------------
-The Heap Order Property
-^^^^^^^^^^^^^^^^^^^^^^^
 
-The method that we will use to store items in a heap relies on
-maintaining the heap order property. The **heap order property** is as
-follows: In a heap, for every node :math:`x` with parent :math:`p`,
-the key in :math:`p` is smaller than or equal to the key in
-:math:`x`. :ref:`Figure 2 <fig_heapOrder>` also illustrates a complete binary
-tree that has the heap order property.
+A Propriedade Heap
+^^^^^^^^^^^^^^^^^^
+
+O método que iremos usar para armazenar itens em um heap depende de
+mantermos o que chamamos de **propriedade heap**. Essa propriedade
+subentende uma ordenação e pode ser expressa da seguinte forma:
+Em um heap, para cada nó :math:`x` com pai :math:`p`, a chave em :math:`p`
+é menor ou igual à chave em :math:`x`. A :ref:`Figura 2 <fig_heapOrder>`
+também ilustra uma árvore binária completa que mantém a propriedade heap.
 
 .. _fig_heapOrder:
 
@@ -62,25 +62,25 @@ tree that has the heap order property.
    :align: center
    :alt: image
 
-   Figure 2: A Complete Binary Tree, along with its List Representation
+   Figura 2: Uma Árvore Binária Completa, Junto com sua Representação em Lista
 
 
-Heap Operations
-^^^^^^^^^^^^^^^
+Operações Heap
+^^^^^^^^^^^^^^
 
-We will begin our implementation of a binary heap with the constructor.
-Since the entire binary heap can be represented by a single list, all
-the constructor will do is initialize the list and an attribute
-``currentSize`` to keep track of the current size of the heap.
-:ref:`Listing 1 <lst_heap1a>` shows the Python code for the constructor. You
-will notice that an empty binary heap has a single zero as the first
-element of ``heapList`` and that this zero is not used, but is there so
-that simple integer division can be used in later methods.
+Iremos começar nossa implementação de um heap binário com o construtor.
+Como o heap inteiro pode ser representado por uma única lista, tudo o que
+o construtor irá fazer é inicializar a lista e um atributo ``currentSize``
+para armazenar o tamanho atual do heap. O :ref:`Código 1 <lst_heap1a>`
+mostra o código em Python para o construtor. Você irá notar que um
+heap binário vazio tem um único zero como o primeiro elemento da
+``heapList`` e que esse zero não é utilizado, mas está lá para que
+a divisão por inteiros seja possível em outros métodos.
 
 .. _lst_heap1a:
 
 
-**Listing 1**
+**Código 1**
 
 ::
     
@@ -89,17 +89,16 @@ that simple integer division can be used in later methods.
             self.heapList = [0]
             self.currentSize = 0
 
-The next method we will implement is ``insert``. The easiest, and most
-efficient, way to add an item to a list is to simply append the item to
-the end of the list. The good news about appending is that it guarantees
-that we will maintain the complete tree property. The bad news about
-appending is that we will very likely violate the heap structure
-property. However, it is possible to write a method that will allow us
-to regain the heap structure property by comparing the newly added item
-with its parent. If the newly added item is less than its parent, then
-we can swap the item with its parent. :ref:`Figure 2 <fig_percUp>` shows the
-series of swaps needed to percolate the newly added item up to its
-proper position in the tree.
+O próximo método que iremos implementar é o ``insert``. O jeito mais fácil e
+eficiente de adicionar um item à lista é simplesmente juntar o item ao final
+da lista. A notícia boa sobre juntar itens é que essa prática garante que
+iremos manter a propriedade da árvore completa. A notícia ruim é que muito
+provavelmente iremos violar a propriedade heap. Contudo, é possível escrever
+um método que nos permitirá manter a propriedade heap ao comparar o novo
+item com o seu pai. Se o novo elemento adicionado for menor que o seu pai,
+então podemos trocá-lo com a posição do pai. A :ref:`Figura 2 <fig_percUp>`
+mostra uma série de trocas necessárias para percolar o novo item até sua
+posição correta na árvore.
 
 .. _fig_percUp:
 
@@ -107,8 +106,10 @@ proper position in the tree.
    :align: center
    :alt: image
 
-   Figure 2: Percolate the New Node up to Its Proper Position
+   Figura 2: Percolação do Novo Nó até sua Posição Correta
 
+
+   -----------------------
 Notice that when we percolate an item up, we are restoring the heap
 property between the newly added item and the parent. We are also
 preserving the heap property for any siblings. Of course, if the newly
