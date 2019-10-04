@@ -109,27 +109,28 @@ posição correta na árvore.
    Figura 2: Percolação do Novo Nó até sua Posição Correta
 
 
-   -----------------------
-Notice that when we percolate an item up, we are restoring the heap
-property between the newly added item and the parent. We are also
-preserving the heap property for any siblings. Of course, if the newly
-added item is very small, we may still need to swap it up another level.
-In fact, we may need to keep swapping until we get to the top of the
-tree. :ref:`Listing 2 <lst_heap2>` shows the ``percUp`` method, which
-percolates a new item as far up in the tree as it needs to go to
-maintain the heap property. Here is where our wasted element in
-``heapList`` is important. Notice that we can compute the parent of any
-node by using simple integer division. The parent of the current node
-can be computed by dividing the index of the current node by 2.
+Note que quando percolamos um item para cima na árvore, estamos mantendo
+a propriedade heap entre o novo item e o seu pai. Também estamos
+preservando a propriedade heap para qualquer irmão desse nó. Claro,
+se o novo item for muito pequeno, podemos ainda ter que percolá-lo
+para um nível superior. Na realidade, pode ser que tenhamos que
+ficar fazendo trocas até chegar ao topo da árvore. O código
+:ref:`Código 2 <lst_heap2>` mostra o método ``percUp``, que percola
+um novo item para cima na árvore para que a propriedade heap seja
+mantida. Agora vemos por que nosso elemento zero em ``heapList``
+é importante. Observe que podemos computar o pai de qualquer nó
+usando uma simples divisão por inteiro. O pai do nó atual pode
+ser computado ao dividir o índice do nó atual por 2.
 
-We are now ready to write the ``insert`` method (see :ref:`Listing 3 <lst_heap3>`). Most of the work in the
-``insert`` method is really done by ``percUp``. Once a new item is
-appended to the tree, ``percUp`` takes over and positions the new item
-properly.
+Agora estamos prontos para escrever o método ``insert`` (veja o
+:ref:`Código 3 <lst_heap3>`). A maior parte do trabalho do método
+``insert`` é de fato realizada por ``percUp``. Assim que um novo
+item é adicionado à árvore, ``percUp`` assume e posiciona o 
+novo item na posição correta.
 
 .. _lst_heap2:
 
-**Listing 2**
+**Código 2**
 
 ::
 
@@ -144,7 +145,7 @@ properly.
 
 .. _lst_heap3:
 
-**Listing 3**
+**Código 3**
 
 ::
 
@@ -154,20 +155,20 @@ properly.
         self.percUp(self.currentSize)
         
         
-
-With the ``insert`` method properly defined, we can now look at the
-``delMin`` method. Since the heap property requires that the root of the
-tree be the smallest item in the tree, finding the minimum item is easy.
-The hard part of ``delMin`` is restoring full compliance with the heap
-structure and heap order properties after the root has been removed. We
-can restore our heap in two steps. First, we will restore the root item
-by taking the last item in the list and moving it to the root position.
-Moving the last item maintains our heap structure property. However, we
-have probably destroyed the heap order property of our binary heap.
-Second, we will restore the heap order property by pushing the new root
-node down the tree to its proper position. :ref:`Figure 3 <fig_percDown>` shows
-the series of swaps needed to move the new root node to its proper
-position in the heap.
+Com o método ``insert`` definido, podemos seguir agora para o método
+``delMin``. Como a propriedade heap requer que a raiz da árvore seja
+o elemento de menor valor na árvore (n.T.: nesse caso, um min-heap),
+encontrar o mínimo é fácil. A parte difícil de ``delMin`` é fazer
+com que a estrutura heap e a propriedade heap sejam restauradas depois 
+que raiz é removida. Podemos restaurar nosso heap em dois passos.
+Primeiro, iremos restaurar a raiz tomando o último elemento da lista e
+movendo-o para a raiz. Essa operação garante manutenção de uma estrutura
+heap. Contudo, ao fazer isso, provavelmente destruímos a propriedade
+heap do nosso heap binário. Então, o segundo passo a ser feito é
+percolar o novo nó raiz para baixo na árvore até que ele alcance
+sua posição correta. A :ref:`Figura 3 <fig_percDown>` mostra uma
+série de trocas necessárias para mover o novo nó raiz até sua posição
+correta no heap.
 
 .. _fig_percdown:
 
@@ -175,19 +176,20 @@ position in the heap.
    :align: center
    :alt: image
 
-   Figure 3: Percolating the Root Node down the Tree
+   Figura 3: Percolando o Nó Raiz para Baixo na Árvore
 
-In order to maintain the heap order property, all we need to do is swap
-the root with its smallest child less than the root. After the initial
-swap, we may repeat the swapping process with a node and its children
-until the node is swapped into a position on the tree where it is
-already less than both children. The code for percolating a node down
-the tree is found in the ``percDown`` and ``minChild`` methods in
-:ref:`Listing 4 <lst_heap4>`.
-
+Para que a propriedade heap seja mantida, a única coisa que devemos
+fazer é trocar a raiz com o seu menor filho (admitindo que ao menos um
+deles seja menor que a raiz). Depois da troca inicial, podemos ter que 
+repetir esse processo de trocas com o nó e seus filhos atuais até que 
+ele seja posicionado em um lugar da árvore em que seus filhos são 
+maiores do que ele. O código para percolar um nó para baixo na árvore
+pode ser visto nos métodos ``percDown`` e ``minChild``, conforme
+o :ref:`Código 4 <lst_heap4>`.
+   
 .. _lst_heap4:
 
-**Listing 4**
+**Código 4**
 
 
 ::
@@ -210,13 +212,13 @@ the tree is found in the ``percDown`` and ``minChild`` methods in
             else:
                 return i * 2 + 1
 
-The code for the ``delmin`` operation is in :ref:`Listing 5 <lst_heap5>`. Note
-that once again the hard work is handled by a helper function, in this
-case ``percDown``.
-
+O código para a operação ``delmin`` está :ref:`Código 5 <lst_heap5>`.
+Observe que, mais uma vez, o grosso do trabalho está na função
+auxiliar. Neste caso, em ``percDown``.
+                
 .. _lst_heap5:
 
-**Listing 5**
+**Código 5**
 
 ::
 
@@ -228,7 +230,12 @@ case ``percDown``.
         self.percDown(1)
         return retval
 
-To finish our discussion of binary heaps, we will look at a method to
+Para terminar nossa discussão sobre heaps binários, iremos olhar agora
+um método para construir um heap inteiro a partir de uma lista de chaves.
+O primeiro método funciona mais ou menos da seguinte forma: Dado uma 
+lista de chaves, você pode construir um h
+       --------------------------------------- 
+        To finish our discussion of binary heaps, we will look at a method to
 build an entire heap from a list of keys. The first method you might
 think of may be like the following. Given a list of keys, you could
 easily build a heap by inserting each key one at a time. Since you are
