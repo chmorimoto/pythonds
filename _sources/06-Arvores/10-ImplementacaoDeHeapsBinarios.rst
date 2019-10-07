@@ -230,29 +230,25 @@ auxiliar. Neste caso, em ``percDown``.
         self.percDown(1)
         return retval
 
-Para terminar nossa discussão sobre heaps binários, iremos olhar agora
-um método para construir um heap inteiro a partir de uma lista de chaves.
-O primeiro método funciona mais ou menos da seguinte forma: Dado uma 
-lista de chaves, você pode construir um h
-       --------------------------------------- 
-        To finish our discussion of binary heaps, we will look at a method to
-build an entire heap from a list of keys. The first method you might
-think of may be like the following. Given a list of keys, you could
-easily build a heap by inserting each key one at a time. Since you are
-starting with a list of one item, the list is sorted and you could use
-binary search to find the right position to insert the next key at a
-cost of approximately :math:`O(\log{n})` operations. However, remember
-that inserting an item in the middle of the list may require
-:math:`O(n)` operations to shift the rest of the list over to make
-room for the new key. Therefore, to insert :math:`n` keys into the
-heap would require a total of :math:`O(n \log{n})` operations.
-However, if we start with an entire list then we can build the whole
-heap in :math:`O(n)` operations. :ref:`Listing 6 <lst_heap6>` shows the code
-to build the entire heap.
+Para terminar nossa discussão sobre heaps binários, iremos ver agora
+um método para construir um heap inteiro a partir de uma lista de 
+chaves. O primeiro método funciona mais ou menos da seguinte forma: 
+Dado uma lista de chaves, você pode construir um heap inserindo uma
+chave por vez. Como você está começando com uma lista de um único item,
+a lista está ordenada e você pode usar a busca binária para encontrar
+a posição correta em que a próxima chave deve ser inserida com um
+custo aproximado de :math:`O(\log{n})` operações. Contudo, lembre-se
+de que inserir um item no meio da lista pode requerer :math:`O(n)`
+operações para transpor o restante da lista a fim de criar espaço
+para a nova chave. Portanto, inserir :math:`n` chaves no heap irá
+demandar um total de :math:`O(n \log{n})` operações. Porém se
+começarmos com uma lista completa, podemos construir o heap todo
+em :math:`O(n)` operações. O :ref:`Código 6 <lst_heap6>` mostra 
+como o heap inteiro é construído.
 
 .. _lst_heap6:
 
-**Listing 6**
+**Código 6**
 
 ::
 
@@ -271,25 +267,25 @@ to build the entire heap.
    :align: center
    :alt: image
 
-   Figure 4: Building a Heap from the List [9, 6, 5, 2, 3]
+   Figura 4: Construindo um Heap a partir da Lista [9, 6, 5, 2, 3]
 
-:ref:`Figure 4 <fig_buildheap>` shows the swaps that the ``buildHeap`` method
-makes as it moves the nodes in an initial tree of [9, 6, 5, 2, 3] into
-their proper positions. Although we start out in the middle of the tree
-and work our way back toward the root, the ``percDown`` method ensures
-that the largest child is always moved down the tree. Because the heap is a
-complete binary tree, any nodes past the halfway point will be leaves
-and therefore have no children. Notice that when ``i=1``, we are
-percolating down from the root of the tree, so this may require multiple
-swaps. As you can see in the rightmost two trees of
-:ref:`Figure 4 <fig_buildheap>`, first the 9 is moved out of the root position,
-but after 9 is moved down one level in the tree, ``percDown`` ensures
-that we check the next set of children farther down in the tree to
-ensure that it is pushed as low as it can go. In this case it results in
-a second swap with 3. Now that 9 has been moved to the lowest level of
-the tree, no further swapping can be done. It is useful to compare the
-list representation of this series of swaps as shown in
-:ref:`Figure 4 <fig_buildheap>` with the tree representation.
+A :ref:`Figura 4 <fig_buildheap>` mostra as trocas que o método ``buildHeap``
+faz para mover os nós de suas posições iniciais na árvore [9, 6, 5, 2, 3]
+para as posições corretas. Apesar de começarmos no meio da árvore e
+trabalharmos para chegar até a raiz, o método ``percDown`` garante que
+o filho de maior valor será sempre movido para a base. Como o heap é uma
+árvore binária completa, qualquer nó acima do ponto médio virará uma folha
+e, portanto, não terá filhos. Note que quando ``i=1``, estamos percolando
+para baixo a partir da raiz da árvore, então isso pode demandar várias
+trocas. Como você pode ver nas duas árvores mais à direita na 
+:ref:`Figura 4 <fig_buildheap>`, primeiro o 9 é retirado da raiz, mas
+assim que o 9 é movido um nível para baixo na árvore, ``percDown`` garante
+a checagem do próximo conjunto de filhos imediatamente abaixo na árvore
+a fim de que o nó seja empurrado o mais para baixo possível. Nesse caso,
+isso implica uma segunda troca, com o 3. Agora o 9 foi movido para o 
+nível mais baixo da árvore e não há mais filhos com os quais possa fazer
+trocas. É interessante comparar a representação em lista dessas trocas
+mostras na :ref:`Figura 4 <fig_buildheap>` com a representação em árvore.
 
 ::
 
@@ -298,12 +294,12 @@ list representation of this series of swaps as shown in
           i = 0  [0, 2, 3, 6, 5, 9]
           
 
-The complete binary heap implementation can be seen in ActiveCode 1.
+A implementação do heap binário completo pode ser visto no ActiveCode 1.
 
 
 
 .. activecode:: completeheap
-   :caption: The Complete Binary Heap Example
+   :caption: Exemplo de um Heap Binário Completo
    :hidecode:
    
    class BinHeap:
@@ -370,15 +366,14 @@ The complete binary heap implementation can be seen in ActiveCode 1.
    
    
    
+A afirmação de que podemos construir o heap em tempo :math:`O(n)` pode
+parecer um tanto nebulosa em princípio, e a prova está além do escopo
+deste livro. Contudo, a chave para entender por que você pode construir
+o heap em :math:`O(n)` é lembrar que o fator :math:`\log{n}` é derivado
+da altura da árvore. Para a maior parte do trabalho em ``buildHeap``,
+a árvore é menor que :math:`\log{n}`.
 
-The assertion that we can build the heap in :math:`O(n)` may seem a
-bit mysterious at first, and a proof is beyond the scope of this book.
-However, the key to understanding that you can build the heap in
-:math:`O(n)` is to remember that the :math:`\log{n}` factor is
-derived from the height of the tree. For most of the work in
-``buildHeap``, the tree is shorter than :math:`\log{n}`.
-
-Using the fact that you can build a heap from a list in :math:`O(n)`
-time, you will construct a sorting algorithm that uses a heap and sorts
-a list in :math:`O(n\log{n}))` as an exercise at the end of this
-chapter.
+Usando o fato de que você consegue construir um heap a partir de uma
+lista em tempo :math:`O(n)`, você irá construir um algoritmo de ordenação
+que usa um heap e ordena uma lista em tempo :math:`O(n\log{n})` como
+exercício ao fim deste capítulo.
