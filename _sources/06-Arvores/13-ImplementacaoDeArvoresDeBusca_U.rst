@@ -42,26 +42,26 @@ ela precisa estar na subárvore esquerda de 31, mas como 23 é maior que
 14, 23 se torna filho direito de 14.
 
 
---------------------------------------
-To implement the binary search tree, we will use the nodes and
-references approach similar to the one we used to implement the linked
-list, and the expression tree. However, because we must be able create
-and work with a binary search tree that is empty, our implementation
-will use two classes. The first class we will call ``BinarySearchTree``,
-and the second class we will call ``TreeNode``. The ``BinarySearchTree``
-class has a reference to the ``TreeNode`` that is the root of the binary
-search tree. In most cases the external methods defined in the outer
-class simply check to see if the tree is empty. If there are nodes in
-the tree, the request is just passed on to a private method defined in
-the ``BinarySearchTree`` class that takes the root as a parameter. In
-the case where the tree is empty or we want to delete the key at the
-root of the tree, we must take special action. The code for the
-``BinarySearchTree`` class constructor along with a few other
-miscellaneous functions is shown in :ref:`Listing 1 <lst_bst1>`.
+Para implementar a árvore de busca binária, iremos utilizar a abordagem
+de nós e referências semelhante àquela usada para implementar listas
+ligadas e árvores de expressões. Contudo, como temos que poder criar e
+trabalhar com uma árvore de busca binária inicialmente vazia, nossa
+implementação fará uso de duas classes. A primeira chamaremos de 
+``BinarySearchTree``, enquanto a segunda será ``TreeNode``. A classe
+``BinarySearchTree`` guarda uma referência para ``TreeNode``, que é a
+raiz da árvore de busca binária. Na maioria dos casos, os métodos
+externos definidos na classe mais externa apenas checa para ver se a
+árvore está vazia. Se houver nós na árvore, a requisição é apenas
+passada adiante para um método privado definido na classe
+``BinarySearchTree`` que recebe a raiz como parâmetro. No caso de a
+árvore estar vazia ou se quisermos remover a chave contida na raiz,
+uma ação especial é necessária. O código para o construtor da classe
+``BinarySearchTree``, junto com outras funções genéricas, pode ser
+visto em :ref:`Código 1 <lst_bst1>`.
 
 .. _lst_bst1:
 
-**Listing 1**
+**Código 1**
 
 ::
 
@@ -81,31 +81,30 @@ miscellaneous functions is shown in :ref:`Listing 1 <lst_bst1>`.
     	    return self.root.__iter__()
 	    
 
-The ``TreeNode`` class provides many helper functions that make the work
-done in the ``BinarySearchTree`` class methods much easier. The
-constructor for a ``TreeNode``, along with these helper functions, is
-shown in :ref:`Listing 2 <lst_bst2>`. As you can see in the listing many of
-these helper functions help to classify a node according to its own
-position as a child, (left or right) and the kind of children the node
-has.
-The ``TreeNode`` class will also explicitly keep track
-of the parent as an attribute of each node. You will see why this is
-important when we discuss the implementation for the ``del`` operator.
+A classe ``TreeNode`` fornece várias funções auxiliares que tornam o
+trabalho realizado pela classe ``BinarySearchTree`` muito mais fácil.
+O construtor para um objeto ``TreeNode``, junto com essas funções
+auxiliares, é exibido em :ref:`Código 2 <lst_bst2>`. Como você pode ver
+no código, muitas dessas funções auxiliares ajudam a classificar um nó
+de acordo com sua própria posição como filho (esquerdo ou direito) e
+de acordo com os filhos que o nó possui. A classe ``TreeNode`` também
+manterá explicitamente uma referência para o pai como um atributo de
+cada nó. Você verá por que isso é importante quando discutirmos a
+implementação do operador ``del``.
 
-Another interesting aspect of the implementation of ``TreeNode`` in
-:ref:`Listing 2 <lst_bst2>` is that we use Python’s optional parameters.
-Optional parameters make it easy for us to create a ``TreeNode`` under
-several different circumstances. Sometimes we will want to construct a
-new ``TreeNode`` that already has both a ``parent`` and a ``child``.
-With an existing parent and child, we can pass parent and child as
-parameters. At other times we will just create a ``TreeNode`` with the
-key value pair, and we will not pass any parameters for ``parent`` or
-``child``. In this case, the default values of the optional parameters
-are used.
-
+Um outro aspecto interessante da implementação de ``TreeNode`` no
+:ref:`Código 2 <lst_bst2>` é que usamos parâmetros opcionais do Python.
+O uso desse recurso permite que criemos mais facilmente um objeto do 
+tipo ``TreeNode`` sob as mais diferentes circunstâncias. Algumas vezes
+iremos querer construir um ``TreeNode`` que tem tanto um ``pai`` quanto
+um ``filho``. Com o pai e filho existentes, podemos passá-los como 
+parâmetros. Em outros momentos não iremos passar parâmetro algum, seja
+para o ``pai`` ou para o ``filho``. Nesse caso são usados os valores
+padrões dos parâmetros opcionais.
+            
 .. _lst_bst2:
 
-**Listing 2**
+**Código 2**
 
 ::
 
@@ -153,44 +152,47 @@ are used.
 		self.rightChild.parent = self
 		
 
-Now that we have the ``BinarySearchTree`` shell and the ``TreeNode`` it
-is time to write the ``put`` method that will allow us to build our
-binary search tree. The ``put`` method is a method of the
-``BinarySearchTree`` class. This method will check to see if the tree
-already has a root. If there is not a root then ``put`` will create a
-new ``TreeNode`` and install it as the root of the tree. If a root node
-is already in place then ``put`` calls the private, recursive, helper
-function ``_put`` to search the tree according to the following
-algorithm:
+Agora que temos o esqueleto de ``BinarySearchTree`` e ``TreeNode``, está
+na hora de escrever o método ``put`` que nos permitirá construir nossa
+árvore de busca binária. O método ``put`` é um método da classe
+``BinarySearchTree``. Esse método irá verificar se a árvore já possui
+uma raiz. Se não houver uma raiz, então ``put`` irá criar um novo
+objeto do tipo ``TreeNode`` e colocá-lo na raiz da árvore. Se já houver
+uma raiz, então ``put`` faz uma chamada para a função auxiliar privada
+e recursiva ``_put``, a fim de fazer uma busca na árvore de acordo com
+o seguinte algoritmo:
 
--  Starting at the root of the tree, search the binary tree comparing
-   the new key to the key in the current node. If the new key is less
-   than the current node, search the left subtree. If the new key is
-   greater than the current node, search the right subtree.
+-  Começando pela raiz da árvore, faça uma busca na árvore binária
+   comparando a nova chave com a chave do nó atual. Se a nova chave for
+   menor que o nó atual, continue a busca na subárvore esquerda. Se a 
+   nova chave for maior (n.T.: ou igual) que o nó atual, continue
+   a busca na subárvore direita.
 
--  When there is no left (or right) child to search, we have found the
-   position in the tree where the new node should be installed.
+-  Quando não houver mais filhos à esquerda (ou à direita) para
+   seguir na busca, significa que encontramos a posição na árvore
+   em que o novo nó deve ser colocado.
 
--  To add a node to the tree, create a new ``TreeNode`` object and
-   insert the object at the point discovered in the previous step.
+-  Para adicionar um nó à árvore, cre um novo objeto do tipo
+   ``TreeNode`` e insira-o no ponto descoberto no passo anterior.
 
-:ref:`Listing 3 <lst_bst3>` shows the Python code for inserting a new node in
-the tree. The ``_put`` function is written recursively following the
-steps outlined above. Notice that when a new child is inserted into the
-tree, the ``currentNode`` is passed to the new tree as the parent.
+O código :ref:`Código 3 <lst_bst3>` mostra a implementação em Python
+para inserir um novo nó na árvore. A função ``_put`` é escrita
+recursivamente tendo por base os passos mostrados acima. Note que
+quando um novo filho é inserido na árvore, o ``currentNode`` é
+passado para a nova árvore como pai.
 
-One important problem with our implementation of insert is that
-duplicate keys are not handled properly. As our tree is implemented a
-duplicate key will create a new node with the same key value in the
-right subtree of the node having the original key. The result of this is
-that the node with the new key will never be found during a search. A
-better way to handle the insertion of a duplicate key is for the value
-associated with the new key to replace the old value. We leave fixing
-this bug as an exercise for you.
+Um problema importante com nossa implementação de inserção é que chaves
+duplicadas não são tratadas apropriadamente. Da forma como nossa árvore
+está implementada, uma chave duplicada irá criar um novo nó com o mesmo
+valor na subárvore direita do nó com a chave original. O resultado disso
+é que o nó com a nova chave nunca será encontrado em uma busca. Uma
+forma melhor de lidar com a inserção de uma chave duplicada é
+substituir o valor antigo pelo valor associado à nova chave. Vamos
+deixar o conserto desse *bug* como um exercício para você.
 
 .. _lst_bst3:
 
-**Listing 3**
+**Código 3**
 
 ::
 
@@ -214,76 +216,73 @@ this bug as an exercise for you.
     		   currentNode.rightChild = TreeNode(key,val,parent=currentNode)
 
 
-With the ``put`` method defined, we can easily overload the ``[]``
-operator for assignment by having the ``__setitem__`` method call (see :ref:`Listing 4 <lst_bst4>`) the
-put method. This allows us to write Python statements like
-``myZipTree['Plymouth'] = 55446``, just like a Python dictionary.
-
-
+Com o método ``put`` definido, podemos facilmente sobrescrever o
+operador ``[]`` fazendo com que o método ``__setitem__`` (veja 
+:ref:`Código 4 <lst_bst4>`) chave o método ``put``. Isso nos
+permitirá escrever declarações em Python da forma
+``myZipTree['Plymouth'] = 55446``, ou seja, como um dicionário do Python.
+                   
 .. _lst_bst4:
 
-**Listing 4**
+**Código 4**
 
 ::
 
 	def __setitem__(self,k,v):
 	    self.put(k,v)
 	    
-
-:ref:`Figure 2 <fig_bstput>` illustrates the process for inserting a new node
-into a binary search tree. The lightly shaded nodes indicate the nodes
-that were visited during the insertion process.
+A :ref:`Figura 2 <fig_bstput>` ilustra o processo de inserir um novo nó
+em uma árvore de busca binária. Os nós levemente sombreados indicam os
+nós que foram visitados durante o processo de inserção.
 
 .. _fig_bstput:
 
 .. figure:: Figures/bstput.png
    :align: center
 
-   Figure 2: Inserting a Node with Key = 19
+   Figura 2: Inserindo um Nó com Chave = 19
 
-.. admonition:: Self Check
+.. admonition:: Auto-Avaliação
 
     .. mchoice:: bst_1
        :correct: b
        :answer_a: <img src="../_static/bintree_a.png">
-       :feedback_a: Remember, starting at the root keys less than the root must be in the left subtree, while keys greater than the root go in the right subtree.
+       :feedback_a: Lembre-se que, começando pelo topo, as chaves menores que a raiz têm que estar na subárvore esquerda, enquanto as maiores na direita.
        :answer_b: <img src="../_static/bintree_b.png">
-       :feedback_b: good job.
+       :feedback_b: bom trabalho.
        :answer_c: <img src="../_static/bintree_c.png">       
-       :feedback_c: This looks like a binary tree that satisfies the full tree property needed for a heap.
+       :feedback_c: Isso parece uma árvore binária que satisfaz a propriedade da árvore completa para um heap.
 
-       Which of the trees shows a correct binary search tree given that the keys were
-       inserted in the following order 5, 30, 2, 40, 25, 4.
+       Qual das árvores é uma árvore de busca binária, dado que as chaves foram
+       inseridas na seguinte ordem: 5, 30, 2, 40, 25, 4.
 
 
-Once the tree is constructed, the next task is to implement the
-retrieval of a value for a given key. The ``get`` method is even easier
-than the ``put`` method because it simply searches the tree recursively
-until it gets to a non-matching leaf node or finds a matching key. When
-a matching key is found, the value stored in the payload of the node is
-returned.
+Uma vez construída a árvore, a próxima tarefa é implementar a recuperação
+de um valor, dado uma determinada chave. O método ``get`` é ainda mais
+fácil que o ``put`` porque ele simplesmente faz uma busca recursiva na
+árvore até chegar em uma folha não correspondente ou em uma chave
+correspondente. Quando a chave desejada é encontrada, o valor armazenado
+no nó é retornado.
+       
+O :ref:`Código 5 <lst_bst5>` mostra o a implementação de ``get``, ``_get``
+e ``__getitem__``. O código para a busca no método ``_get`` usa a mesma
+lógica do método ``_put`` para a escolha do filho esquerdo ou direito. 
+Observe que o método ``_get_`` retorna um objeto ``TreeNode`` para ``get``.
+Isso permite que ``_get`` seja usado como um flexível método auxiliar
+para outros métodos de ``BinarySearchTree`` que podem precisar fazer
+uso de outros dados de um objeto ``TreeNode``, além do valor armazenado
+em si.
 
-:ref:`Listing 5 <lst_bst5>` shows the code for ``get``, ``_get`` and
-``__getitem__``. The search code in the ``_get`` method uses the same
-logic for choosing the left or right child as the ``_put`` method. Notice
-that the ``_get`` method returns a ``TreeNode`` to ``get``, this allows
-``_get`` to be used as a flexible helper method for other
-``BinarySearchTree`` methods that may need to make use of other data
-from the ``TreeNode`` besides the payload.
-
-By implementing the ``__getitem__`` method we can write a Python
-statement that looks just like we are accessing a dictionary, when in
-fact we are using a binary search tree, for example
-``z = myZipTree['Fargo']``.  As you can see, all the ``__getitem__`` method does is call
-``get``.
-
+Implementando o método ``__getitem__``, podemos escrever uma declaração
+em Python muito semelhante àquela usada para acessar um dicionário,
+embora estejamos utilizando na prática uma árvore de busca binária.
+Por exemplo, podemos fazer ``z = myZipTree['Fargo']``. Como você
+pode ver, tudo o que o método ``__getitem__`` faz é chamar ``get``.
 
 .. _lst_bst5:
 
 
-
-
-**Listing 5**
+**Código 5**
 
 ::
 
