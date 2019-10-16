@@ -309,15 +309,16 @@ pode ver, tudo o que o método ``__getitem__`` faz é chamar ``get``.
     def __getitem__(self,key):
     	return self.get(key) 
 
-Using ``get``, we can implement the ``in`` operation by writing a
-``__contains__`` method for the ``BinarySearchTree``. The
-``__contains__`` method will simply call ``get`` and return ``True``
-if ``get`` returns a value, or ``False`` if it returns ``None``. The
-code for ``__contains__`` is shown in :ref:`Listing 6 <lst_bst6>`.
-
+Usando ``get``, podemos implementar a operação ``in`` escrevendo
+um método ``__contains__`` para ``BinarySearchTree``. O método
+``__contains__`` simplesmente irá chamar ``get`` e retornar
+``True`` se ``get`` retornar um valor, ou ``False`` se retornar
+``None``. O código para ``__contains__`` pode ser visto em
+:ref:`Código 6 <lst_bst6>`.
+        
 .. _lst_bst6:
 
-**Listing 6**
+**Código 6**
 
 ::
 
@@ -327,26 +328,27 @@ code for ``__contains__`` is shown in :ref:`Listing 6 <lst_bst6>`.
     	else:
     	    return False
 
-Recall that ``__contains__`` overloads the ``in`` operator and allows us
-to write statements such as:
+Lembre-se que ``__contains__`` sobrescreve o operador ``in`` e permite
+escrevamos declarações como:
 
 ::
 
 	if 'Northfield' in myZipTree:
 	    print("oom ya ya")
 
-Finally, we turn our attention to the most challenging method in the
-binary search tree, the deletion of a key (see :ref:`Listing 7 <lst_bst7>`). The first task is to find the
-node to delete by searching the tree. If the tree has more than one node
-we search using the ``_get`` method to find the ``TreeNode`` that needs
-to be removed. If the tree only has a single node, that means we are
-removing the root of the tree, but we still must check to make sure the
-key of the root matches the key that is to be deleted. In either case if
-the key is not found the ``del`` operator raises an error.
+Finalmente, voltamos nossa atenção para o método mais desafiador na árvore
+de busca binária: a remoção de uma chave (veja :ref:`Código 7 <lst_bst7>`).
+O primeiro passo é encontrar o nó a ser removido por meio de uma busca na
+árvore. Se a árvore tiver mais de um nó, realizamos a busca usando o
+método ``_get`` para encontrar o ``TreeNode`` que precisa ser apagado.
+Se a árvore tiver um único nó, significa que estamos removendo a raiz
+da árvore, mas ainda assim precisamos verificar se a chave da raiz bate
+com a chave que deve ser apagada. De todo modo, se a chave não for
+encontrada, o operador ``del`` emite um erro.
 
 .. _lst_bst7:
 
-**Listing 7**
+**Código 7**
 
 ::
 
@@ -367,23 +369,22 @@ the key is not found the ``del`` operator raises an error.
     def __delitem__(self,key):
     	self.delete(key)
 
-Once we’ve found the node containing the key we want to delete, there
-are three cases that we must consider:
+Uma vez encontrado o nó contendo a chave que queremos remover, existem
+três casos que devemos considerar:
+        
+#. O nó a ser removido não possui filhos (veja :ref:`Figura 3 <fig_bstdel1>`).
 
-#. The node to be deleted has no children (see :ref:`Figure 3 <fig_bstdel1>`).
+#. O nó a ser removido tem apenas um filho (veja :ref:`Figura 4 <fig_bstdel2>`).
 
-#. The node to be deleted has only one child (see :ref:`Figure 4 <fig_bstdel2>`).
+#. O nó a ser removido tem dois filhos (veja :ref:`Figura 5 <fig_bstdel3>`).
 
-#. The node to be deleted has two children (see :ref:`Figure 5 <fig_bstdel3>`).
-
-The first case is straightforward (see :ref:`Listing 8 <lst_bst8>`). If the current node has no children
-all we need to do is delete the node and remove the reference to this
-node in the parent. The code for this case is shown in here.
-
-
+O primeiro caso é bastante simples (veja :ref:`Código 8 <lst_bst8>`). Se o nó
+atual não possui filhos, tudo o que temos de fazer é apagar o nó e remover
+a referência para ele no nó pai. O código para esse caso é mostrado a seguir.
+   
 .. _lst_bst8:
 
-**Listing 8**
+**Código 8**
 
 
 ::
@@ -400,34 +401,38 @@ node in the parent. The code for this case is shown in here.
 .. figure:: Figures/bstdel1.png
    :align: center
 
-   Figure 3: Deleting Node 16, a Node without Children
+   Figura 3: Apagando o Nó 16, um Nó sem Filhos
 
-The second case is only slightly more complicated (see :ref:`Listing 9 <lst_bst9>`). If a node has only a
-single child, then we can simply promote the child to take the place of
-its parent. The code for this case is shown in the next listing. As
-you look at this code you will see that there are six cases to consider.
-Since the cases are symmetric with respect to either having a left or
-right child we will just discuss the case where the current node has a
-left child. The decision proceeds as follows:
 
-#. If the current node is a left child then we only need to update the
-   parent reference of the left child to point to the parent of the
-   current node, and then update the left child reference of the parent
-   to point to the current node’s left child.
+O segundo caso é somente um pouquinho mais complicado
+(veja o :ref:`Código 9 <lst_bst9>`). Se um nó possui apenas um filho,
+então podemos simplesmente colocar o filho no lugar do pai. O código
+para esse caso é mostrado abaixo. Olhando para o código, você irá 
+perceber que há seis casos a serem considerados. Como os casos são
+simétricos com relação a ter um filho esquerdo ou direito, iremos
+discutir apenas os casos em que o nó atual tem um filho esquerdo.
+O processo de decisão é o seguinte:
 
-#. If the current node is a right child then we only need to update the
-   parent reference of the left child to point to the parent of the
-   current node, and then update the right child reference of the parent
-   to point to the current node’s left child.
+#. Se o nó atual for um filho esquerdo, então precisamos apenas atualizar
+   a referência para o pai no filho esquerdo, de modo a apontá-la agora 
+   para o pai do nó atual, e depois atualizar a referência para o filho
+   esquerdo no pai, de modo a apontá-la agora para o filho esquerdo
+   do nó atual.
 
-#. If the current node has no parent, it must be the root. In this case
-   we will just replace the ``key``, ``payload``, ``leftChild``, and
-   ``rightChild`` data by calling the ``replaceNodeData`` method on the
-   root.
+#. Se o nó atual for um filho direito, então precisamos apenas atualizar
+   a referência para o pai no filho esquerdo, de modo a apontá-la agora
+   para o pai do nó atual, e depois atualizar a referência para o filho
+   direito no pai, de modo a apontá-la agoara para o filho esquerdo
+   do nó atual.
+
+#. Se o nó atual não tiver pai, então ele é uma raiz. Nesse caso, 
+   precisamos somente substituir os valores de ``key``, ``payload``,
+   ``leftChild`` e ``rightChild`` chamando o método ``replaceNodeData``
+   na raiz.
 
 .. _lst_bst9:
 
-**Listing 9**
+**Código 9**
 
 ::
 
@@ -462,39 +467,41 @@ left child. The decision proceeds as follows:
 .. figure:: Figures/bstdel2.png
    :align: center
 
-   Figure 4: Deleting Node 25, a Node That Has a Single Child
+   Figura 4: Removendo o Nó 25, um Nó com um Único Filho
 
-The third case is the most difficult case to handle (see :ref:`Listing 10 <lst_bst10>`). If a node has two
-children, then it is unlikely that we can simply promote one of them to
-take the node’s place. We can, however, search the tree for a node that
-can be used to replace the one scheduled for deletion. What we need is a
-node that will preserve the binary search tree relationships for both of
-the existing left and right subtrees. The node that will do this is the
-node that has the next-largest key in the tree. We call this node the
-**successor**, and we will look at a way to find the successor shortly.
-The successor is guaranteed to have no more than one child, so we know
-how to remove it using the two cases for deletion that we have already
-implemented. Once the successor has been removed, we simply put it in
-the tree in place of the node to be deleted.
-
+O terceiro caso é o mais difícil de lidar (veja o
+:ref:`Código 10 <lst_bst10>`). Se um nó tiver dois filhos, então é
+improvável que possamos simplesmente promover um deles para o lugar
+do nó em questão. O que podemos fazer, no entanto, é realizar uma busca
+na árvore por um nó que pode ser usado para substituir aquele planejado
+para remoção. Precisamos, portanto, de um nó que irá preservar as
+relações dentro da árvore de busca binária para ambas as subárvores
+esquerda e direita. O nó que irá fazer isso é aquele com a segunda
+maior chave na árvore. Iremos chamar esse nó de **sucessor** e iremos
+ver uma forma de encontrar o sucessor em breve. Uma coisa interessante
+do sucessor é que ele não pode ter mais do que um filho, então nós
+sabemos como removê-lo usando os dois casos de remoção que já 
+implementamos. Uma vez apagado o sucessor, simplesmente o colocamos
+na árvore no lugar do nó a ser removido.
+   
 .. _fig_bstdel3:
 
 .. figure:: Figures/bstdel3.png
     :align: center
 
-    Figure 5: Deleting Node 5, a Node with Two Children
+    Figura 5: Removendo o Nó 5, um Nó com Dois Filhos
 
-The code to handle the third case is shown in the next listing.
-Notice that we make use of the helper methods ``findSuccessor`` and
-``findMin`` to find the successor. To remove the successor, we make use
-of the method ``spliceOut``. The reason we use ``spliceOut`` is that it
-goes directly to the node we want to splice out and makes the right
-changes. We could call ``delete`` recursively, but then we would waste
-time re-searching for the key node.
-
+O código para lidar com o terceiro caso é mostrado abaixo. Note que
+podemos fazer uso dos métodos auxiliares ``findSucessor`` e ``findMin``
+para encontrar o sucessor. Para remover o sucessor, podemos utilizar
+o método ``spliceOut``. O motivo pelo qual usamos ``spliceOut`` é que
+ele vai diretamente para o nó que queremos emendar e faz os ajustes
+adequados. Nós poderíamos chamar ``delete`` recursivamente, mas
+perderíamos tempo refazendo a busca pelo nó chave.
+    
 .. _lst_bst10:
 
-**Listing 10**
+**Código 10**
 
 ::
 
@@ -504,36 +511,38 @@ time re-searching for the key node.
 	   currentNode.key = succ.key
 	   currentNode.payload = succ.payload
 
-The code to find the successor is shown below (see :ref:`Listing 11 <lst_bst11>`) and as
-you can see is a method of the ``TreeNode`` class. This code makes use
-of the same properties of binary search trees that cause an inorder
-traversal to print out the nodes in the tree from smallest to largest.
-There are three cases to consider when looking for the successor:
+O código para encontrar o sucessor pode ser visto abaixo (veja o 
+:ref:`Código 11 <lst_bst11>`) e como você poderá notar, trata-se de um
+método da classe ``TreeNode``. Esse código faz uso das mesmas propriedades
+de árvores de busca binárias que fazem com que uma varredura infixa
+imprima os nós da árvore do menor para o maior. Há três casos a 
+considerar quando procuramos pelo sucessor:
 
-#. If the node has a right child, then the successor is the smallest key
-   in the right subtree.
+#. Se o nó tiver um filho direito, então o sucessor é a menor chave
+   na subárvore direita.
 
-#. If the node has no right child and is the left child of its parent,
-   then the parent is the successor.
+#. Se o nó não tiver filho direito e for o filho esquerdo do seu nó
+   pai, então o pai é o sucessor.
 
-#. If the node is the right child of its parent, and itself has no right
-   child, then the successor to this node is the successor of its
-   parent, excluding this node.
+#. Se o nó for o filho direito do seu nó pai e não tiver ele próprio
+   um filho direito, então o sucessor desse nó é o sucessor do seu
+   pai, excluindo tal nó.
+           
+A primeira condição é única que verdadeiramente importa para nós quando
+estamos removendo um nó de uma árvore de busca binária. Contudo, o método
+``findSucessor`` possui outros usos que iremos explorar nos exercícios
+ao fim deste capítulo.
 
-The first condition is the only one that matters for us when deleting a
-node from a binary search tree. However, the ``findSuccessor`` method
-has other uses that we will explore in the exercises at the end of this
-chapter.
-
-The ``findMin`` method is called to find the minimum key in a subtree.
-You should convince yourself that the minimum valued key in any binary
-search tree is the leftmost child of the tree. Therefore the ``findMin``
-method simply follows the ``leftChild`` references in each node of the
-subtree until it reaches a node that does not have a left child.
+O método ``findMin`` é chamado para encontrar a chave mínima em uma 
+subárvore. A esta altura, você deve se convencer de que a chave de menor
+valor em qualquer árvore de busca binária é sempre o filho mais à esquerda
+contido na árvore. Portanto, o método ``findMin`` simplesmente varre
+por referências ``leftChild`` em cada nó da subárvore até chegar a um
+nó que não possui filho esquerdo.
 
 .. _lst_bst11:
 
-**Listing 11**
+**Código 11**
 
 
 ::
@@ -580,30 +589,28 @@ subtree until it reaches a node that does not have a left child.
 
 
 
+Precisamos ainda olhar um último método da interface da árvore de busca
+binária. Suponha que queiramos tão somente iterar sobre todas as chaves 
+de forma ordenada. Isso é algo que definitivamente fizemos com dicionários,
+então por que não com árvores? Você já sabe como varrer uma árvore binária
+ordenadamente, usando o algoritmo de varredura ``infixa``. Contudo,
+escrever um iterador requer um pouco mais de trabalho, uma vez que um
+iterador deve retornar somente um nó a cada vez que o iterador for chamado.
 
+O Python nos fornece uma função muito poderosa para quando queremos
+criar um iterador. A função é chamada ``yield``. Essa função é semelhante
+ao ``return`` no sentido de que retorna um valor para quem chamou. No
+entanto, o ``yield`` também realiza o passo adicional de congelar o estado
+da função, de modo que na próxima vez em que a função for chamada, ela
+continue a executar exatamente a partir desse último ponto. Funções que
+criam objetos que podemos ser iterados são chamadas de geradoras.
 
-We need to look at one last interface method for the binary search tree.
-Suppose that we would like to simply iterate over all the keys in the
-tree in order. This is definitely something we have done with
-dictionaries, so why not trees? You already know how to traverse a
-binary tree in order, using the ``inorder`` traversal algorithm.
-However, writing an iterator requires a bit more work, since an iterator
-should return only one node each time the iterator is called.
-
-Python provides us with a very powerful function to use when creating an
-iterator. The function is called ``yield``. ``yield`` is similar to
-``return`` in that it returns a value to the caller. However, ``yield``
-also takes the additional step of freezing the state of the function so
-that the next time the function is called it continues executing from
-the exact point it left off earlier. Functions that create objects that
-can be iterated are called generator functions.
-
-The code for an ``inorder`` iterator of a binary tree is shown in the next
-listing. Look at this code carefully; at first glance you
-might think that the code is not recursive. However, remember that
-``__iter__`` overrides the ``for x in`` operation for iteration, so it
-really is recursive! Because it is recursive over ``TreeNode`` instances
-the ``__iter__`` method is defined in the ``TreeNode`` class.
+O código para um iterador ``infixo`` de uma árvore binária é mostrado
+a seguir. Observe esse código com cuidado. À primeira vista, você poderá
+pensar que o código não é recursivo. Porém lembre-se que ``__iter__``
+sobrescreve a operação ``for x in`` na iteração, então ela é de fato
+recursiva! Como ela é recursiva sobre instâncias de ``TreeNode``, então
+o método ``__iter__`` é definido dentro da classe ``TreeNode``.
 
 ::
 
@@ -617,8 +624,8 @@ the ``__iter__`` method is defined in the ``TreeNode`` class.
     		 for elem in self.rightChild:
     		    yield elem
 
-At this point you may want to download the entire file containing the
-full version of the ``BinarySearchTree`` and ``TreeNode`` classes.
+Neste ponto pode ser uma boa ideia você baixar o arquivo contendo a
+versão completa das classes ``BinarySearchTree`` e ``TreeNode``.
 
 .. activecode:: completebstcode
 
