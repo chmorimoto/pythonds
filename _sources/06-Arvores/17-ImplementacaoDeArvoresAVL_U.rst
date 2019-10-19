@@ -2,41 +2,40 @@
     This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
-AVL Tree Implementation
-~~~~~~~~~~~~~~~~~~~~~~~
+Implementação de Árvores AVL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Agora que já demonstramos que manter uma árvore AVL balanceada significará
+uma grande melhora de desempenho, vamos ver agora como incrementar o
+procedimento de inserir uma nova chave na árvore. Como todas as chaves
+novas são inseridas na árvore como folhas, e como sabemos que o fator de
+balanceamento para uma nova folha é zero, não há novos requisitos para
+esse nó que acabou de ser inserido. Mas uma vez que a nova folha é
+adicionada, precisamos atualizar o fator de balanceamento do nó pai.
+A maneira como esse nó folha afeta o fator de balanceamento do nó pai
+depende da folha ser um filho esquerdo ou direito. Se o novo nó é um 
+filho direito, o fator de balanceamento do pai será diminuído em um. Se
+o novo nó for um filho esquerdo, então o fator de balanceamento do pai
+será incrementado em um. Essa relação pode ser aplicada recursivamente
+para o avô do novo nó, e possivelmente para cada ancestral até chegarmos
+à raiz. Como esse é um procedimento recursivo, vamos examinar os dois
+casos bases para atualizar os fatores de balanceamento:
+
+- A chamada recursiva chegou à raiz da árvore.
+
+- O fator de balanceamento do pai foi ajustado para zero. Você deve se
+  convencer de que uma vez que uma subárvore tem fator de balanceamento
+  igual a zero, então o balanceamento dos seus ancestrais não é alterado.
+
+Iremos implementar a árvore AVL como uma subclasse de ``BinarySearchTree``.
+Para começar, iremos sobrescrever o método ``_put`` e escrever um novo
+método auxiliar ``updateBalance``. Esses métodos são mostrados no
+:ref:`Código 1 <lst_updbal>`. Você irá notar que a definição de ``_put``
+é exatamente a mesma de árvores de busca binária simples, exceto pelas
+chamadas adicionais a ``updateBalance`` nas linhas 7 e 13.
 
 
-Now that we have demonstrated that keeping an AVL tree in balance is
-going to be a big performance improvement, let us look at how we will
-augment the procedure to insert a new key into the tree. Since all new
-keys are inserted into the tree as leaf nodes and we know that the
-balance factor for a new leaf is zero, there are no new requirements for
-the node that was just inserted. But once the new leaf is added we must
-update the balance factor of its parent. How this new leaf affects the
-parent’s balance factor depends on whether the leaf node is a left child
-or a right child. If the new node is a right child the balance factor of
-the parent will be reduced by one. If the new node is a left child then
-the balance factor of the parent will be increased by one. This relation
-can be applied recursively to the grandparent of the new node, and
-possibly to every ancestor all the way up to the root of the tree. Since
-this is a recursive procedure let us examine the two base cases for
-updating balance factors:
-
--  The recursive call has reached the root of the tree.
-
--  The balance factor of the parent has been adjusted to zero. You
-   should convince yourself that once a subtree has a balance factor of
-   zero, then the balance of its ancestor nodes does not change.
-
-We will implement the AVL tree as a subclass of ``BinarySearchTree``. To
-begin, we will override the ``_put`` method and write a new
-``updateBalance`` helper method. These methods are shown in
-:ref:`Listing 1 <lst_updbal>`. You will notice that the definition for ``_put`` is
-exactly the same as in simple binary search trees except for the additions of
-the calls to ``updateBalance`` on lines 7 and 13.
-
-
-**Listing 1**
+**Código 1**
 
 .. _lst_updbal:
 
@@ -71,53 +70,56 @@ the calls to ``updateBalance`` on lines 7 and 13.
     		    
     		    
 
-The new ``updateBalance`` method is where most of the work is done. This
-implements the recursive procedure we just described. The
-``updateBalance`` method first checks to see if the current node is out
-of balance enough to require rebalancing (line 16). If that
-is the case then the rebalancing is done and no further updating to
-parents is required. If the current node does not require rebalancing
-then the balance factor of the parent is adjusted. If the balance factor
-of the parent is non-zero then the algorithm continues to work its way
-up the tree toward the root by recursively calling ``updateBalance`` on
-the parent.
+O novo método ``updateBalance`` é onde a maior parte do trabalho é feita.
+Ele implementa o procedimento recursivo que descrevemos anteriormente. O
+método ``updateBalance`` primeiro checa para ver se o nó atual está 
+desbalanceado o bastante para requerer um rebalanceamento (linha 16). Se
+esse for o caso, então o rebalanceamento é feito e não é preciso 
+atualizar o fator dos pais. Se o nó atual não requer rebalanceamento, 
+então o fator de balanceamento do nó pai precisa ser ajustado. Se o 
+fator de balanceamento do pai for diferente de zero, então o algoritmo
+continua seu trabalho, subindo a árvore recursivamente em direção à
+raiz por meio da chamada ``updateBalance`` feita no pai.
 
-When a rebalancing of the tree is necessary, how do we do it? Efficient
-rebalancing is the key to making the AVL Tree work well without
-sacrificing performance. In order to bring an AVL Tree back into balance
-we will perform one or more **rotations** on the tree.
-
-To understand what a rotation is let us look at a very simple example.
-Consider the tree in the left half of :ref:`Figure 3 <fig_unbalsimple>`. This tree
-is out of balance with a balance factor of -2. To bring this tree into
-balance we will use a left rotation around the subtree rooted at node A.
+Quando o rebalanceamento da árvore é necessário, como isso é feito?
+Um rebalanceamento eficiente é a chave para fazer com que árvores AVL
+funcionem bem sem sacrifício de desempenho. Para fazer com que árvores
+AVL voltem a ficar balanceadas, iremos realizar uma ou mais
+**rotações** na árvore.
+                    
+Para entender o que é uma rotação, vamos ver um exemplo bem simples.
+Considere a árvore na metade esquerda de :ref:`Figura 3 <fig_unbalsimple>`.
+Essa árvore está desbalanceada, com um fator de balanceamento de -2.
+Para balancear novamente essa árvore, precisamos realizar uma rotação
+à esquerda na subárvore com raiz no nó A.
 
 .. _fig_unbalsimple:
 
 .. figure:: Figures/simpleunbalanced.png
    :align: center
 
-   Figure 3: Transforming an Unbalanced Tree Using a Left Rotation
+   Figura 3: Transformando uma Árvore Desbalanceada Usando uma Rotação À Esquerda
    
 
-To perform a left rotation we essentially do the following:
+Para fazer uma rotação à esquerda, basicamente precisamos do seguinte:
 
--  Promote the right child (B) to be the root of the subtree.
+-  Promover o filho direito (B) à raiz da subárvore.
 
--  Move the old root (A) to be the left child of the new root.
+-  Mover a raiz antiga (A) para a posição de filho esquerdo da nova raiz.
 
--  If new root (B) already had a left child then make it the right child
-   of the new left child (A). Note: Since the new root (B) was the right
-   child of A the right child of A is guaranteed to be empty at this
-   point. This allows us to add a new node as the right child without
-   any further consideration.
-
-While this procedure is fairly easy in concept, the details of the code
-are a bit tricky since we need to move things around in just the right
-order so that all properties of a Binary Search Tree are preserved.
-Furthermore we need to make sure to update all of the parent pointers
-appropriately.
-
+-  Se a nova raiz (B) já tiver um filho esquerdo, então faça com que 
+   ele se torne o filho direito do novo filho esquerdo (A). Observação:
+   como a nova raiz (B) era o filho direito de A, sabemos a esta altura
+   que A não tem mais um filho direito. Isso nos permite adicionar um
+   novo nó como filho direito sem maiores problemas. 
+   
+Embora esse procedimento seja relativamente tranquilo na teoria, o código
+necessita de cuidado redobrado, uma vez que precisamos mover os nós na
+ordem certa para garantir que todas as propriedades de uma Árvore de 
+Busca Binária sejam preservadas. Além disso, precisamos ter certeza
+de que todos os ponteiros dos pais serão atualizados apropriadamente.
+ 
+-----------------------------
 Let's look at a slightly more complicated tree to illustrate the right
 rotation. The left side of :ref:`Figure 4 <fig_rightrot1>` shows a tree that is
 left-heavy and with a balance factor of 2 at the root. To perform a

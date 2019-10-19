@@ -22,7 +22,7 @@
     15-ArvoresDeBuscaBinariaBalanceadas.rst
     16-DesempenhoDeArvoresAVL.rst
     17-ImplementacaoDeArvoresAVL.rst
-    18-ResumoDeImplementacoesDeMapeamentoADT.rst
+    18-SumarioDeImplementacoesDeMapeamentoADT.rst
     19-Sumário.rst
     20-TermosChave.rst
     21-DiscussaoQuestoes.rst
