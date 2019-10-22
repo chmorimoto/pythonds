@@ -119,55 +119,55 @@ ordem certa para garantir que todas as propriedades de uma Árvore de
 Busca Binária sejam preservadas. Além disso, precisamos ter certeza
 de que todos os ponteiros dos pais serão atualizados apropriadamente.
  
------------------------------
-Let's look at a slightly more complicated tree to illustrate the right
-rotation. The left side of :ref:`Figure 4 <fig_rightrot1>` shows a tree that is
-left-heavy and with a balance factor of 2 at the root. To perform a
-right rotation we essentially do the following:
+Vamos olhar para uma árvore ligeiramente mais complicada para ilustrar a
+rotação à direita. O lado esquerdo da :ref:`Figura 4 <fig_rightrot1>` mostra
+uma árvore inclinada à esquerda com um fator de balanceamento de 2 na raiz.
+Para fazer uma rotação à direita, basicamente precisamos do seguinte:
 
--  Promote the left child (C) to be the root of the subtree.
+-  Promover o filho esquerdo (C) à raiz da subárvore.
 
--  Move the old root (E) to be the right child of the new root.
+-  Mover a raiz antiga (E) para a posição de filho direito da nova raiz.
 
--  If the new root(C) already had a right child (D) then make it the
-   left child of the new right child (E). Note: Since the new root (C)
-   was the left child of E, the left child of E is guaranteed to be
-   empty at this point. This allows us to add a new node as the left
-   child without any further consideration.
+-  Se a nova raiz (C) já tiver um filho direito (D), então torne-o o
+   filho esquerdo do novo filho direito (E). Observação: como a nova
+   raiz (C) era o filho esquerdo de E, sabemos a essa altura que E
+   não tem mais um filho esquerdo. Isso no permite adicionar um novo
+   nó como filho esquerdo sem maiores problemas.
 
 .. _fig_rightrot1:
 
 .. figure:: Figures/rightrotate1.png
   :align: center
 
-  Figure 4: Transforming an Unbalanced Tree Using a Right Rotation
+  Figura 4: Transformando uma Árvore Desbalanceada Usando Rotação à Direita
 
-Now that you have seen the rotations and have the basic idea of how a
-rotation works let us look at the code. :ref:`Listing 2 <lst_bothrotations>` shows the
-code for both the right and the left rotations. In line 2
-we create a temporary variable to keep track of the new root of the
-subtree. As we said before the new root is the right child of the
-previous root. Now that a reference to the right child has been stored
-in this temporary variable we replace the right child of the old root
-with the left child of the new.
+Agora que você já viu os tipos de rotação e tem uma ideia básica de como
+uma rotação funciona, vamos olhar para o :ref:`Código 2 <lst_bothrotations>`,
+que mostra a implementação tanto para rotações à esquerda quanto à direita.
+Na linha 2, nós criamos uma variável temporária para guardar a nova raiz
+da subárvore. Como dissemos antes, a nova raiz é o filho direito da raiz
+anterior. Agora que uma referência para o filho direito foi armazenada
+nessa variável temporária, nós podemos substituir o filho direito da
+antiga raiz pelo filho esquerdo da nova.
 
-The next step is to adjust the parent pointers of the two nodes. If
-``newRoot`` has a left child then the new parent of the left child
-becomes the old root. The parent of the new root is set to the parent of
-the old root. If the old root was the root of the entire tree then we
-must set the root of the tree to point to this new root. Otherwise, if
-the old root is a left child then we change the parent of the left child
-to point to the new root; otherwise we change the parent of the right
-child to point to the new root. (lines 10-13).
-Finally we set the parent of the old root to be the new root. This is a
-lot of complicated bookkeeping, so we encourage you to trace through
-this function while looking at :ref:`Figure 3 <fig_unbalsimple>`. The
-``rotateRight`` method is symmetrical to ``rotateLeft`` so we will leave
-it to you to study the code for ``rotateRight``.
+O próximo passo é ajustar os ponteiros para os pais dos dois nós. Se
+``newRoot`` tiver um filho esquerdo, então o novo pai do filho esquerdo
+se torna a raiz antiga. O pai da nova raiz agora se torna o pai da 
+raiz antiga. Se a raiz anterior era a raiz da árvore inteira, então
+devemos fazer com que a raiz da árvore aponte para a nova raiz. Mas
+se a raiz antiga era um filho esquerdo, então temos que fazer com que
+o pai do filho esquerdo aponte para a nova raiz. Se a raiz antiga era
+um filho direito, temos que fazer com que o pai do filho direito
+aponte para a nova raiz (linhas 10-13). Finalmente, tornamos o pai
+da raiz antiga agora pai da nova raiz. Isso pode ser muito para
+você acompanhar, então sugerimos que você simule essa função olhando
+para a :ref:`Figura 3 <fig_unbalsimple>`. O método ``rotateRight`` é
+simétrico a ``rotateLeft``, então deixaremos o estudo de ``rotateRight``
+ao seu encargo.
 
 .. _lst_bothrotations:
 
-**Listing 2**
+**Código 2**
 
 .. code-block:: python
 
@@ -193,45 +193,46 @@ it to you to study the code for ``rotateRight``.
 .. highlight:: python
   :linenothreshold: 500
 
-Finally, lines 16-17 require some explanation. In
-these two lines we update the balance factors of the old and the new
-root. Since all the other moves are moving entire subtrees around the
-balance factors of all other nodes are unaffected by the rotation. But
-how can we update the balance factors without completely recalculating
-the heights of the new subtrees? The following derivation should
-convince you that these lines are correct.
+Finalmente, as linhas 16-17 requerem uma explicação. Nessas duas linhas,
+nós atualizamos os fatores de balanceamento tando da antiga quanto da
+nova raiz. Como todas as outras transformações envolvem apenas mover
+subárvores inteiras, os fatores de balanceamento de todos os outros nós
+não são afetados pela rotação. Mas como podemos atualizar os fatores de
+balanceamento sem recalcular completamente as alturas das novas
+subárvores? A seguinte derivação deve convencê-lo de que essas linhas
+estão corretas.
 
 .. _fig_bfderive:
 
 .. figure:: Figures/bfderive.png
    :align: center
 
-   Figure 5: A Left Rotation
+   Figura 5: Uma Rotação à Esquerda
 
 
-:ref:`Figure 5 <fig_bfderive>` shows a left rotation. B and D are the pivotal
-nodes and A, C, E are their subtrees. Let :math:`h_x` denote the
-height of a particular subtree rooted at node :math:`x`. By definition
-we know the following:
-
+A :ref:`Figura 5 <fig_bfderive>` mostra uma rotação à esquerda. B e D
+são os nós pivotais e A, C e E são suas subárvores. Seja :mat:`h_x` a
+altura de uma subárvore em particular enraizada no nó :math:`x`. Pela
+definição, sabemos o seguinte:
+   
 .. math::
 
   newBal(B) = h_A - h_C \\
   oldBal(B) = h_A - h_D
 
 
-But we know that the old height of D can also be given by :math:`1 +
-max(h_C,h_E)`, that is, the height of D is one more than the maximum
-height of its two children. Remember that :math:`h_c` and
-:math:`h_E` hav not changed. So, let us substitute that in to the
-second equation, which gives us 
+Mas sabemos que a altura antiga de D também pode ser dada por
+:math:`1 + max(h_C, hE)`, isto é, a altura de D é a altura máxima
+entre seus dois filhos mais um. Lembre-se que :math:`h_C` e 
+:math:`h_E` não mudaram. Então vamos substituir isso na segunda
+equação, o que nos dá:
 
-:math:`oldBal(B) = h_A - (1 + max(h_C,h_E))` 
+:math:`oldBal(B) = h_A - (1 + max(h_C, h_E))`
 
-and then subtract the two equations. The following steps
-do the subtraction and use some algebra to simplify the equation for
+e então subtrair as duas equações. Os passos a seguir realizam a
+subtração e usam álgebra para simplificar a equação para
 :math:`newBal(B)`.
-
+  
 .. math::
 
    newBal(B) - oldBal(B) = h_A - h_C - (h_A - (1 + max(h_C,h_E))) \\
@@ -239,99 +240,95 @@ do the subtraction and use some algebra to simplify the equation for
    newBal(B) - oldBal(B) = h_A  - h_A + 1 + max(h_C,h_E) - h_C  \\
    newBal(B) - oldBal(B) =  1 + max(h_C,h_E) - h_C 
 
-
-Next we will move :math:`oldBal(B)` to the right hand side of the
-equation and make use of the fact that
-:math:`max(a,b)-c = max(a-c, b-c)`.
+Em seguida, iremos move :math:`oldBal(B)` para o lado direito da
+equação e fazer uso do fato de que :math:`max(a,b)-c = max(a-c,b-c)`.
 
 .. math::
 
    newBal(B) = oldBal(B) + 1 + max(h_C - h_C ,h_E - h_C) \\
 
 
-But, :math:`h_E - h_C` is the same as :math:`-oldBal(D)`. So we can
-use another identity that says :math:`max(-a,-b) = -min(a,b)`. So we
-can finish our derivation of :math:`newBal(B)` with the following
-steps:
-
+Mas :math:`h_E - h_C` é o mesmo que :math:`-oldBal(D)`. Então podemos
+usar outra identidade que diz que :math:`max(-a,-b) = -min(a,b)`.
+Então podemos terminar nossa derivação de :math:`newBal(B)` com os
+seguintes passos:
+   
 .. math::
 
    newBal(B) = oldBal(B) + 1 + max(0 , -oldBal(D)) \\
    newBal(B) = oldBal(B) + 1 - min(0 , oldBal(D)) \\
 
-
-Now we have all of the parts in terms that we readily know. If we
-remember that B is ``rotRoot`` and D is ``newRoot`` then we can see this
-corresponds exactly to the statement on line 16, or:
+Agora temos todas as partes em termos que já conhecemos. Se lembrarmos que
+B é ``rotRoot`` e D é ``newRoot``, então podemos ver que isso corresponde
+exatamente à declaração na linha 16:
 
 ::
 
     rotRoot.balanceFactor = rotRoot.balanceFactor + 1 - min(0,newRoot.balanceFactor)
 
-A similar derivation gives us the equation for the updated node D, as
-well as the balance factors after a right rotation. We leave these as
-exercises for you.
-
-Now you might think that we are done. We know how to do our left and
-right rotations, and we know when we should do a left or right rotation,
-but take a look at :ref:`Figure 6 <fig_hardrotate>`. Since node A has a balance
-factor of -2 we should do a left rotation. But, what happens when we do
-the left rotation around A?
+Uma derivação semelhante nos dá a equação para o nó D atualizado, bem como
+os fatores de balanceamento depois de uma rotação à direita. Iremos deixar
+isso como exercício para você.
+    
+Você pode estar pensando agora que terminamos. Sabemos como fazer nossas
+rotações à esquerda e à direita, sabemos quando devemos realizá-las, mas
+preste atenação antes na :ref:`Figura 6 <fig_hardrotate>`. Como o nó A
+tem um fator de balanceamento de -2, deveríamos fazer uma rotação à
+esquerda. Mas o que acontece se fizermos essa rotação em torno de A?
 
 .. _fig_hardrotate:
 
 .. figure:: Figures/hardunbalanced.png
    :align: center
 
-   Figure 6: An Unbalanced Tree that is More Difficult to Balance
+   Figura 6: Uma Árvore Desbalanceada que é Mais Difícil de Balancear
 
-
-:ref:`Figure 7 <fig_badrotate>` shows us that after the left rotation we are now
-out of balance the other way. If we do a right rotation to correct the
-situation we are right back where we started.
-
+A :ref:`Figura 7 <fig_badrotate>` mostra que após a rotação à esquerda 
+nós ficamos agora desbalanceados de uma outra forma. Se fizermos uma
+rotação à direita para corrigir a situação, voltamos à estaca zero.
+   
 .. _fig_badrotate:
 
 .. figure:: Figures/badrotate.png
    :align: center
 
-   Figure 7: After a Left Rotation the Tree is Out of Balance in the Other Direction
+   Figura 7: Depois de uma Rotação à Esquerda a Árvore Fica Desbalanceada para o Outro Lado
 
 
-To correct this problem we must use the following set of rules:
+Para corrigir esse problema, precisamos seguir as seguintes regras:
 
--  If a subtree needs a left rotation to bring it into balance, first
-   check the balance factor of the right child. If the right child is
-   left heavy then do a right rotation on right child, followed by the
-   original left rotation.
+-  Se uma subárvore precisa de uma rotação à esquerda para ficar balanceada,
+   primeiro devemos checar o fator de balanceamento do filho direito. Se o 
+   filho direito estiver mais pesado à esquerda, então fazemos uma rotação à
+   direita no filho direito, seguida pela rotação à esquerda original.
 
--  If a subtree needs a right rotation to bring it into balance, first
-   check the balance factor of the left child. If the left child is
-   right heavy then do a left rotation on the left child, followed by
-   the original right rotation.
+-  Se uma subárvore precisa de uma rotação à direita para ficar balanceada,
+   primeiro devemos checar o fator de balanceamento do filho esquerdo. Se
+   o filho esquerdo estiver mais pesado à direita, então fazemos uma rotação
+   à esquerda no filho esquerdo, seguida pela rotação à direita original.
 
-:ref:`Figure 8 <fig_rotatelr>` shows how these rules solve the dilemma we
-encountered in :ref:`Figure 6 <fig_hardrotate>` and :ref:`Figure 7 <fig_badrotate>`. Starting
-with a right rotation around node C puts the tree in a position where
-the left rotation around A brings the entire subtree back into balance.
+A :ref:`Figura 8 <fig_rotatelr>` mostra como essas regras resolvem o
+dilema com o qual nos deparamos na :ref:`Figura 6 <fig_hardrotate>` e na
+:ref:`Figura 7 <fig_badrotate>`. Começando por uma rotação à direita em 
+torno do nó C coloca a árvore em uma posição em que a rotação à esquerda
+em torno de A faz com que a subárvore inteira se torne balanceada.
 
 .. _fig_rotatelr:
 
 .. figure:: Figures/rotatelr.png
    :align: center
 
-   Figure 8: A Right Rotation Followed by a Left Rotation
+   Figura 8: Uma Rotação à Direita Seguida por uma Rotação à Esquerda
 
 
-The code that implements these rules can be found in our ``rebalance``
-method, which is shown in :ref:`Listing 3 <lst_rebalance>`. Rule number 1 from
-above is implemented by the ``if`` statement starting on line 2.
-Rule number 2 is implemented by the ``elif`` statement starting on
-line 8.
-
+O código que implementa essas regras pode ser encontrado no método
+``rebalance``, conforme mostrado no :ref:`Código 3 <lst_rebalance>`.
+A regra 1 acima é implementada pelo ``if`` começando na linha 2.
+A regra 2 é implementada pelo ``elif`` começando na linha 8.
+   
 .. _lst_rebalance:
 
-**Listing 3**
+**Código 3**
 
 .. highlight:: python
   :linenothreshold: 5
@@ -356,24 +353,23 @@ line 8.
 .. highlight:: python
    :linenothreshold: 500
 
-The :ref:`discussion questions <tree_discuss>` provide you the opportunity to rebalance a tree
-that requires a left rotation followed by a right. In addition the
-discussion questions provide you with the opportunity to rebalance some
-trees that are a little more complex than the tree in
-:ref:`Figure 8 <fig_rotatelr>`.
+As :ref:`questões para discussão <tree_discss>` dão a você a oportunidade
+de rebalancear uma árvore que requer uma rotação à esquerda seguida por
+uma à direita. Além disso, elas também dão oportunidade a você para
+rebalancear outras árvores um pouco mais complexas do que aquelas
+mostradas na :ref:`Figura 8 <fig_rotatelr>`.
 
-By keeping the tree in balance at all times, we can ensure that the
-``get`` method will run in order :math:`O(log_2(n))` time. But the
-question is at what cost to our ``put`` method? Let us break this down
-into the operations performed by ``put``. Since a new node is inserted
-as a leaf, updating the balance factors of all the parents will require
-a maximum of :math:`log_2(n)` operations, one for each level of the
-tree. If a subtree is found to be out of balance a maximum of two
-rotations are required to bring the tree back into balance. But, each of
-the rotations works in :math:`O(1)` time, so even our ``put``
-operation remains :math:`O(log_2(n))`.
+Ao mantermos a árvore balanceada o tempo todo, podemos garantir que o
+método ``get`` irá rodar em tempo :mat:`O(log_2(n))`. Mas a questão é:
+qual o custo do método ``put``? Vamos quebrar isso em operações feitas
+por ``put``. Como um nó novo é inserido como uma folha, atualizando os
+fatores de balanceamento de todos os pais irá requerer no máximo
+:mat:`log_2(n)` operações, uma para cada nível da árvore. Se uma subárvore
+estiver desbalanceada, no máximo duas rotações serão necessárias para 
+tornar a árvore balanceada novamente. Mas como cada rotação custa
+:mat:`O(1)`, o método ``put`` também terá tempo :math:`O(log_2(n))`.
 
-At this point we have implemented a functional AVL-Tree, unless you need
-the ability to delete a node. We leave the deletion of the node and
-subsequent updating and rebalancing as an exercise for you.
+Nesta altura nós já temos uma árvore AVL funcional, a não ser pela
+capacidade de poder remover um nó. Nós iremos deixar a remoação do nó
+e a subsequente atualização e rebalanceamento como um exercício para você.
 
